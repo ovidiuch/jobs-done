@@ -1,2 +1,3 @@
-# job-done
+# jobs-done
+
 A shutdown ritual app inspired by Deep Work
