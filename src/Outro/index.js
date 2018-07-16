@@ -37,5 +37,5 @@ export class Outro extends Component {
 }
 
 const Container = styled.div`
-  padding: 40px 16px;
+  padding: 40px 16px 16px 16px;
 `;

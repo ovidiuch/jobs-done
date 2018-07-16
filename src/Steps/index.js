@@ -9,7 +9,8 @@ import { steps } from './data';
 
 export class Steps extends Component {
   state = {
-    activeStep: -1
+    activeStep: -1,
+    topOffset: 0
   };
 
   componentDidMount() {
@@ -20,10 +21,10 @@ export class Steps extends Component {
     window.removeEventListener('keydown', this.handleKeyDown);
   }
 
-  handleKeyDown = e => {
-    if (e.keyCode === 13) {
-      this.handleNext();
-    }
+  handleActiveElRef = el => {
+    this.setState({
+      topOffset: el.offsetTop + el.offsetHeight + 16
+    });
   };
 
   handleNext = () => {
@@ -36,47 +37,81 @@ export class Steps extends Component {
     }
   };
 
+  handleKeyDown = e => {
+    if (e.keyCode === 13) {
+      this.handleNext();
+    }
+  };
+
   render() {
-    const { activeStep } = this.state;
+    const { activeStep, topOffset } = this.state;
     const isIntroActive = activeStep === -1;
     const isOutroActive = activeStep === steps.length;
 
     return (
-      <Center>
-        <Inner>
-          <ActiveElement key={-1} isActive={isIntroActive}>
-            <Intro isActive={isIntroActive} onStart={this.handleNext} />
-          </ActiveElement>
-          {steps.map((step, index) => {
-            const isActive = index === activeStep;
+      <Container>
+        <Center>
+          <Inner style={{ transform: `translate(0, -${topOffset}px)` }}>
+            <ActiveElement
+              key={-1}
+              isActive={isIntroActive}
+              activeElRef={this.handleActiveElRef}
+            >
+              <Intro isActive={isIntroActive} onStart={this.handleNext} />
+            </ActiveElement>
+            {steps.map((step, index) => {
+              const isActive = index === activeStep;
 
-            return (
-              <ActiveElement key={index} isActive={isActive}>
-                <Step {...step} isActive={isActive} onDone={this.handleNext} />
-              </ActiveElement>
-            );
-          })}
-          <ActiveElement key={steps.length} isActive={isOutroActive}>
-            <Outro isActive={isOutroActive} />
-          </ActiveElement>
-        </Inner>
-      </Center>
+              return (
+                <ActiveElement
+                  key={index}
+                  isActive={isActive}
+                  activeElRef={this.handleActiveElRef}
+                >
+                  <Step
+                    {...step}
+                    isActive={isActive}
+                    onDone={this.handleNext}
+                  />
+                </ActiveElement>
+              );
+            })}
+            <ActiveElement
+              key={steps.length}
+              isActive={isOutroActive}
+              activeElRef={this.handleActiveElRef}
+            >
+              <Outro isActive={isOutroActive} />
+            </ActiveElement>
+          </Inner>
+        </Center>
+      </Container>
     );
   }
 }
 
-const Center = styled.div`
+const Container = styled.div`
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+`;
+
+const Center = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 512px;
+  height: 100%;
+  max-height: 512px;
 `;
 
 const Inner = styled.div`
   box-sizing: border-box;
-  width: 512px;
+  position: absolute;
+  top: 100%;
+  transition: transform 0.4s;
 `;
