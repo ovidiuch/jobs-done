@@ -12,10 +12,28 @@ export class Steps extends Component {
     activeStep: -1
   };
 
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyDown);
+  }
+
+  handleKeyDown = e => {
+    if (e.keyCode === 13) {
+      this.handleNext();
+    }
+  };
+
   handleNext = () => {
-    this.setState(({ activeStep }) => ({
-      activeStep: activeStep + 1
-    }));
+    const { activeStep } = this.state;
+
+    if (activeStep < steps.length) {
+      this.setState({
+        activeStep: activeStep + 1
+      });
+    }
   };
 
   render() {
