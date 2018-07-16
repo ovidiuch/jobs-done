@@ -13,6 +13,16 @@ injectGlobal`
 
   button {
     font-family: -apple-system, BlinkMacSystemFont, Ubuntu, 'Helvetica Neue', Helvetica, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
+  }
+
+  p {
+    line-height: 24px;
+    margin: 0 0 16px 0;
+  }
+
+  li {
+    line-height: 18px;
+    margin: 0 0 4px 0;
   }
 `;

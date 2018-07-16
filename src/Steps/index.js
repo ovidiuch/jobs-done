@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Sound from 'react-sound';
+import { Button } from '../Button';
+import { ActiveElement } from '../ActiveElement';
 import { Step } from '../Step';
+import { Intro } from '../Intro';
+import { Outro } from '../Outro';
 import { steps } from './data';
-import jobsDoneSound from './jobs-done.mp3';
 
 export class Steps extends Component {
   state = {
-    activeStep: 0
+    activeStep: -1
   };
 
-  handleDone = () => {
+  handleNext = () => {
     this.setState(({ activeStep }) => ({
       activeStep: activeStep + 1
     }));
@@ -18,32 +20,32 @@ export class Steps extends Component {
 
   render() {
     const { activeStep } = this.state;
-    const areJobsDone = activeStep === steps.length;
+    const isIntroActive = activeStep === -1;
+    const isOutroActive = activeStep === steps.length;
 
     return (
       <Center>
-        {areJobsDone && (
-          <Sound url={jobsDoneSound} playStatus={Sound.status.PLAYING} />
-        )}
-        <StepsContainer>
-          {steps.map((step, index) => (
-            <Step
-              key={index}
-              {...step}
-              isActive={index === activeStep}
-              onDone={this.handleDone}
-            />
-          ))}
-        </StepsContainer>
+        <Inner>
+          <ActiveElement key={-1} isActive={isIntroActive}>
+            <Intro isActive={isIntroActive} onStart={this.handleNext} />
+          </ActiveElement>
+          {steps.map((step, index) => {
+            const isActive = index === activeStep;
+
+            return (
+              <ActiveElement key={index} isActive={isActive}>
+                <Step {...step} isActive={isActive} onDone={this.handleNext} />
+              </ActiveElement>
+            );
+          })}
+          <ActiveElement key={steps.length} isActive={isOutroActive}>
+            <Outro isActive={isOutroActive} />
+          </ActiveElement>
+        </Inner>
       </Center>
     );
   }
 }
-
-const StepsContainer = styled.div`
-  box-sizing: border-box;
-  width: 512px;
-`;
 
 const Center = styled.div`
   position: absolute;
@@ -54,4 +56,9 @@ const Center = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const Inner = styled.div`
+  box-sizing: border-box;
+  width: 512px;
 `;

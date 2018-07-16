@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import parse from 'url-parse';
+import { Button } from '../Button';
 
 export class Step extends Component {
   render() {
@@ -9,7 +10,7 @@ export class Step extends Component {
 
     return (
       <StepContainer isActive={isActive}>
-        {isActive && <DoneButton onClick={onDone}>Done</DoneButton>}
+        {isActive && <Button onClick={onDone}>Done</Button>}
         <StepName>{name}</StepName>
         <StepUrl>
           <a href={url} target="_blank">
@@ -25,35 +26,19 @@ const StepContainer = styled.div`
   box-sizing: border-box;
   padding: 12px 16px;
   background: ${props => (props.isActive ? '#fff' : 'transparent')};
-  opacity: ${props => (props.isActive ? 1 : 0.6)};
 `;
 
 const StepName = styled.div`
   font-size: 16px;
-  line-height: 18px;
+  line-height: 20px;
 `;
 
 const StepUrl = styled.div`
-  margin: 2px 0 0 0;
+  margin: 2px 0 2px 0;
   font-size: 14px;
   line-height: 16px;
 
   a {
     color: #666;
   }
-`;
-
-const DoneButton = styled.button`
-  float: right;
-  display: block;
-  height: 36px;
-  margin: 0;
-  padding: 0 16px;
-  border: 0;
-  border-radius: 4px;
-  background: #666;
-  color: #f1f1f1;
-  text-transform: uppercase;
-  cursor: pointer;
-  outline: none;
 `;
