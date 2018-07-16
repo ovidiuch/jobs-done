@@ -106,7 +106,6 @@ const Center = styled.div`
   width: 100%;
   max-width: 512px;
   height: 100%;
-  max-height: 512px;
 `;
 
 const Inner = styled.div`
