@@ -27,6 +27,16 @@ export class Steps extends Component {
     });
   };
 
+  handlePrev = () => {
+    const { activeStep } = this.state;
+
+    if (activeStep > -1) {
+      this.setState({
+        activeStep: activeStep - 1
+      });
+    }
+  };
+
   handleNext = () => {
     const { activeStep } = this.state;
 
@@ -40,6 +50,8 @@ export class Steps extends Component {
   handleKeyDown = e => {
     if (e.keyCode === 13) {
       this.handleNext();
+    } else if (e.keyCode === 8) {
+      this.handlePrev();
     }
   };
 

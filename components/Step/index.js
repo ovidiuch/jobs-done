@@ -19,7 +19,7 @@ export class Step extends Component {
           const { hostname } = parse(url);
 
           return (
-            <Url>
+            <Url key={url}>
               <a href={url} target="_blank">
                 {hostname}
               </a>
@@ -45,7 +45,7 @@ const Name = styled.div`
 
 const Url = styled.div`
   font-size: 14px;
-  line-height: 20px;
+  line-height: 22px;
 
   a {
     color: #666;
