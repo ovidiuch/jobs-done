@@ -23,7 +23,7 @@ export class Steps extends Component {
 
   handleActiveElRef = el => {
     this.setState({
-      topOffset: el.offsetTop + el.offsetHeight + 16
+      topOffset: Math.round(el.offsetTop + el.offsetHeight / 2 + 16)
     });
   };
 
@@ -111,6 +111,6 @@ const Center = styled.div`
 const Inner = styled.div`
   box-sizing: border-box;
   position: absolute;
-  top: 100%;
+  top: 50%;
   transition: transform 0.4s;
 `;
