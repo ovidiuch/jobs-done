@@ -24,6 +24,7 @@ export class Outro extends Component {
           <li>Read a book</li>
           <li>Go see a play</li>
           <li>Play a game</li>
+          <li>Hang out with a friend</li>
           <li>Take a long walk</li>
           <li>Go for a swim</li>
           <li>Watch a movie</li>
