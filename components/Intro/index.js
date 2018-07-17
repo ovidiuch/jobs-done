@@ -12,8 +12,8 @@ export class Intro extends Component {
           <strong>Here's to another productive day!</strong>
         </p>
         <p>
-          You gave it your best. Now it's time for that big brain of yours to
-          call it a day and relax.
+          You gave it your best. Now it's time to call it a day and let that big
+          brain of yours relax.
         </p>
         <p>
           Make sure everything's in check and lay down an outline for tomorrow.
