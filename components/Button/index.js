@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Button = styled.button`
-  float: right;
   display: block;
   height: 40px;
   margin: 0;

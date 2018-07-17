@@ -18,7 +18,11 @@ export class Intro extends Component {
         <p>
           Make sure everything's in check and lay down an outline for tomorrow.
         </p>
-        <div>{isActive && <Button onClick={onStart}>Start</Button>}</div>
+        {isActive && (
+          <ButtonContainer>
+            <Button onClick={onStart}>Start</Button>
+          </ButtonContainer>
+        )}
       </Container>
     );
   }
@@ -26,4 +30,8 @@ export class Intro extends Component {
 
 const Container = styled.div`
   padding: 40px 16px;
+`;
+
+const ButtonContainer = styled.div`
+  float: right;
 `;

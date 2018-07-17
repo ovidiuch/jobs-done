@@ -5,40 +5,55 @@ import { Button } from '../Button';
 
 export class Step extends Component {
   render() {
-    const { name, url, isActive, onDone } = this.props;
-    const { hostname } = parse(url);
+    const { name, urls, isActive, onDone } = this.props;
 
     return (
-      <StepContainer isActive={isActive}>
-        {isActive && <Button onClick={onDone}>Done</Button>}
-        <StepName>{name}</StepName>
-        <StepUrl>
-          <a href={url} target="_blank">
-            {hostname}
-          </a>
-        </StepUrl>
-      </StepContainer>
+      <Container isActive={isActive}>
+        {isActive && (
+          <ButtonContainer>
+            <Button onClick={onDone}>Done</Button>
+          </ButtonContainer>
+        )}
+        <Name>{name}</Name>
+        {urls.map(url => {
+          const { hostname } = parse(url);
+
+          return (
+            <Url>
+              <a href={url} target="_blank">
+                {hostname}
+              </a>
+            </Url>
+          );
+        })}
+      </Container>
     );
   }
 }
 
-const StepContainer = styled.div`
+const Container = styled.div`
+  position: relative;
   box-sizing: border-box;
   padding: 12px 16px;
   background: ${props => (props.isActive ? '#fff' : 'transparent')};
 `;
 
-const StepName = styled.div`
+const Name = styled.div`
   font-size: 16px;
-  line-height: 20px;
+  line-height: 24px;
 `;
 
-const StepUrl = styled.div`
-  margin: 2px 0 2px 0;
+const Url = styled.div`
   font-size: 14px;
-  line-height: 16px;
+  line-height: 20px;
 
   a {
     color: #666;
   }
+`;
+
+const ButtonContainer = styled.div`
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
 `;
