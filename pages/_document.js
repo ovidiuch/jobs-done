@@ -17,7 +17,12 @@ export default class MyDocument extends Document {
       <html>
         <Head>
           <meta charSet="utf-8" />
+          <meta
+            name="description"
+            content="A shutdown ritual app inspired by Deep Work"
+          />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="theme-color" content="#111" />
           <title>Jobs Done!</title>
           <link rel="icon" href="/static/favicon.ico" />
