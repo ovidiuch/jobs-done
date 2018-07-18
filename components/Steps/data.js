@@ -2,8 +2,8 @@ export const steps = [
   {
     name: 'Reply to (or schedule) anything urgent',
     urls: [
-      'https://react-cosmos.slack.com/messages/C4E8D7K6J/',
-      'https://mail.google.com/mail/'
+      'https://mail.google.com/mail/',
+      'https://react-cosmos.slack.com/messages/C4E8D7K6J/'
     ]
   },
   {
@@ -16,8 +16,8 @@ export const steps = [
   {
     name: 'Skim over all tasks and check next calendar days',
     urls: [
-      'https://calendar.google.com/calendar/r',
-      'https://workflowy.com/#/3ebdb1373118'
+      'https://workflowy.com/#/3ebdb1373118',
+      'https://calendar.google.com/calendar/r'
     ]
   },
   {

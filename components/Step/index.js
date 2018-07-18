@@ -39,8 +39,9 @@ const Container = styled.div`
 `;
 
 const Name = styled.div`
+  margin: 0 80px 2px 0;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 22px;
 `;
 
 const Url = styled.div`

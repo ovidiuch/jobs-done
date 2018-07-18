@@ -14,19 +14,28 @@ export class Outro extends Component {
           <strong>Jobs done!</strong>
         </p>
         <p>
-          Time to unwind. Forget about work until tomorrow. Here's some ideas
-          for this evening:
+          Time to unwind. <em>Forget</em> about work until tomorrow. What do you
+          feel like doing this evening?
         </p>
+        <p>Social</p>
         <ul>
-          <li>Attend a social event</li>
-          <li>Go for a run</li>
+          <li>Attend an event</li>
           <li>Take someone to dinner</li>
-          <li>Read a book</li>
-          <li>Go see a play</li>
-          <li>Play a game</li>
           <li>Hang out with a friend</li>
-          <li>Take a long walk</li>
+          <li>Call someone dear</li>
+        </ul>
+        <p>Physical</p>
+        <ul>
+          <li>Go for a run</li>
           <li>Go for a swim</li>
+          <li>Take a long walk</li>
+          <li>Work out</li>
+        </ul>
+        <p>Leisure</p>
+        <ul>
+          <li>Read a book</li>
+          <li>Play a game</li>
+          <li>Go see a play</li>
           <li>Watch a movie</li>
         </ul>
         {isActive && (
