@@ -32,7 +32,7 @@ export class Outro extends Component {
         <p>
           Time to unwind. <em>Forget</em> about work until tomorrow.
         </p>
-        <p>What do you feel like doing this evening? Something...</p>
+        <p>What type of thing do you feel like doing this evening?</p>
         <ActivityType
           label="Social"
           selectedActivityType={selectedActivityType}
