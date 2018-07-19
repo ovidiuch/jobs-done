@@ -7,6 +7,17 @@
     "plugin:react/recommended"
   ],
   "env": {
-    "browser": true
-  }
+    "shared-node-browser": true
+  },
+  "globals": {
+    "global": true
+  },
+  "overrides": [
+    {
+      "files": ["**/*.fixture.js"],
+      "rules": {
+        "no-console": "off"
+      }
+    }
+  ]
 }

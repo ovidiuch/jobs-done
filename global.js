@@ -19,10 +19,18 @@ injectGlobal`
   p {
     line-height: 24px;
     margin: 0 0 16px 0;
+
+    :last-child {
+      margin-bottom: 0;
+    }
   }
 
   li {
     line-height: 18px;
     margin: 0 0 4px 0;
+
+    :last-child {
+      margin-bottom: 0;
+    }
   }
 `;

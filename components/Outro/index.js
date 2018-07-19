@@ -6,21 +6,16 @@ import { Button } from '../Button';
 import jobsDoneSound from './jobs-done.mp3';
 
 export class Outro extends Component {
-  state = {
-    selectedActivityType: null
-  };
-
-  handleSelectActivityType = activityType => {
-    this.setState({
-      selectedActivityType: activityType
-    });
+  static propTypes = {
+    selectedActivityType: string,
+    selectActivityType: func.isRequired
   };
 
   render() {
-    const { selectedActivityType } = this.state;
+    const { selectedActivityType, selectActivityType } = this.props;
 
     return (
-      <Container>
+      <Container key={selectedActivityType}>
         <p>
           <strong>Jobs done!</strong>
         </p>
@@ -31,7 +26,7 @@ export class Outro extends Component {
         <ActivityType
           label="Social"
           selectedActivityType={selectedActivityType}
-          selectActivityType={this.handleSelectActivityType}
+          selectActivityType={selectActivityType}
         >
           <ul>
             <li>Attend an event</li>
@@ -43,7 +38,7 @@ export class Outro extends Component {
         <ActivityType
           label="Physical"
           selectedActivityType={selectedActivityType}
-          selectActivityType={this.handleSelectActivityType}
+          selectActivityType={selectActivityType}
         >
           <ul>
             <li>Go for a run</li>
@@ -55,7 +50,7 @@ export class Outro extends Component {
         <ActivityType
           label="Leisure"
           selectedActivityType={selectedActivityType}
-          selectActivityType={this.handleSelectActivityType}
+          selectActivityType={selectActivityType}
         >
           <ul>
             <li>Read a book</li>
@@ -98,5 +93,5 @@ ActivityType.propTypes = {
 };
 
 const Container = styled.div`
-  padding: 56px 16px 8px 16px;
+  padding: 56px 16px 0 16px;
 `;

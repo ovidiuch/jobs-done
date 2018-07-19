@@ -9,20 +9,28 @@ import { steps } from './data';
 export class Steps extends Component {
   state = {
     activeStep: -1,
-    topOffset: 0
+    activeElOffset: null,
+    selectedActivityType: null
   };
 
   componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown);
+    // window isn't available on the server side, but nor is componentDidMount
+    // called on the server
+    global.addEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
+    // window isn't available on the server side, but nor is componentWillUnmount
+    // called on the server
+    global.removeEventListener('keydown', this.handleKeyDown);
   }
 
   handleActiveElRef = el => {
     this.setState({
-      topOffset: Math.round(el.offsetTop + el.offsetHeight / 2 + 16)
+      activeElOffset: {
+        top: el.offsetTop,
+        height: el.offsetHeight
+      }
     });
   };
 
@@ -54,8 +62,15 @@ export class Steps extends Component {
     }
   };
 
+  handleSelectActivityType = activityType => {
+    this.setState({
+      selectedActivityType: activityType
+    });
+  };
+
   render() {
-    const { activeStep, topOffset } = this.state;
+    const { activeStep, selectedActivityType } = this.state;
+
     const isIntroActive = activeStep === -1;
     const isOutroReached = activeStep >= steps.length;
     const isOutroActive = activeStep === steps.length;
@@ -63,7 +78,7 @@ export class Steps extends Component {
     return (
       <Container>
         <Center>
-          <Inner style={{ transform: `translate(0, -${topOffset}px)` }}>
+          <Inner style={this.getInnerStyle()}>
             <ActiveElement
               key={-1}
               isActive={isIntroActive}
@@ -93,11 +108,15 @@ export class Steps extends Component {
             })}
             {isOutroReached && (
               <ActiveElement
-                key={steps.length}
+                key={selectedActivityType}
                 isActive={isOutroActive}
                 activeElRef={this.handleActiveElRef}
               >
-                <Outro isActive={isOutroActive} />
+                <Outro
+                  isActive={isOutroActive}
+                  selectedActivityType={selectedActivityType}
+                  selectActivityType={this.handleSelectActivityType}
+                />
               </ActiveElement>
             )}
           </Inner>
@@ -105,6 +124,36 @@ export class Steps extends Component {
       </Container>
     );
   }
+
+  getInnerStyle() {
+    const { activeElOffset } = this.state;
+
+    if (!activeElOffset) {
+      // Don't show inner container until app is rendered on the client. But
+      // let DOM element render to properly calculate its bounds
+      return { opacity: 0 };
+    }
+
+    const { top, height } = activeElOffset;
+
+    if (isMobileDevice()) {
+      return {
+        opacity: 1,
+        top: '100%',
+        transform: `translate(0, -${top + height + 16}px)`
+      };
+    }
+
+    return {
+      opacity: 1,
+      top: '50%',
+      transform: `translate(0, -${top + Math.round(height / 2) + 16}px)`
+    };
+  }
+}
+
+function isMobileDevice() {
+  return 'ontouchstart' in global;
 }
 
 const Container = styled.div`
@@ -129,6 +178,5 @@ const Center = styled.div`
 const Inner = styled.div`
   box-sizing: border-box;
   position: absolute;
-  top: 50%;
-  transition: transform 0.4s;
+  transition: transform 0.4s, opacity 1s;
 `;
