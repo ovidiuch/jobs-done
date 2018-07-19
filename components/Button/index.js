@@ -8,9 +8,9 @@ export const Button = styled.button`
   border: 0;
   border-radius: 4px;
   background: #666;
-  color: #f1f1f1;
+  color: ${props => (props.disabled ? '#b1b1b1' : '#f1f1f1')};
   line-height: 40px;
   text-transform: uppercase;
-  cursor: pointer;
+  cursor: ${props => (props.disabled ? 'default' : 'pointer')};
   outline: none;
 `;
