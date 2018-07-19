@@ -1,4 +1,4 @@
-import { bool, string, func, node } from 'prop-types';
+import { string, func, node } from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Sound from 'react-sound';
@@ -6,10 +6,6 @@ import { Button } from '../Button';
 import jobsDoneSound from './jobs-done.mp3';
 
 export class Outro extends Component {
-  static propTypes = {
-    isActive: bool.isRequired
-  };
-
   state = {
     selectedActivityType: null
   };
@@ -21,7 +17,6 @@ export class Outro extends Component {
   };
 
   render() {
-    const { isActive } = this.props;
     const { selectedActivityType } = this.state;
 
     return (
@@ -69,9 +64,7 @@ export class Outro extends Component {
             <li>Watch a movie</li>
           </ul>
         </ActivityType>
-        {isActive && (
-          <Sound url={jobsDoneSound} playStatus={Sound.status.PLAYING} />
-        )}
+        <Sound url={jobsDoneSound} playStatus={Sound.status.PLAYING} />
       </Container>
     );
   }

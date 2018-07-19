@@ -57,6 +57,7 @@ export class Steps extends Component {
   render() {
     const { activeStep, topOffset } = this.state;
     const isIntroActive = activeStep === -1;
+    const isOutroReached = activeStep >= steps.length;
     const isOutroActive = activeStep === steps.length;
 
     return (
@@ -71,29 +72,34 @@ export class Steps extends Component {
               <Intro isActive={isIntroActive} onStart={this.handleNext} />
             </ActiveElement>
             {steps.map((step, index) => {
-              const isActive = index === activeStep;
+              const isReached = activeStep >= index;
+              const isActive = activeStep === index;
 
               return (
-                <ActiveElement
-                  key={index}
-                  isActive={isActive}
-                  activeElRef={this.handleActiveElRef}
-                >
-                  <Step
-                    {...step}
+                isReached && (
+                  <ActiveElement
+                    key={index}
                     isActive={isActive}
-                    onDone={this.handleNext}
-                  />
-                </ActiveElement>
+                    activeElRef={this.handleActiveElRef}
+                  >
+                    <Step
+                      {...step}
+                      isActive={isActive}
+                      onDone={this.handleNext}
+                    />
+                  </ActiveElement>
+                )
               );
             })}
-            <ActiveElement
-              key={steps.length}
-              isActive={isOutroActive}
-              activeElRef={this.handleActiveElRef}
-            >
-              <Outro isActive={isOutroActive} />
-            </ActiveElement>
+            {isOutroReached && (
+              <ActiveElement
+                key={steps.length}
+                isActive={isOutroActive}
+                activeElRef={this.handleActiveElRef}
+              >
+                <Outro isActive={isOutroActive} />
+              </ActiveElement>
+            )}
           </Inner>
         </Center>
       </Container>
