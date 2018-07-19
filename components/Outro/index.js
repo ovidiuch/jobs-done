@@ -1,12 +1,16 @@
+import { bool } from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Sound from 'react-sound';
-import { Button } from '../Button';
 import jobsDoneSound from './jobs-done.mp3';
 
 export class Outro extends Component {
+  static propTypes = {
+    isActive: bool.isRequired
+  };
+
   render() {
-    const { isActive, onStart } = this.props;
+    const { isActive } = this.props;
 
     return (
       <Container>

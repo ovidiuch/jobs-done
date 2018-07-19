@@ -1,22 +1,28 @@
+import { bool, func } from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Button } from '../Button';
 
 export class Intro extends Component {
+  static propTypes = {
+    isActive: bool.isRequired,
+    onStart: func.isRequired
+  };
+
   render() {
     const { isActive, onStart } = this.props;
 
     return (
       <Container>
         <p>
-          <strong>Here's to another productive day!</strong>
+          <strong>{`Here's to another productive day!`}</strong>
         </p>
         <p>
-          You gave it your best. Now it's time to call it a day and let that big
-          brain of yours relax.
+          {`You gave it your best. Now it's time to call it a day and let that big
+          brain of yours relax.`}
         </p>
         <p>
-          Make sure everything's in check and lay down an outline for tomorrow.
+          {`Make sure everything's in check and lay down an outline for tomorrow.`}
         </p>
         {isActive && (
           <ButtonContainer>

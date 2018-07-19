@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "lint": "eslint '{components,pages}/**/*.js'",
     "dev": "next",
     "build": "next build",
     "start": "next start"
@@ -7,6 +8,7 @@
   "dependencies": {
     "@babel/preset-react": "^7.0.0-beta.53",
     "next": "^6.1.1",
+    "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-sound": "^1.2.0",
@@ -17,8 +19,13 @@
     "@babel/core": "^7.0.0-beta.53",
     "@babel/plugin-proposal-class-properties": "^7.0.0-beta.53",
     "@babel/preset-env": "^7.0.0-beta.53",
+    "babel-eslint": "^8.2.6",
     "babel-loader": "^8.0.0-beta",
     "babel-plugin-styled-components": "^1.5.1",
+    "eslint": "^5.1.0",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-react": "^7.10.0",
     "html-webpack-plugin": "^3.2.0",
     "react-cosmos": "^4.5.0",
     "url-loader": "^1.0.1",

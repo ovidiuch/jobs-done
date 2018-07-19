@@ -1,9 +1,17 @@
+import { string, bool, func, arrayOf } from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import parse from 'url-parse';
 import { Button } from '../Button';
 
 export class Step extends Component {
+  static propTypes = {
+    name: string.isRequired,
+    urls: arrayOf(string).isRequired,
+    isActive: bool.isRequired,
+    onDone: func.isRequired
+  };
+
   render() {
     const { name, urls, isActive, onDone } = this.props;
 
@@ -20,7 +28,7 @@ export class Step extends Component {
 
           return (
             <Url key={url}>
-              <a href={url} target="_blank">
+              <a href={url} target="_blank" rel="noopener noreferrer">
                 {hostname}
               </a>
             </Url>

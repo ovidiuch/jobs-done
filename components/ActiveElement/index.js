@@ -1,9 +1,16 @@
+import { bool, func, node } from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
 export class ActiveElement extends Component {
+  static propTypes = {
+    children: node.isRequired,
+    isActive: bool.isRequired,
+    activeElRef: func.isRequired
+  };
+
   handleRef = el => {
-    const { isActive, activeElRef } = this.props;
+    const { activeElRef } = this.props;
 
     if (el) {
       activeElRef(el);
