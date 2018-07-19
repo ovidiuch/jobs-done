@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import Sound from 'react-sound';
 import { ActiveElement } from '../ActiveElement';
 import { Step } from '../Step';
 import { Intro } from '../Intro';
 import { Outro } from '../Outro';
 import { steps } from './data';
+import jobsDoneSound from './jobs-done.mp3';
 
 export class Steps extends Component {
   state = {
@@ -72,56 +74,57 @@ export class Steps extends Component {
     const { activeStep, selectedActivityType } = this.state;
 
     const isIntroActive = activeStep === -1;
-    const isOutroReached = activeStep >= steps.length;
     const isOutroActive = activeStep === steps.length;
 
     return (
-      <Container>
-        <Center>
-          <Inner style={this.getInnerStyle()}>
-            <ActiveElement
-              key={-1}
-              isActive={isIntroActive}
-              activeElRef={this.handleActiveElRef}
-            >
-              <Intro isActive={isIntroActive} onStart={this.handleNext} />
-            </ActiveElement>
-            {steps.map((step, index) => {
-              const isReached = activeStep >= index;
-              const isActive = activeStep === index;
-
-              return (
-                isReached && (
-                  <ActiveElement
-                    key={index}
-                    isActive={isActive}
-                    activeElRef={this.handleActiveElRef}
-                  >
-                    <Step
-                      {...step}
-                      isActive={isActive}
-                      onDone={this.handleNext}
-                    />
-                  </ActiveElement>
-                )
-              );
-            })}
-            {isOutroReached && (
+      <>
+        <Container>
+          <Center>
+            <Inner style={this.getInnerStyle()}>
               <ActiveElement
-                key={selectedActivityType}
-                isActive={isOutroActive}
+                key={-1}
+                isActive={isIntroActive}
                 activeElRef={this.handleActiveElRef}
               >
-                <Outro
-                  isActive={isOutroActive}
-                  selectedActivityType={selectedActivityType}
-                  selectActivityType={this.handleSelectActivityType}
-                />
+                <Intro isActive={isIntroActive} onStart={this.handleNext} />
               </ActiveElement>
-            )}
-          </Inner>
-        </Center>
-      </Container>
+              {steps.map((step, index) => {
+                const isReached = activeStep >= index;
+                const isActive = activeStep === index;
+
+                return (
+                  isReached && (
+                    <ActiveElement
+                      key={index}
+                      isActive={isActive}
+                      activeElRef={this.handleActiveElRef}
+                    >
+                      <Step
+                        {...step}
+                        isActive={isActive}
+                        onDone={this.handleNext}
+                      />
+                    </ActiveElement>
+                  )
+                );
+              })}
+              {isOutroActive && (
+                <ActiveElement
+                  key={selectedActivityType}
+                  isActive={isOutroActive}
+                  activeElRef={this.handleActiveElRef}
+                >
+                  <Outro
+                    selectedActivityType={selectedActivityType}
+                    selectActivityType={this.handleSelectActivityType}
+                  />
+                </ActiveElement>
+              )}
+            </Inner>
+          </Center>
+        </Container>
+        {isOutroActive && <JobsDoneSound />}
+      </>
     );
   }
 
@@ -149,6 +152,17 @@ export class Steps extends Component {
       top: '50%',
       transform: `translate(0, -${top + Math.round(height / 2) + 16}px)`
     };
+  }
+}
+
+class JobsDoneSound extends Component {
+  shouldComponentUpdate() {
+    // Don't play song more than once
+    return false;
+  }
+
+  render() {
+    return <Sound url={jobsDoneSound} playStatus={Sound.status.PLAYING} />;
   }
 }
 
