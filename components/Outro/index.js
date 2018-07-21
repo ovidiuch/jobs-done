@@ -18,9 +18,9 @@ export class Outro extends Component {
           <strong>Jobs done!</strong>
         </p>
         <p>
-          Time to unwind. <em>Forget</em> about work until tomorrow.
+          Time to unwind. Let work sink in your subconscious until tomorrow.
         </p>
-        <p>What type of thing do you feel like doing this evening?</p>
+        <p>What do you feel like doing this evening?</p>
         <ActivityType
           label="Social"
           selectedActivityType={selectedActivityType}
