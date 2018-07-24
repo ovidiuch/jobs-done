@@ -25,7 +25,7 @@ export default class MyDocument extends Document {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="theme-color" content="#000915" />
-          <title>Shutdown Complete</title>
+          <title>Jobs Done!</title>
           <link rel="icon" href="/static/favicon.ico" />
           {this.props.styleTags}
         </Head>
