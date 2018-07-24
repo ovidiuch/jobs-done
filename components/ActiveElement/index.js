@@ -29,6 +29,7 @@ export class ActiveElement extends Component {
 }
 
 const Container = styled.div`
+  padding: 0 0 20px 0;
   opacity: ${props => (props.isActive ? 1 : 0.5)};
   transition: opacity 1s;
 `;

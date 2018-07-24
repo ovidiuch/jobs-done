@@ -88,5 +88,5 @@ ActivityType.propTypes = {
 };
 
 const Container = styled.div`
-  padding: 56px 20px 20px 20px;
+  padding: 56px 20px 0 20px;
 `;

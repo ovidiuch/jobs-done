@@ -34,7 +34,7 @@ export class Intro extends Component {
 }
 
 const Container = styled.div`
-  padding: 0 20px 68px 20px;
+  padding: 0 20px 48px 20px;
 `;
 
 const ButtonContainer = styled.div`

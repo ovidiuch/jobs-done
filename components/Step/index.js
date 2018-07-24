@@ -51,7 +51,7 @@ const Container = styled.div`
   background: ${props =>
     props.isActive ? 'rgba(217, 223, 247, 0.12)' : 'transparent'};
 
-  @media (min-width: 641px) {
+  @media (min-width: 553px) {
     border-radius: 5px;
   }
 `;
