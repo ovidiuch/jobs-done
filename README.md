@@ -1,3 +1,3 @@
-# jobs-done
+# Shutdown Complete
 
-A shutdown ritual app inspired by Deep Work
+An ritual app for ending the work day inspired by Deep Work

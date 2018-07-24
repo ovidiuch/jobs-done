@@ -11,7 +11,6 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-sound": "^1.2.0",
     "styled-components": "^3.3.3",
     "url-parse": "^1.4.1"
   },

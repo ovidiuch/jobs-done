@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Sound from 'react-sound';
 import { ActiveElement } from '../ActiveElement';
 import { Step } from '../Step';
 import { Intro } from '../Intro';
 import { Outro } from '../Outro';
 import { steps } from './data';
-import jobsDoneSound from './jobs-done.mp3';
 
 export class Steps extends Component {
   state = {
@@ -124,7 +122,6 @@ export class Steps extends Component {
             </Inner>
           </Center>
         </Container>
-        {isOutroActive && <JobsDoneSound />}
       </>
     );
   }
@@ -153,17 +150,6 @@ export class Steps extends Component {
       top: '50%',
       transform: `translate(0, -${top + Math.round(height / 2)}px)`
     };
-  }
-}
-
-class JobsDoneSound extends Component {
-  shouldComponentUpdate() {
-    // Don't play song more than once
-    return false;
-  }
-
-  render() {
-    return <Sound url={jobsDoneSound} playStatus={Sound.status.PLAYING} />;
   }
 }
 
