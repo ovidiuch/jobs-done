@@ -14,9 +14,7 @@ export class Outro extends Component {
 
     return (
       <Container key={selectedActivityType}>
-        <p>
-          <strong>Jobs done!</strong>
-        </p>
+        <h2>Shutdown complete.</h2>
         <p>
           Time to unwind. Let work sink in your subconscious until tomorrow.
         </p>
@@ -90,5 +88,5 @@ ActivityType.propTypes = {
 };
 
 const Container = styled.div`
-  padding: 56px 16px 0 16px;
+  padding: 56px 20px 0 20px;
 `;

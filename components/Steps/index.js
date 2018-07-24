@@ -79,6 +79,7 @@ export class Steps extends Component {
     return (
       <>
         <Container>
+          <Sunset />
           <Center>
             <Inner style={this.getInnerStyle()}>
               <ActiveElement
@@ -143,14 +144,14 @@ export class Steps extends Component {
       return {
         opacity: 1,
         top: '100%',
-        transform: `translate(0, -${top + height + 16}px)`
+        transform: `translate(0, -${top + height}px)`
       };
     }
 
     return {
       opacity: 1,
       top: '50%',
-      transform: `translate(0, -${top + Math.round(height / 2) + 16}px)`
+      transform: `translate(0, -${top + Math.round(height / 2)}px)`
     };
   }
 }
@@ -176,21 +177,40 @@ const Container = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 9, 21, 1),
+    rgba(22, 35, 95, 1) 100%
+  );
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
 `;
 
+const Sunset = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  transform: translate(-25%, 5%);
+  background: radial-gradient(
+    ellipse closest-side,
+    rgba(107, 76, 122, 0.5),
+    rgba(107, 76, 122, 0) 100%
+  );
+`;
+
 const Center = styled.div`
   position: relative;
   width: 100%;
-  max-width: 512px;
+  max-width: 552px;
   height: 100%;
 `;
 
 const Inner = styled.div`
   box-sizing: border-box;
   position: absolute;
-  transition: transform 0.4s, opacity 1s;
+  transition: transform 1s, opacity 2s;
 `;
