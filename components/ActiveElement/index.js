@@ -30,5 +30,5 @@ export class ActiveElement extends Component {
 
 const Container = styled.div`
   opacity: ${props => (props.isActive ? 1 : 0.5)};
-  transition: opacity 0.4s;
+  transition: opacity 1s;
 `;

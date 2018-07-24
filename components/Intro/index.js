@@ -14,15 +14,14 @@ export class Intro extends Component {
 
     return (
       <Container>
+        <h2>Here&apos;s to another productive day!</h2>
         <p>
-          <strong>{`Here's to another productive day!`}</strong>
+          You gave it your best. Now it&apos;s time to call it a day and let
+          that big brain of yours relax.
         </p>
         <p>
-          {`You gave it your best. Now it's time to call it a day and let that big
-          brain of yours relax.`}
-        </p>
-        <p>
-          {`Make sure everything's in check and lay down an outline for tomorrow.`}
+          Make sure everything&apos;s in check and lay down an outline for
+          tomorrow.
         </p>
         {isActive && (
           <ButtonContainer>
@@ -35,7 +34,7 @@ export class Intro extends Component {
 }
 
 const Container = styled.div`
-  padding: 40px 16px;
+  padding: 0 20px 68px 20px;
 `;
 
 const ButtonContainer = styled.div`

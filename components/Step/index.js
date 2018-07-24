@@ -17,52 +17,66 @@ export class Step extends Component {
 
     return (
       <Container isActive={isActive}>
-        {isActive && (
-          <ButtonContainer>
-            <Button onClick={onDone}>Done</Button>
-          </ButtonContainer>
-        )}
-        <Name>{name}</Name>
-        {urls.map(url => {
-          const { hostname } = parse(url);
+        <Left>
+          <Name>{name}</Name>
+          {urls.map(url => {
+            const { hostname } = parse(url);
 
-          return (
-            <Url key={url}>
-              <a href={url} target="_blank" rel="noopener noreferrer">
-                {hostname}
-              </a>
-            </Url>
-          );
-        })}
+            return (
+              <Url key={url}>
+                <a href={url} target="_blank" rel="noopener noreferrer">
+                  {hostname}
+                </a>
+              </Url>
+            );
+          })}
+        </Left>
+        <ButtonContainer>
+          <Button disabled={!isActive} onClick={onDone}>
+            Done
+          </Button>
+        </ButtonContainer>
       </Container>
     );
   }
 }
 
 const Container = styled.div`
-  position: relative;
-  box-sizing: border-box;
-  padding: 12px 16px;
-  background: ${props => (props.isActive ? '#fff' : 'transparent')};
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  padding: 0 20px 16px 20px;
+  background: ${props =>
+    props.isActive ? 'rgba(217, 223, 247, 0.12)' : 'transparent'};
+
+  @media (min-width: 641px) {
+    border-radius: 5px;
+  }
+`;
+
+const Left = styled.div`
+  flex: 1;
+  min-width: 280px;
 `;
 
 const Name = styled.div`
-  margin: 0 80px 2px 0;
-  font-size: 16px;
-  line-height: 22px;
+  margin: 16px 0 4px 0;
+  font-size: 18px;
+  line-height: 24px;
 `;
 
 const Url = styled.div`
-  font-size: 14px;
-  line-height: 22px;
+  font-size: 16px;
+  line-height: 24px;
 
   a {
-    color: #666;
+    color: rgba(217, 223, 247, 0.6);
   }
 `;
 
 const ButtonContainer = styled.div`
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
+  flex-shrink: 0;
+  margin: 16px 0 0 0;
 `;
