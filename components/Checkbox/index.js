@@ -15,8 +15,8 @@ export const StyledCheckbox = styled.div`
   width: 52px;
   height: 52px;
   box-sizing: border-box;
-  border-radius: 8px;
-  border: 4px solid
+  border-radius: 10px;
+  border: 5px solid
     ${props => (props.checked ? 'transparent' : 'rgba(0, 9, 21, 0.4)')};
   background: ${props =>
     props.checked ? 'rgba(0, 9, 21, 0.4)' : 'transparent'};
