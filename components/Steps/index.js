@@ -34,6 +34,18 @@ export class Steps extends Component {
     });
   };
 
+  handleSelect = stepIndex => {
+    const { activeStep } = this.state;
+
+    if (stepIndex === activeStep) {
+      this.handleNext();
+    } else {
+      this.setState({
+        activeStep: stepIndex
+      });
+    }
+  };
+
   handlePrev = () => {
     const { activeStep } = this.state;
 
@@ -100,8 +112,9 @@ export class Steps extends Component {
                     >
                       <Step
                         {...step}
+                        stepIndex={index}
                         isActive={isActive}
-                        onDone={this.handleNext}
+                        onSelect={this.handleSelect}
                       />
                     </ActiveElement>
                   )

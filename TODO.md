@@ -11,3 +11,9 @@
 - [ ] Onboarding: What and why
 - [x] Proper font, colors and spacing
 - [ ] Medium article or Twitter thread
+
+Nice to have:
+
+- [x] Animated checkbox
+- [ ] Router (so native back button goes back in steps)
+- [ ] Fade in next steps (by rendering them all the time)
