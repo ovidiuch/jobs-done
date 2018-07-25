@@ -1,11 +1,11 @@
-import { bool, func, node } from 'prop-types';
+import { func, node, oneOf } from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
 export class ActiveElement extends Component {
   static propTypes = {
     children: node.isRequired,
-    isActive: bool.isRequired,
+    state: oneOf(['hidden', 'active', 'past']).isRequired,
     activeElRef: func.isRequired
   };
 
@@ -18,10 +18,10 @@ export class ActiveElement extends Component {
   };
 
   render() {
-    const { isActive, children } = this.props;
+    const { state, children } = this.props;
 
     return (
-      <Container isActive={isActive} innerRef={isActive && this.handleRef}>
+      <Container state={state} innerRef={state === 'active' && this.handleRef}>
         {children}
       </Container>
     );
@@ -30,6 +30,7 @@ export class ActiveElement extends Component {
 
 const Container = styled.div`
   padding: 0 0 20px 0;
-  opacity: ${props => (props.isActive ? 1 : 0.5)};
+  opacity: ${props =>
+    props.state === 'active' ? 1 : props.state === 'past' ? 0.5 : 0};
   transition: opacity 1s;
 `;

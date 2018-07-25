@@ -16,4 +16,4 @@ Nice to have:
 
 - [x] Animated checkbox
 - [ ] Router (so native back button goes back in steps)
-- [ ] Fade in next steps (by rendering them all the time)
+- [x] Fade in next steps (by rendering them all the time)

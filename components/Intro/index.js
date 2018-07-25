@@ -23,11 +23,11 @@ export class Intro extends Component {
           Make sure everything&apos;s in check and lay down an outline for
           tomorrow.
         </p>
-        {isActive && (
-          <ButtonContainer>
-            <Button onClick={onStart}>Start</Button>
-          </ButtonContainer>
-        )}
+        <ButtonContainer>
+          <Button onClick={onStart} disabled={!isActive}>
+            Start
+          </Button>
+        </ButtonContainer>
       </Container>
     );
   }

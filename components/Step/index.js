@@ -10,6 +10,7 @@ export class Step extends Component {
     name: string.isRequired,
     urls: arrayOf(string).isRequired,
     isActive: bool.isRequired,
+    isChecked: bool.isRequired,
     onSelect: func.isRequired
   };
 
@@ -23,7 +24,7 @@ export class Step extends Component {
   };
 
   render() {
-    const { name, urls, isActive } = this.props;
+    const { name, urls, isActive, isChecked } = this.props;
 
     return (
       <Container isActive={isActive} onClick={this.handleSelect}>
@@ -47,7 +48,7 @@ export class Step extends Component {
           })}
         </Left>
         <ButtonContainer>
-          <Checkbox checked={!isActive} />
+          <Checkbox checked={isChecked} />
         </ButtonContainer>
       </Container>
     );

@@ -94,44 +94,41 @@ export class Steps extends Component {
             <Inner style={this.getInnerStyle()}>
               <ActiveElement
                 key={-1}
-                isActive={isIntroActive}
+                state={isIntroActive ? 'active' : 'past'}
                 activeElRef={this.handleActiveElRef}
               >
                 <Intro isActive={isIntroActive} onStart={this.handleNext} />
               </ActiveElement>
               {steps.map((step, index) => {
-                const isReached = activeStep >= index;
                 const isActive = activeStep === index;
+                const isChecked = activeStep > index;
 
                 return (
-                  isReached && (
-                    <ActiveElement
-                      key={index}
+                  <ActiveElement
+                    key={index}
+                    state={isActive ? 'active' : isChecked ? 'past' : 'hidden'}
+                    activeElRef={this.handleActiveElRef}
+                  >
+                    <Step
+                      {...step}
+                      stepIndex={index}
                       isActive={isActive}
-                      activeElRef={this.handleActiveElRef}
-                    >
-                      <Step
-                        {...step}
-                        stepIndex={index}
-                        isActive={isActive}
-                        onSelect={this.handleSelect}
-                      />
-                    </ActiveElement>
-                  )
+                      isChecked={isChecked}
+                      onSelect={this.handleSelect}
+                    />
+                  </ActiveElement>
                 );
               })}
-              {isOutroActive && (
-                <ActiveElement
-                  key={selectedActivityType}
-                  isActive={isOutroActive}
-                  activeElRef={this.handleActiveElRef}
-                >
-                  <Outro
-                    selectedActivityType={selectedActivityType}
-                    selectActivityType={this.handleSelectActivityType}
-                  />
-                </ActiveElement>
-              )}
+              <ActiveElement
+                key={selectedActivityType}
+                state={isOutroActive ? 'active' : 'hidden'}
+                activeElRef={this.handleActiveElRef}
+              >
+                <Outro
+                  selectedActivityType={selectedActivityType}
+                  selectActivityType={this.handleSelectActivityType}
+                />
+              </ActiveElement>
             </Inner>
           </Center>
         </Container>
