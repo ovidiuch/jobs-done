@@ -6,6 +6,11 @@
     "plugin:import/warnings",
     "plugin:react/recommended"
   ],
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
+  },
   "env": {
     "shared-node-browser": true
   },

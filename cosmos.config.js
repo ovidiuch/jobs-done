@@ -1,8 +1,8 @@
-const { addUrlLoader } = require('./webpack.extend');
+const { addUrlLoader, addNativeAlias } = require('./webpack.extend');
 
 module.exports = {
   globalImports: ['./global.js'],
-  webpack: config => addUrlLoader(config),
+  webpack: config => addNativeAlias(addUrlLoader(config)),
   plugin: {
     responsivePreview: {
       devices: [

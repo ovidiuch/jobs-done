@@ -9,6 +9,18 @@ exports.addUrlLoader = function(config) {
   });
 };
 
+exports.addNativeAlias = function(config) {
+  return {
+    ...config,
+    resolve: {
+      ...config.resolve,
+      alias: {
+        'react-native$': 'react-native-web'
+      }
+    }
+  };
+};
+
 function addLoader(config, loader) {
   return {
     ...config,
