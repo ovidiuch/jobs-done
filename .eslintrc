@@ -18,6 +18,12 @@
       "rules": {
         "no-console": "off"
       }
+    },
+    {
+      "files": ["cosmos.config.js", "next.config.js", "webpack.config.js"],
+      "env": {
+        "node": true
+      }
     }
   ]
 }

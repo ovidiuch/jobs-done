@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "lint": "eslint '{components,pages}/**/*.js'",
+    "lint": "eslint '{{components,pages}/**/,}*.js'",
     "dev": "next",
     "build": "next build",
     "start": "next start"
