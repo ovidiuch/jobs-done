@@ -100,19 +100,24 @@ export class App extends Component {
                 <Intro isActive={isIntroActive} onStart={this.handleNext} />
               </ActiveElement>
               {steps.map((step, index) => {
-                const isActive = activeStep === index;
                 const isChecked = activeStep > index;
+                const state =
+                  activeStep === index
+                    ? 'active'
+                    : isChecked
+                      ? 'past'
+                      : 'hidden';
 
                 return (
                   <ActiveElement
                     key={index}
-                    state={isActive ? 'active' : isChecked ? 'past' : 'hidden'}
+                    state={state}
                     activeElRef={this.handleActiveElRef}
                   >
                     <Step
                       {...step}
                       stepIndex={index}
-                      isActive={isActive}
+                      state={state}
                       isChecked={isChecked}
                       onSelect={this.handleSelect}
                     />

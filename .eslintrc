@@ -14,13 +14,13 @@
   },
   "overrides": [
     {
-      "files": ["**/*.fixture.js"],
+      "files": ["**/*.fixture.js", "**/__fixtures__/**/*.js"],
       "rules": {
         "no-console": "off"
       }
     },
     {
-      "files": ["cosmos.config.js", "next.config.js", "webpack.config.js"],
+      "files": ["cosmos.config.js", "next.config.js", "webpack.extend.js"],
       "env": {
         "node": true
       }

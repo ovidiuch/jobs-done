@@ -1,4 +1,4 @@
-import { number, string, bool, func, arrayOf } from 'prop-types';
+import { number, string, bool, func, arrayOf, oneOf } from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import parse from 'url-parse';
@@ -9,32 +9,45 @@ export class Step extends Component {
     stepIndex: number.isRequired,
     name: string.isRequired,
     urls: arrayOf(string).isRequired,
-    isActive: bool.isRequired,
+    state: oneOf(['hidden', 'active', 'past']).isRequired,
     isChecked: bool.isRequired,
     onSelect: func.isRequired
   };
 
   handleSelect = () => {
-    this.props.onSelect(this.props.stepIndex);
+    const { stepIndex, state, onSelect } = this.props;
+
+    if (state !== 'hidden') {
+      onSelect(stepIndex);
+    }
   };
 
   handleUrlClick = e => {
-    // Prevent step from being selected when opening links
-    e.stopPropagation();
+    const { state } = this.props;
+
+    if (state !== 'active') {
+      e.preventDefault();
+    }
+
+    // - When active: Prevent step from being checked when following links
+    // - When past: Select step instead of following links
+    if (state === 'active') {
+      e.stopPropagation();
+    }
   };
 
   render() {
-    const { name, urls, isActive, isChecked } = this.props;
+    const { name, urls, state, isChecked } = this.props;
 
     return (
-      <Container isActive={isActive} onClick={this.handleSelect}>
+      <Container state={state} onClick={this.handleSelect}>
         <Left>
           <Name>{name}</Name>
           {urls.map(url => {
             const { hostname } = parse(url);
 
             return (
-              <Url key={url}>
+              <Url key={url} state={state}>
                 <a
                   href={url}
                   target="_blank"
@@ -63,8 +76,9 @@ const Container = styled.div`
   flex-wrap: wrap;
   padding: 0 20px 16px 20px;
   background: ${props =>
-    props.isActive ? 'rgba(217, 223, 247, 0.12)' : 'transparent'};
-  cursor: pointer;
+    props.state === 'active' ? 'rgba(217, 223, 247, 0.12)' : 'transparent'};
+  cursor: ${props => (props.state === 'hidden' ? 'default' : 'pointer')};
+  user-select: none;
 
   @media (min-width: 553px) {
     border-radius: 5px;
@@ -89,6 +103,7 @@ const Url = styled.div`
   a {
     display: inline-block;
     color: rgba(217, 223, 247, 0.6);
+    cursor: ${props => (props.state === 'hidden' ? 'default' : 'pointer')};
   }
 `;
 
