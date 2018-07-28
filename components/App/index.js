@@ -6,7 +6,7 @@ import { Intro } from '../Intro';
 import { Outro } from '../Outro';
 import { steps } from './data';
 
-export class Steps extends Component {
+export class App extends Component {
   state = {
     activeStep: -1,
     activeElOffset: null,

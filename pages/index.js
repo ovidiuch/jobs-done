@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import '../global';
-import { Steps } from '../components/Steps';
+import { App } from '../components/App';
 
 export default class Index extends Component {
   render() {
-    return <Steps />;
+    return <App />;
   }
 }
