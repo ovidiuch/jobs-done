@@ -87,7 +87,7 @@ const Container = styled.div`
 
 const Left = styled.div`
   flex: 1;
-  min-width: 280px;
+  padding-right: 16px;
 `;
 
 const Name = styled.div`
