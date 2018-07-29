@@ -9,8 +9,7 @@ import { steps } from './data';
 export class App extends Component {
   state = {
     activeStep: -1,
-    activeElOffset: null,
-    selectedActivityType: null
+    activeElOffset: null
   };
 
   componentDidMount() {
@@ -74,14 +73,8 @@ export class App extends Component {
     }
   };
 
-  handleSelectActivityType = activityType => {
-    this.setState({
-      selectedActivityType: activityType
-    });
-  };
-
   render() {
-    const { activeStep, selectedActivityType } = this.state;
+    const { activeStep } = this.state;
 
     const isIntroActive = activeStep === -1;
     const isOutroActive = activeStep === steps.length;
@@ -95,7 +88,7 @@ export class App extends Component {
               <ActiveElement
                 key={-1}
                 state={isIntroActive ? 'active' : 'past'}
-                activeElRef={this.handleActiveElRef}
+                onElRef={this.handleActiveElRef}
               >
                 <Intro isActive={isIntroActive} onStart={this.handleNext} />
               </ActiveElement>
@@ -112,7 +105,7 @@ export class App extends Component {
                   <ActiveElement
                     key={index}
                     state={state}
-                    activeElRef={this.handleActiveElRef}
+                    onElRef={this.handleActiveElRef}
                   >
                     <Step
                       {...step}
@@ -125,14 +118,10 @@ export class App extends Component {
                 );
               })}
               <ActiveElement
-                key={selectedActivityType}
                 state={isOutroActive ? 'active' : 'hidden'}
-                activeElRef={this.handleActiveElRef}
+                onElRef={this.handleActiveElRef}
               >
-                <Outro
-                  selectedActivityType={selectedActivityType}
-                  selectActivityType={this.handleSelectActivityType}
-                />
+                {onChildUpdate => <Outro onChildUpdate={onChildUpdate} />}
               </ActiveElement>
             </Inner>
           </Center>

@@ -1,19 +1,27 @@
-import { func, node, oneOf } from 'prop-types';
+import { func, node, oneOf, oneOfType } from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
 export class ActiveElement extends Component {
   static propTypes = {
-    children: node.isRequired,
+    children: oneOfType([node, func]).isRequired,
     state: oneOf(['hidden', 'active', 'past']).isRequired,
-    activeElRef: func.isRequired
+    onElRef: func.isRequired
   };
 
+  rootEl;
+
   handleRef = el => {
-    const { activeElRef } = this.props;
+    this.rootEl = el;
 
     if (el) {
-      activeElRef(el);
+      this.props.onElRef(el);
+    }
+  };
+
+  handleChildUpdate = () => {
+    if (this.rootEl) {
+      this.props.onElRef(this.rootEl);
     }
   };
 
@@ -22,7 +30,9 @@ export class ActiveElement extends Component {
 
     return (
       <Container state={state} innerRef={state === 'active' && this.handleRef}>
-        {children}
+        {typeof children === 'function'
+          ? children(this.handleChildUpdate)
+          : children}
       </Container>
     );
   }
