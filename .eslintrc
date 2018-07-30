@@ -25,7 +25,13 @@
       }
     },
     {
-      "files": ["cosmos.config.js", "next.config.js", "webpack.extend.js"],
+      "files": [
+        "cosmos.config.js",
+        "next.config.js",
+        "webpack.extend.js",
+        "rn-cli.config.js",
+        "App.js"
+      ],
       "env": {
         "node": true
       }

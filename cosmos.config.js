@@ -1,6 +1,8 @@
 const { addUrlLoader, addNativeAlias } = require('./webpack.extend');
 
 module.exports = {
+  // TEMP: Until all components are converted to RN
+  fileMatch: ['**/components/native/**/__fixtures__/**/*.js'],
   globalImports: ['./global.js'],
   webpack: config => addNativeAlias(addUrlLoader(config)),
   plugin: {

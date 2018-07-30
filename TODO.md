@@ -3,9 +3,7 @@
 - [ ] React Native (start with this to figure out design constraints and avoid rewriting code)
   - [x] Configure Cosmos with react-native-web
   - [x] Configure ESLint with react-native-web
-  - [ ] CRNA, Next.js?
-        https://github.com/necolas/react-native-web/blob/master/packages/website/guides/getting-started.md#client-side-rendering
-  - [ ] Configure Cosmos Native
+  - [x] Configure CRNA
   - [ ] Convert existing UI to react-native components
 - [ ] Fixed header
   - [ ] Logo (resets state on click)
