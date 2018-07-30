@@ -4,6 +4,7 @@ import { ActiveElement } from '../ActiveElement';
 import { Step } from '../Step';
 import { Intro } from '../Intro';
 import { Outro } from '../Outro';
+import { Background } from './Background';
 import { steps } from './data';
 
 export class App extends Component {
@@ -80,53 +81,46 @@ export class App extends Component {
     const isOutroActive = activeStep === steps.length;
 
     return (
-      <>
-        <Container>
-          <Sunset />
-          <Center>
-            <Inner style={this.getInnerStyle()}>
-              <ActiveElement
-                key={-1}
-                state={isIntroActive ? 'active' : 'past'}
-                onElRef={this.handleActiveElRef}
-              >
-                <Intro isActive={isIntroActive} onStart={this.handleNext} />
-              </ActiveElement>
-              {steps.map((step, index) => {
-                const isChecked = activeStep > index;
-                const state =
-                  activeStep === index
-                    ? 'active'
-                    : isChecked
-                      ? 'past'
-                      : 'hidden';
+      <Background>
+        <Center>
+          <Inner style={this.getInnerStyle()}>
+            <ActiveElement
+              key={-1}
+              state={isIntroActive ? 'active' : 'past'}
+              onElRef={this.handleActiveElRef}
+            >
+              <Intro isActive={isIntroActive} onStart={this.handleNext} />
+            </ActiveElement>
+            {steps.map((step, index) => {
+              const isChecked = activeStep > index;
+              const state =
+                activeStep === index ? 'active' : isChecked ? 'past' : 'hidden';
 
-                return (
-                  <ActiveElement
-                    key={index}
+              return (
+                <ActiveElement
+                  key={index}
+                  state={state}
+                  onElRef={this.handleActiveElRef}
+                >
+                  <Step
+                    {...step}
+                    stepIndex={index}
                     state={state}
-                    onElRef={this.handleActiveElRef}
-                  >
-                    <Step
-                      {...step}
-                      stepIndex={index}
-                      state={state}
-                      isChecked={isChecked}
-                      onSelect={this.handleSelect}
-                    />
-                  </ActiveElement>
-                );
-              })}
-              <ActiveElement
-                state={isOutroActive ? 'active' : 'hidden'}
-                onElRef={this.handleActiveElRef}
-              >
-                {onChildUpdate => <Outro onChildUpdate={onChildUpdate} />}
-              </ActiveElement>
-            </Inner>
-          </Center>
-        </Container>
-      </>
+                    isChecked={isChecked}
+                    onSelect={this.handleSelect}
+                  />
+                </ActiveElement>
+              );
+            })}
+            <ActiveElement
+              state={isOutroActive ? 'active' : 'hidden'}
+              onElRef={this.handleActiveElRef}
+            >
+              {onChildUpdate => <Outro onChildUpdate={onChildUpdate} />}
+            </ActiveElement>
+          </Inner>
+        </Center>
+      </Background>
     );
   }
 
@@ -160,37 +154,6 @@ export class App extends Component {
 function isMobileDevice() {
   return 'ontouchstart' in global;
 }
-
-const Container = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 9, 21, 1),
-    rgba(22, 35, 95, 1) 100%
-  );
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-`;
-
-const Sunset = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 200%;
-  transform: translate(-25%, 5%);
-  background: radial-gradient(
-    ellipse closest-side,
-    rgba(107, 76, 122, 0.5),
-    rgba(107, 76, 122, 0) 100%
-  );
-`;
 
 const Center = styled.div`
   position: relative;
