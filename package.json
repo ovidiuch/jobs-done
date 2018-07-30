@@ -1,5 +1,6 @@
 {
   "name": "jobs-done",
+  "license": "MIT",
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
     "lint": "eslint '{{components,pages}/**/,}*.js'",
