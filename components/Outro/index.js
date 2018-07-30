@@ -57,7 +57,7 @@ const Container = styled.div`
 `;
 
 const ActivityTypeButtons = styled.div`
-  margin: 0 0 4px 0;
+  margin: 0 -16px 4px 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
