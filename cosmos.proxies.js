@@ -3,13 +3,11 @@ import { proxyPropTypes } from 'react-cosmos-shared/react';
 import { Background } from './components/App/Background';
 
 function BgProxy(props) {
-  const { children, nextProxy } = props;
+  const { nextProxy } = props;
 
   return (
     <Background>
-      <nextProxy.value {...props} nextProxy={nextProxy.next()}>
-        {children}yo
-      </nextProxy.value>
+      <nextProxy.value {...props} nextProxy={nextProxy.next()} />
     </Background>
   );
 }

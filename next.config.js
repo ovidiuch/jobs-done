@@ -1,5 +1,5 @@
-const { addUrlLoader } = require('./webpack.extend');
+const { addUrlLoader, addNativeAlias } = require('./webpack.extend');
 
 module.exports = {
-  webpack: config => addUrlLoader(config)
+  webpack: config => addNativeAlias(addUrlLoader(config))
 };
