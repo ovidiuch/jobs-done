@@ -1,6 +1,6 @@
 import { number, string, func, arrayOf, oneOf } from 'prop-types';
 import React, { Component } from 'react';
-import { TouchableWithoutFeedback } from 'react-native';
+import { Animated, TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 import { Checkbox } from '../Checkbox';
 import { Url } from '../Url';
@@ -13,6 +13,19 @@ export class Step extends Component {
     state: oneOf(['active', 'checked', 'disabled']).isRequired,
     onSelect: func.isRequired
   };
+
+  state = {
+    bgOpacity: new Animated.Value(getBgOpacityForState(this.props.state))
+  };
+
+  componentDidUpdate(prevProps) {
+    if (this.props.state !== prevProps.state) {
+      Animated.timing(this.state.bgOpacity, {
+        toValue: getBgOpacityForState(this.props.state),
+        duration: 600
+      }).start();
+    }
+  }
 
   handleSelect = () => {
     const { stepIndex, state, onSelect } = this.props;
@@ -36,9 +49,15 @@ export class Step extends Component {
 
   renderStep() {
     const { name, urls, state } = this.props;
+    const { bgOpacity } = this.state;
+
+    const backgroundColor = bgOpacity.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['rgba(217, 223, 247, 0)', 'rgba(217, 223, 247, 0.12)']
+    });
 
     return (
-      <Container state={state}>
+      <AnimatedContainer style={{ backgroundColor }}>
         <Left>
           <Name>{name}</Name>
           <Urls>
@@ -52,12 +71,11 @@ export class Step extends Component {
         <ButtonContainer>
           <Checkbox checked={state === 'checked'} />
         </ButtonContainer>
-      </Container>
+      </AnimatedContainer>
     );
   }
 }
 
-// TODO: Add background transition
 // FIXME: @media (min-width: 553px) {
 //   border-radius: 5px;
 // }
@@ -68,12 +86,10 @@ const Container = styled.View`
   justify-content: flex-end;
   flex-wrap: wrap;
   padding: 0 20px 16px 20px;
-  background: ${props =>
-    props.state === 'active'
-      ? 'rgba(217, 223, 247, 0.12)'
-      : 'rgba(217, 223, 247, 0)'};
   user-select: none;
 `;
+
+const AnimatedContainer = Animated.createAnimatedComponent(Container);
 
 const Left = styled.View`
   flex: 1;
@@ -100,3 +116,7 @@ const ButtonContainer = styled.View`
   flex-shrink: 0;
   margin: 16px 0 0 0;
 `;
+
+function getBgOpacityForState(state) {
+  return state === 'active' ? 1 : 0;
+}

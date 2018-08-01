@@ -9,26 +9,16 @@ export class Checkbox extends Component {
   };
 
   state = {
-    anim: new Animated.Value(this.props.checked ? 1 : 0)
+    anim: new Animated.Value(getAnimValueForProps(this.props))
   };
-
-  componentDidMount() {
-    if (this.props.checked) {
-      this.animate(1);
-    }
-  }
 
   componentDidUpdate(prevProps) {
     if (this.props.checked !== prevProps.checked) {
-      this.animate(this.props.checked ? 1 : 0);
+      Animated.timing(this.state.anim, {
+        toValue: getAnimValueForProps(this.props),
+        duration: 600
+      }).start();
     }
-  }
-
-  animate(toValue) {
-    Animated.timing(this.state.anim, {
-      toValue,
-      duration: 600
-    }).start();
   }
 
   render() {
@@ -103,3 +93,7 @@ const LongBar = styled.View`
   height: 6px;
   background: rgba(217, 223, 247, 1);
 `;
+
+function getAnimValueForProps({ checked }) {
+  return checked ? 1 : 0;
+}
