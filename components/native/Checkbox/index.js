@@ -93,7 +93,7 @@ const ShortBar = styled.View`
   top: 0;
   left: 0;
   width: 6px;
-  height: 100%;
+  height: 16px;
   background: rgba(217, 223, 247, 1);
 `;
 
@@ -102,7 +102,7 @@ const LongBar = styled.View`
   bottom: 0;
   left: 6px;
   width: 6px;
-  width: 100%;
+  width: 26px;
   height: 6px;
   background: rgba(217, 223, 247, 1);
 `;

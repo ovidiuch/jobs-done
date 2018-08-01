@@ -6,6 +6,7 @@ export default {
     checked: true,
     onSelect: () => console.log('Select checkbox')
   },
+  bg: true,
   viewport: {
     width: 320,
     height: 568

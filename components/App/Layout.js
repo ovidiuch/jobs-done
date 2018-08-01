@@ -6,7 +6,7 @@ import styled from 'styled-components/native';
 // import LinearGradient from 'react-native-linear-gradient';
 // <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
 
-export class Background extends Component {
+export class Layout extends Component {
   static propTypes = {
     children: node
   };
@@ -17,7 +17,7 @@ export class Background extends Component {
     return (
       <Container>
         <Sunset />
-        {children}
+        <Content>{children}</Content>
       </Container>
     );
   }
@@ -33,8 +33,9 @@ const Container = styled.View`
   height: 100%;
   background: rgba(0, 9, 21, 1);
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   overflow: hidden;
 `;
 // background: linear-gradient(
@@ -57,3 +58,11 @@ const Sunset = styled.View`
 //   rgba(107, 76, 122, 0.5),
 //   rgba(107, 76, 122, 0) 100%
 // );
+
+const Content = styled.View`
+  position: absolute;
+  width: 100%;
+  max-width: 552px;
+  height: 100%;
+  display: flex;
+`;

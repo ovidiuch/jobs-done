@@ -4,7 +4,7 @@ import { ActiveElement } from '../ActiveElement';
 import { Step } from '../Step';
 import { Intro } from '../Intro';
 import { Outro } from '../Outro';
-import { Background } from './Background';
+import { Layout } from './Layout';
 import { steps } from './data';
 
 export class App extends Component {
@@ -81,46 +81,44 @@ export class App extends Component {
     const isOutroActive = activeStep === steps.length;
 
     return (
-      <Background>
-        <Center>
-          <Inner style={this.getInnerStyle()}>
-            <ActiveElement
-              key={-1}
-              state={isIntroActive ? 'active' : 'past'}
-              onElRef={this.handleActiveElRef}
-            >
-              <Intro isActive={isIntroActive} onStart={this.handleNext} />
-            </ActiveElement>
-            {steps.map((step, index) => {
-              const isChecked = activeStep > index;
-              const state =
-                activeStep === index ? 'active' : isChecked ? 'past' : 'hidden';
+      <Layout>
+        <Inner style={this.getInnerStyle()}>
+          <ActiveElement
+            key={-1}
+            state={isIntroActive ? 'active' : 'past'}
+            onElRef={this.handleActiveElRef}
+          >
+            <Intro isActive={isIntroActive} onStart={this.handleNext} />
+          </ActiveElement>
+          {steps.map((step, index) => {
+            const isChecked = activeStep > index;
+            const state =
+              activeStep === index ? 'active' : isChecked ? 'past' : 'hidden';
 
-              return (
-                <ActiveElement
-                  key={index}
+            return (
+              <ActiveElement
+                key={index}
+                state={state}
+                onElRef={this.handleActiveElRef}
+              >
+                <Step
+                  {...step}
+                  stepIndex={index}
                   state={state}
-                  onElRef={this.handleActiveElRef}
-                >
-                  <Step
-                    {...step}
-                    stepIndex={index}
-                    state={state}
-                    isChecked={isChecked}
-                    onSelect={this.handleSelect}
-                  />
-                </ActiveElement>
-              );
-            })}
-            <ActiveElement
-              state={isOutroActive ? 'active' : 'hidden'}
-              onElRef={this.handleActiveElRef}
-            >
-              {onChildUpdate => <Outro onChildUpdate={onChildUpdate} />}
-            </ActiveElement>
-          </Inner>
-        </Center>
-      </Background>
+                  isChecked={isChecked}
+                  onSelect={this.handleSelect}
+                />
+              </ActiveElement>
+            );
+          })}
+          <ActiveElement
+            state={isOutroActive ? 'active' : 'hidden'}
+            onElRef={this.handleActiveElRef}
+          >
+            {onChildUpdate => <Outro onChildUpdate={onChildUpdate} />}
+          </ActiveElement>
+        </Inner>
+      </Layout>
     );
   }
 
@@ -154,13 +152,6 @@ export class App extends Component {
 function isMobileDevice() {
   return 'ontouchstart' in global;
 }
-
-const Center = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: 552px;
-  height: 100%;
-`;
 
 const Inner = styled.div`
   box-sizing: border-box;
