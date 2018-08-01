@@ -76,6 +76,7 @@ export class Step extends Component {
   }
 }
 
+// FIXME: user-select: none;
 // FIXME: @media (min-width: 553px) {
 //   border-radius: 5px;
 // }
@@ -86,7 +87,6 @@ const Container = styled.View`
   justify-content: flex-end;
   flex-wrap: wrap;
   padding: 0 20px 16px 20px;
-  user-select: none;
 `;
 
 const AnimatedContainer = Animated.createAnimatedComponent(Container);
