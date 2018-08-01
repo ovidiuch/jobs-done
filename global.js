@@ -2,6 +2,7 @@
 // Object.assign, Array.from, and ResizeObserver as necessary for your desired
 // browser support."
 
+// TODO: Remove or rename to `global-web`
 import { injectGlobal } from 'styled-components';
 
 injectGlobal`
