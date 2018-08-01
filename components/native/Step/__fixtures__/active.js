@@ -10,9 +10,9 @@ export default {
       'slack://react-cosmos.slack.com/messages/general/'
     ],
     state: 'active',
-    isChecked: false,
     onSelect: () => console.log('Select')
   },
+  bg: true,
   viewport: {
     width: 411,
     height: 731

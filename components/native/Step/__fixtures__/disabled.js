@@ -9,10 +9,10 @@ export default {
       'https://mail.google.com/mail/',
       'slack://react-cosmos.slack.com/messages/general/'
     ],
-    state: 'past',
-    isChecked: false,
+    state: 'disabled',
     onSelect: () => console.log('Select')
   },
+  bg: true,
   viewport: {
     width: 411,
     height: 731

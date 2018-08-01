@@ -1,12 +1,12 @@
-Q: How to make something `inline-block` in RN (ie. only take as much width as it needs)
+Q: How to apply web-only style to RNW components? (eg. `user-select` or `cursor`)
 
 FIXME
 
 ---
 
-Q: How to apply web-only style to RNW components? (eg. `user-select` or `cursor`)
+Q: How to make something `inline-block` in RN? (ie. only take as much width as it needs)
 
-FIXME
+`margin-left: auto` or `margin-right: auto` https://stackoverflow.com/a/36606694/128816
 
 ---
 
@@ -23,7 +23,7 @@ https://github.com/necolas/react-native-web/issues/162
 
 Q: But a Text component with `href` doesn't seem to open link on Native, how can an external link work in both environments?
 
-FIXME
+https://github.com/necolas/react-native-web/issues/162#issuecomment-409619405
 
 ---
 
