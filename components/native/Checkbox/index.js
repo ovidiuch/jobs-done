@@ -6,11 +6,11 @@ import styled from 'styled-components/native';
 export class Checkbox extends Component {
   static propTypes = {
     checked: bool.isRequired,
-    onSelect: func.isRequired
+    onSelect: func
   };
 
   state = {
-    anim: new Animated.Value(0)
+    anim: new Animated.Value(this.props.checked ? 1 : 0)
   };
 
   componentDidMount() {
