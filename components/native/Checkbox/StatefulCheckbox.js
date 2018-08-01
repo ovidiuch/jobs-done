@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { TouchableWithoutFeedback, View } from 'react-native';
 import { Checkbox } from '.';
 
 export class StatefulCheckbox extends Component {
@@ -14,7 +15,11 @@ export class StatefulCheckbox extends Component {
 
   render() {
     return (
-      <Checkbox checked={this.state.checked} onSelect={this.handleSelect} />
+      <TouchableWithoutFeedback onPress={this.handleSelect}>
+        <View>
+          <Checkbox checked={this.state.checked} />
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

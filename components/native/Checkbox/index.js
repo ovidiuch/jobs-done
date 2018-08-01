@@ -1,12 +1,11 @@
-import { func, bool } from 'prop-types';
+import { bool } from 'prop-types';
 import React, { Component } from 'react';
-import { Animated, TouchableWithoutFeedback } from 'react-native';
+import { Animated } from 'react-native';
 import styled from 'styled-components/native';
 
 export class Checkbox extends Component {
   static propTypes = {
-    checked: bool.isRequired,
-    onSelect: func
+    checked: bool.isRequired
   };
 
   state = {
@@ -33,7 +32,7 @@ export class Checkbox extends Component {
   }
 
   render() {
-    const { checked, onSelect } = this.props;
+    const { checked } = this.props;
     const { anim } = this.state;
 
     const top = anim.interpolate({
@@ -58,14 +57,12 @@ export class Checkbox extends Component {
     ];
 
     return (
-      <TouchableWithoutFeedback onPress={onSelect}>
-        <Bg>
-          <AnimatedCheck checked={checked} style={checkStyle}>
-            <ShortBar />
-            <LongBar />
-          </AnimatedCheck>
-        </Bg>
-      </TouchableWithoutFeedback>
+      <Bg>
+        <AnimatedCheck checked={checked} style={checkStyle}>
+          <ShortBar />
+          <LongBar />
+        </AnimatedCheck>
+      </Bg>
     );
   }
 }

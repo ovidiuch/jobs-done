@@ -5,9 +5,5 @@ export default {
   state: {
     checked: true
   },
-  bg: true,
-  viewport: {
-    width: 320,
-    height: 568
-  }
+  bg: true
 };

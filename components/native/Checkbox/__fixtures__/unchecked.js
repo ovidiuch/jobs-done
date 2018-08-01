@@ -3,12 +3,7 @@ import { Checkbox } from '..';
 export default {
   component: Checkbox,
   props: {
-    checked: false,
-    onSelect: () => console.log('Select checkbox')
+    checked: false
   },
-  bg: true,
-  viewport: {
-    width: 320,
-    height: 568
-  }
+  bg: true
 };
