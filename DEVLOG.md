@@ -1,3 +1,7 @@
+Q: What can I use instead of media queries to create conditional formatting based on viewport?
+
+https://github.com/necolas/react-native-web/blob/master/packages/website/guides/style.md#what-about-media-queries
+
 Q: How to apply web-only style to RNW components? (eg. `user-select`)
 
 https://github.com/necolas/react-native-web/blob/master/packages/website/guides/getting-started.md#web-specific-code

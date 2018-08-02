@@ -1,6 +1,11 @@
 import { number, string, func, arrayOf, oneOf } from 'prop-types';
 import React, { Component } from 'react';
-import { Platform, Animated, TouchableWithoutFeedback } from 'react-native';
+import {
+  Platform,
+  Dimensions,
+  Animated,
+  TouchableWithoutFeedback
+} from 'react-native';
 import styled from 'styled-components/native';
 import { Checkbox } from '../Checkbox';
 import { Link } from '../Link';
@@ -15,7 +20,8 @@ export class Step extends Component {
   };
 
   state = {
-    bgOpacity: new Animated.Value(getBgOpacityForState(this.props.state))
+    bgOpacity: new Animated.Value(getBgOpacityForState(this.props.state)),
+    borderRadius: getBorderRadiusForDeviceWidth()
   };
 
   componentDidUpdate(prevProps) {
@@ -26,6 +32,16 @@ export class Step extends Component {
       }).start();
     }
   }
+
+  handleLayout = () => {
+    const borderRadius = getBorderRadiusForDeviceWidth();
+
+    if (borderRadius !== this.state.borderRadius) {
+      this.setState({
+        borderRadius
+      });
+    }
+  };
 
   handleSelect = () => {
     const { stepIndex, state, onSelect } = this.props;
@@ -49,7 +65,7 @@ export class Step extends Component {
 
   renderStep() {
     const { name, urls, state } = this.props;
-    const { bgOpacity } = this.state;
+    const { bgOpacity, borderRadius } = this.state;
 
     const backgroundColor = bgOpacity.interpolate({
       inputRange: [0, 1],
@@ -57,7 +73,10 @@ export class Step extends Component {
     });
 
     return (
-      <AnimatedContainer style={{ backgroundColor }}>
+      <AnimatedContainer
+        onLayout={this.handleLayout}
+        style={{ backgroundColor, borderRadius }}
+      >
         <Left>
           <Name>{name}</Name>
           <Urls>
@@ -85,10 +104,6 @@ const Container = styled.View`
   padding: 0 20px 16px 20px;
 `;
 
-// FIXME
-// @media (min-width: 553px) {
-//   border-radius: 5px;
-// }
 const WebContainer = Container.extend`
   user-select: none;
 `;
@@ -125,4 +140,8 @@ const ButtonContainer = styled.View`
 
 function getBgOpacityForState(state) {
   return state === 'active' ? 1 : 0;
+}
+
+function getBorderRadiusForDeviceWidth() {
+  return Dimensions.get('window').width > 552 ? 5 : 0;
 }
