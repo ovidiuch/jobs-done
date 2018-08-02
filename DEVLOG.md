@@ -25,6 +25,8 @@ Q: But a Text component with `href` doesn't seem to open link on Native, how can
 
 https://github.com/necolas/react-native-web/issues/162#issuecomment-409619405
 
+This is better: https://codesandbox.io/s/53r88k5opx (Not really, though. Web links still open link via href attribute, as well as call the onPress handler)
+
 ---
 
 Q: How does event propagation work in RN?

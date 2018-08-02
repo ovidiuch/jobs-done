@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Animated, TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 import { Checkbox } from '../Checkbox';
-import { Url } from '../Url';
+import { Link } from '../Link';
 
 export class Step extends Component {
   static propTypes = {
@@ -62,9 +62,9 @@ export class Step extends Component {
           <Name>{name}</Name>
           <Urls>
             {urls.map(url => (
-              <UrlWrapper key={url}>
-                <Url enabled={state === 'active'} url={url} />
-              </UrlWrapper>
+              <Url key={url}>
+                <Link href={url} disabled={state !== 'active'} />
+              </Url>
             ))}
           </Urls>
         </Left>
@@ -108,7 +108,7 @@ const Urls = styled.View`
   flex-direction: column;
 `;
 
-const UrlWrapper = styled.View`
+const Url = styled.View`
   margin: 0 auto 0 0;
 `;
 
