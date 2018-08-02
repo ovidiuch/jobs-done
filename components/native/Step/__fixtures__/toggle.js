@@ -1,7 +1,9 @@
 import { StatefulStep } from '../StatefulStep';
+import { Step } from '..';
 
 export default {
-  component: StatefulStep,
+  component: Step,
+  decorator: StatefulStep,
   bg: true,
   viewport: {
     width: 411,

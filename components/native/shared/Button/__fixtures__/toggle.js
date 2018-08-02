@@ -1,7 +1,8 @@
 import { StatefulButton } from '../StatefulButton';
+import { Button } from '..';
 
 export default {
-  component: StatefulButton,
-  props: {},
+  component: Button,
+  decorator: StatefulButton,
   bg: true
 };

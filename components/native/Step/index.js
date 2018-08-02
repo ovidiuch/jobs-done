@@ -7,8 +7,8 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 import styled from 'styled-components/native';
-import { Checkbox } from '../Checkbox';
-import { Link } from '../Link';
+import { Checkbox } from './Checkbox';
+import { Link } from './Link';
 
 export class Step extends Component {
   static propTypes = {
