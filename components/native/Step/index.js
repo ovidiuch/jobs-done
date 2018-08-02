@@ -1,6 +1,6 @@
 import { number, string, func, arrayOf, oneOf } from 'prop-types';
 import React, { Component } from 'react';
-import { Animated, TouchableWithoutFeedback } from 'react-native';
+import { Platform, Animated, TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 import { Checkbox } from '../Checkbox';
 import { Link } from '../Link';
@@ -76,10 +76,6 @@ export class Step extends Component {
   }
 }
 
-// FIXME: user-select: none;
-// FIXME: @media (min-width: 553px) {
-//   border-radius: 5px;
-// }
 const Container = styled.View`
   display: flex;
   flex-direction: row;
@@ -89,7 +85,17 @@ const Container = styled.View`
   padding: 0 20px 16px 20px;
 `;
 
-const AnimatedContainer = Animated.createAnimatedComponent(Container);
+// FIXME
+// @media (min-width: 553px) {
+//   border-radius: 5px;
+// }
+const WebContainer = Container.extend`
+  user-select: none;
+`;
+
+const AnimatedContainer = Animated.createAnimatedComponent(
+  Platform.OS === 'web' ? WebContainer : Container
+);
 
 const Left = styled.View`
   flex: 1;

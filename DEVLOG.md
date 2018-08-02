@@ -1,6 +1,8 @@
-Q: How to apply web-only style to RNW components? (eg. `user-select` or `cursor`)
+Q: How to apply web-only style to RNW components? (eg. `user-select`)
 
-FIXME
+https://github.com/necolas/react-native-web/blob/master/packages/website/guides/getting-started.md#web-specific-code
+
+Conditional styles that match `Platform.OS === 'web'`
 
 ---
 
