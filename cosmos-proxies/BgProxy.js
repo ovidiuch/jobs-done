@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { proxyPropTypes } from 'react-cosmos-shared/react';
-import { Layout } from '../components/App/Layout';
+import { Layout } from '../components/native/App/Layout';
 
 export function BgProxy(props) {
   const { nextProxy, fixture } = props;

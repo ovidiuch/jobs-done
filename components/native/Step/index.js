@@ -1,4 +1,4 @@
-import { number, string, func, arrayOf, oneOf } from 'prop-types';
+import { number, string, func, arrayOf } from 'prop-types';
 import React, { Component } from 'react';
 import {
   Platform,
@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 import styled from 'styled-components/native';
+import { stepState } from '../shared/prop-types';
 import { Checkbox } from './Checkbox';
 import { Link } from './Link';
 
@@ -15,7 +16,7 @@ export class Step extends Component {
     stepIndex: number.isRequired,
     name: string.isRequired,
     urls: arrayOf(string).isRequired,
-    state: oneOf(['active', 'checked', 'disabled']).isRequired,
+    state: stepState.isRequired,
     onSelect: func.isRequired
   };
 
