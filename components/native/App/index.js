@@ -8,7 +8,6 @@ import { Layout } from './Layout';
 import { ActiveElement } from './ActiveElement';
 import { steps } from './data';
 
-// FIXME: Does onLayout get called when changing device orientation?
 export class App extends Component {
   state = {
     activeStepIndex: 0,
@@ -192,7 +191,7 @@ function getYOffsetForState({ parentSize, elHeights, activeStepIndex }) {
   return (
     -baseOffset -
     visibleElements.reduce((total, nextHeight, index) => {
-      const isLast = index !== activeStepIndex;
+      const isLast = index === activeStepIndex;
       const toAdd =
         !isPortraitScreen && isLast ? Math.round(nextHeight / 2) : nextHeight;
 
