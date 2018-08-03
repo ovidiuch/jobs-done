@@ -1,7 +1,7 @@
 import { bool, func } from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
-import { Header, Paragraph } from '../shared/primitives';
+import { Header, Paragraph } from '../shared/text';
 import { Button } from '../shared/Button';
 
 export class Intro extends Component {

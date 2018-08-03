@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
-import { Header, Paragraph } from '../shared/primitives';
+import { Header, Paragraph } from '../shared/text';
+import { Activities } from './Activities';
 
 export class Outro extends Component {
-  static propTypes = {};
-
   render() {
     return (
       <Container>
@@ -13,6 +12,7 @@ export class Outro extends Component {
           Time to unwind. Let work sink in your subconscious until tomorrow.
         </Paragraph>
         <Paragraph>What do you feel like doing this evening?</Paragraph>
+        <Activities />
       </Container>
     );
   }

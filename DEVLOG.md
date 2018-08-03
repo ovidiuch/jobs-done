@@ -1,6 +1,15 @@
+Q: How to resize SVG in RN automatically?
+
+FIXME
+
+https://github.com/react-native-community/react-native-svg/pull/596
+https://www.sarasoueidan.com/blog/svg-coordinate-systems/ (via viewBox?)
+
+---
+
 Q: How to load custom fonts in RN?
 
-???
+FIXME
 
 ---
 
