@@ -5,21 +5,20 @@ import { Animated } from 'react-native';
 export class Transition extends Component {
   static propTypes = {
     children: func.isRequired,
-    getValue: func.isRequired,
+    value: number.isRequired,
     duration: number.isRequired
   };
 
   state = {
-    value: new Animated.Value(this.props.getValue())
+    valueAnim: new Animated.Value(this.props.value)
   };
 
-  componentDidUpdate() {
-    const { getValue, duration } = this.props;
-    const toValue = getValue();
+  componentDidUpdate(prevProps) {
+    const { value, duration } = this.props;
 
-    if (toValue !== this.state.value) {
-      Animated.timing(this.state.value, {
-        toValue,
+    if (value !== prevProps.value || duration !== prevProps.duration) {
+      Animated.timing(this.state.valueAnim, {
+        toValue: value,
         duration
       }).start();
     }
@@ -27,8 +26,8 @@ export class Transition extends Component {
 
   render() {
     const { children } = this.props;
-    const { value } = this.state;
+    const { valueAnim } = this.state;
 
-    return children(value);
+    return children(valueAnim);
   }
 }

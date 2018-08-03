@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Animated } from 'react-native';
 import styled from 'styled-components/native';
+import { Transition } from '../shared/Transition';
 import { Intro } from '../Intro';
 import { Outro } from '../Outro';
 import { Step } from '../Step';
@@ -12,27 +13,8 @@ export class App extends Component {
   state = {
     activeStepIndex: 0,
     rootViewport: undefined,
-    elHeights: {},
-    yOffset: new Animated.Value(0),
-    opacity: new Animated.Value(0)
+    elHeights: {}
   };
-
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      this.state.rootViewport !== prevState.rootViewport ||
-      this.state.elHeights !== prevState.elHeights ||
-      this.state.activeStepIndex !== prevState.activeStepIndex
-    ) {
-      Animated.timing(this.state.yOffset, {
-        toValue: getYOffsetForState(this.state),
-        duration: 1000
-      }).start();
-      Animated.timing(this.state.opacity, {
-        toValue: getOpacityForState(this.state),
-        duration: 2000
-      }).start();
-    }
-  }
 
   componentDidMount() {
     if (typeof global.addEventListener === 'function') {
@@ -115,7 +97,19 @@ export class App extends Component {
   };
 
   render() {
-    const { rootViewport, activeStepIndex, yOffset, opacity } = this.state;
+    return (
+      <Transition duration={1000} value={getYOffsetForState(this.state)}>
+        {yOffset => (
+          <Transition duration={2000} value={getOpacityForState(this.state)}>
+            {opacity => this.renderAnimated({ yOffset, opacity })}
+          </Transition>
+        )}
+      </Transition>
+    );
+  }
+
+  renderAnimated({ yOffset, opacity }) {
+    const { rootViewport, activeStepIndex } = this.state;
 
     const introStepIndex = 0;
     const outroStepIndex = getStepsNum() - 1;

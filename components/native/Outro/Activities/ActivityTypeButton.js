@@ -15,9 +15,7 @@ export function ActivityTypeButton({
   return (
     <Transition
       duration={600}
-      getValue={() =>
-        !selectedActivityType || selectedActivityType === label ? 1 : 0.3
-      }
+      value={!selectedActivityType || selectedActivityType === label ? 1 : 0.3}
     >
       {opacity => (
         <Container

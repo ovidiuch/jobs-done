@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 import styled from 'styled-components/native';
+import { Transition } from '../../shared/Transition';
 
 export class Button extends Component {
   static propTypes = {
@@ -19,41 +20,36 @@ export class Button extends Component {
     disabled: false
   };
 
-  state = {
-    opacity: new Animated.Value(getOpacityForProps(this.props))
-  };
-
-  componentDidUpdate(prevProps) {
-    if (this.props.disabled !== prevProps.disabled) {
-      Animated.timing(this.state.opacity, {
-        toValue: getOpacityForProps(this.props),
-        duration: 600
-      }).start();
-    }
-  }
-
   render() {
     const { disabled, onPress } = this.props;
 
-    if (disabled) {
-      return this.renderLabel();
-    }
-
     return (
-      <TouchableWithoutFeedback onPress={onPress}>
-        <View>{this.renderLabel()}</View>
-      </TouchableWithoutFeedback>
+      <Transition duration={600} value={getOpacityForState(disabled)}>
+        {opacity => {
+          const color = opacity.interpolate({
+            inputRange: [0, 1],
+            outputRange: [
+              'rgba(217, 223, 247, 0.4)',
+              'rgba(217, 223, 247, 0.8)'
+            ]
+          });
+
+          if (disabled) {
+            return this.renderLabel(color);
+          }
+
+          return (
+            <TouchableWithoutFeedback onPress={onPress}>
+              <View>{this.renderLabel(color)}</View>
+            </TouchableWithoutFeedback>
+          );
+        }}
+      </Transition>
     );
   }
 
-  renderLabel() {
+  renderLabel(color) {
     const { label } = this.props;
-    const { opacity } = this.state;
-
-    const color = opacity.interpolate({
-      inputRange: [0, 1],
-      outputRange: ['rgba(217, 223, 247, 0.4)', 'rgba(217, 223, 247, 0.8)']
-    });
 
     return (
       <Container>
@@ -63,7 +59,7 @@ export class Button extends Component {
   }
 }
 
-function getOpacityForProps({ disabled }) {
+function getOpacityForState(disabled) {
   return disabled ? 0 : 1;
 }
 

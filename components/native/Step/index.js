@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Platform, Animated, TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 import { stepState } from '../shared/prop-types';
+import { Transition } from '../shared/Transition';
 import { Checkbox } from './Checkbox';
 import { Link } from './Link';
 
@@ -26,19 +27,6 @@ export class Step extends Component {
     }
   };
 
-  state = {
-    bgOpacity: new Animated.Value(getBgOpacityForState(this.props.state))
-  };
-
-  componentDidUpdate(prevProps) {
-    if (this.props.state !== prevProps.state) {
-      Animated.timing(this.state.bgOpacity, {
-        toValue: getBgOpacityForState(this.props.state),
-        duration: 600
-      }).start();
-    }
-  }
-
   handleSelect = () => {
     const { stepIndex, state, onSelect } = this.props;
 
@@ -50,18 +38,23 @@ export class Step extends Component {
   render() {
     const { state } = this.props;
 
-    return state === 'disabled' ? (
-      this.renderStep()
-    ) : (
-      <TouchableWithoutFeedback onPress={this.handleSelect}>
-        {this.renderStep()}
-      </TouchableWithoutFeedback>
+    return (
+      <Transition duration={600} value={getBgOpacityForState(state)}>
+        {bgOpacity => {
+          return state === 'disabled' ? (
+            this.renderStep(bgOpacity)
+          ) : (
+            <TouchableWithoutFeedback onPress={this.handleSelect}>
+              {this.renderStep(bgOpacity)}
+            </TouchableWithoutFeedback>
+          );
+        }}
+      </Transition>
     );
   }
 
-  renderStep() {
+  renderStep(bgOpacity) {
     const { name, urls, state, rootViewport } = this.props;
-    const { bgOpacity } = this.state;
 
     const backgroundColor = bgOpacity.interpolate({
       inputRange: [0, 1],

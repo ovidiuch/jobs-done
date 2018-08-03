@@ -2,56 +2,49 @@ import { bool } from 'prop-types';
 import React, { Component } from 'react';
 import { Animated } from 'react-native';
 import styled from 'styled-components/native';
+import { Transition } from '../../shared/Transition';
 
 export class Checkbox extends Component {
   static propTypes = {
     checked: bool.isRequired
   };
 
-  state = {
-    anim: new Animated.Value(getAnimValueForProps(this.props))
-  };
-
-  componentDidUpdate(prevProps) {
-    if (this.props.checked !== prevProps.checked) {
-      Animated.timing(this.state.anim, {
-        toValue: getAnimValueForProps(this.props),
-        duration: 600
-      }).start();
-    }
-  }
-
   render() {
     const { checked } = this.props;
-    const { anim } = this.state;
-
-    const top = anim.interpolate({
-      inputRange: [0, 1],
-      outputRange: [22, 18]
-    });
-    const scale = anim.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0.5, 1]
-    });
-    const checkStyle = [
-      { top },
-      { opacity: anim },
-      {
-        transform: [
-          { rotateZ: '-50deg' },
-          { scaleX: scale },
-          { scaleY: scale },
-          { perspective: 1000 }
-        ]
-      }
-    ];
 
     return (
       <Bg>
-        <AnimatedCheck checked={checked} style={checkStyle}>
-          <ShortBar />
-          <LongBar />
-        </AnimatedCheck>
+        <Transition duration={600} value={getAnimValueForState(checked)}>
+          {anim => {
+            const top = anim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [22, 18]
+            });
+            const scale = anim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0.5, 1]
+            });
+            const checkStyle = [
+              { top },
+              { opacity: anim },
+              {
+                transform: [
+                  { rotateZ: '-50deg' },
+                  { scaleX: scale },
+                  { scaleY: scale },
+                  { perspective: 1000 }
+                ]
+              }
+            ];
+
+            return (
+              <Check checked={checked} style={checkStyle}>
+                <ShortBar />
+                <LongBar />
+              </Check>
+            );
+          }}
+        </Transition>
       </Bg>
     );
   }
@@ -65,15 +58,13 @@ const Bg = styled.View`
   background-color: rgba(0, 9, 21, 0.3);
 `;
 
-const Check = styled.View`
+const Check = Animated.createAnimatedComponent(styled.View`
   position: absolute;
   left: 10px;
   margin: -3px 0 0 0;
   width: 32px;
   height: 16px;
-`;
-
-const AnimatedCheck = Animated.createAnimatedComponent(Check);
+`);
 
 const ShortBar = styled.View`
   position: absolute;
@@ -94,6 +85,6 @@ const LongBar = styled.View`
   background: rgba(217, 223, 247, 1);
 `;
 
-function getAnimValueForProps({ checked }) {
+function getAnimValueForState(checked) {
   return checked ? 1 : 0;
 }
