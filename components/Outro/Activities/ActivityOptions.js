@@ -1,34 +1,36 @@
 import { string } from 'prop-types';
 import React from 'react';
+import styled from 'styled-components/native';
+import { Text } from '../../shared/text';
 
 export function ActivityOptions({ label }) {
   switch (label) {
     case 'Social':
       return (
-        <ul>
-          <li>Attend an event</li>
-          <li>Take someone to dinner</li>
-          <li>Hang out with a friend</li>
-          <li>Call someone dear</li>
-        </ul>
+        <List>
+          <ListItem>Attend an event</ListItem>
+          <ListItem>Take someone to dinner</ListItem>
+          <ListItem>Hang out with a friend</ListItem>
+          <ListItem last>Call someone dear</ListItem>
+        </List>
       );
     case 'Physical':
       return (
-        <ul>
-          <li>Go for a run</li>
-          <li>Go for a swim</li>
-          <li>Take a long walk</li>
-          <li>Work out</li>
-        </ul>
+        <List>
+          <ListItem>Go for a run</ListItem>
+          <ListItem>Go for a swim</ListItem>
+          <ListItem>Take a long walk</ListItem>
+          <ListItem last>Work out</ListItem>
+        </List>
       );
     case 'Leisure':
       return (
-        <ul>
-          <li>Read a book</li>
-          <li>Play a game</li>
-          <li>Go see a play</li>
-          <li>Watch a movie</li>
-        </ul>
+        <List>
+          <ListItem>Read a book</ListItem>
+          <ListItem>Play a game</ListItem>
+          <ListItem>Go see a play</ListItem>
+          <ListItem last>Watch a movie</ListItem>
+        </List>
       );
     default:
       return null;
@@ -38,3 +40,13 @@ export function ActivityOptions({ label }) {
 ActivityOptions.propTypes = {
   label: string
 };
+
+const List = styled.View`
+  width: 100%;
+`;
+
+const ListItem = Text.extend`
+  line-height: 24px;
+  margin: 0 0 ${props => (props.last ? 0 : 4)}px 0;
+  padding: 0 0 0 40px;
+`;

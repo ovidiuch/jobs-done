@@ -43,7 +43,7 @@ export class Activities extends Component {
 }
 
 const ActivityTypeButtons = styled.View`
-  margin: 0 -16px 4px 0;
+  margin: 0 -16px 0 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
