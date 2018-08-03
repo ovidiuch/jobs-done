@@ -18,7 +18,7 @@ export class Activities extends Component {
     const { selectedActivityType } = this.state;
 
     return (
-      <>
+      <React.Fragment>
         <ActivityTypeButtons>
           <ActivityTypeButton
             label="Social"
@@ -37,7 +37,7 @@ export class Activities extends Component {
           />
         </ActivityTypeButtons>
         <ActivityOptions label={selectedActivityType} />
-      </>
+      </React.Fragment>
     );
   }
 }

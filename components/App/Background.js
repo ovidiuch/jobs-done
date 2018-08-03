@@ -8,6 +8,8 @@ import {
   Stop
 } from 'react-native-svg';
 
+// TODO: Fix resizing on Android
+// TODO: Fix Sunset size on iOS
 export function Background() {
   return (
     <Svg width="100%" height="100%">
