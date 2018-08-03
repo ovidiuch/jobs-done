@@ -16,6 +16,8 @@ exports.addNativeAlias = function(config) {
     ...config,
     resolve: {
       ...config.resolve,
+      // These aliases are already applied via Babel, except Babel only aliases
+      // imports/requires in repo source
       alias
     }
   };
