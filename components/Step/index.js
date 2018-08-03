@@ -1,113 +1,137 @@
-import { number, string, bool, func, arrayOf, oneOf } from 'prop-types';
+import { number, string, func, arrayOf, exact } from 'prop-types';
 import React, { Component } from 'react';
-import styled from 'styled-components';
-import parse from 'url-parse';
-import { Checkbox } from '../Checkbox';
+import { Platform, Animated, TouchableWithoutFeedback } from 'react-native';
+import styled from 'styled-components/native';
+import { stepState } from '../shared/prop-types';
+import { Transition } from '../shared/Transition';
+import { Checkbox } from './Checkbox';
+import { Link } from './Link';
 
 export class Step extends Component {
   static propTypes = {
     stepIndex: number.isRequired,
     name: string.isRequired,
     urls: arrayOf(string).isRequired,
-    state: oneOf(['hidden', 'active', 'past']).isRequired,
-    isChecked: bool.isRequired,
+    state: stepState.isRequired,
+    rootViewport: exact({
+      width: number.isRequired,
+      height: number.isRequired
+    }).isRequired,
     onSelect: func.isRequired
+  };
+
+  static defaultProps = {
+    rootViewport: {
+      width: 320,
+      height: 568
+    }
   };
 
   handleSelect = () => {
     const { stepIndex, state, onSelect } = this.props;
 
-    if (state !== 'hidden') {
+    if (state !== 'disabled') {
       onSelect(stepIndex);
     }
   };
 
-  handleUrlClick = e => {
+  render() {
     const { state } = this.props;
 
-    if (state !== 'active') {
-      e.preventDefault();
-    }
+    return (
+      <Transition duration={600} value={getBgOpacityForState(state)}>
+        {bgOpacity => {
+          return state === 'disabled' ? (
+            this.renderStep(bgOpacity)
+          ) : (
+            <TouchableWithoutFeedback onPress={this.handleSelect}>
+              {this.renderStep(bgOpacity)}
+            </TouchableWithoutFeedback>
+          );
+        }}
+      </Transition>
+    );
+  }
 
-    // - When active: Prevent step from being checked when following links
-    // - When past: Select step instead of following links
-    if (state === 'active') {
-      e.stopPropagation();
-    }
-  };
+  renderStep(bgOpacity) {
+    const { name, urls, state, rootViewport } = this.props;
 
-  render() {
-    const { name, urls, state, isChecked } = this.props;
+    const backgroundColor = bgOpacity.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['rgba(217, 223, 247, 0)', 'rgba(217, 223, 247, 0.12)']
+    });
+    const borderRadius = getBorderRadiusForViewport(rootViewport);
 
     return (
-      <Container state={state} onClick={this.handleSelect}>
+      <AnimatedContainer
+        onLayout={this.handleLayout}
+        style={{ backgroundColor, borderRadius }}
+      >
         <Left>
           <Name>{name}</Name>
-          {urls.map(url => {
-            const { hostname } = parse(url);
-
-            return (
-              <Url key={url} state={state}>
-                <a
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={this.handleUrlClick}
-                >
-                  {hostname}
-                </a>
+          <Urls>
+            {urls.map(url => (
+              <Url key={url}>
+                <Link href={url} disabled={state !== 'active'} />
               </Url>
-            );
-          })}
+            ))}
+          </Urls>
         </Left>
         <ButtonContainer>
-          <Checkbox checked={isChecked} />
+          <Checkbox checked={state === 'checked'} />
         </ButtonContainer>
-      </Container>
+      </AnimatedContainer>
     );
   }
 }
 
-const Container = styled.div`
+const Container = styled.View`
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   justify-content: flex-end;
   flex-wrap: wrap;
   padding: 0 20px 16px 20px;
-  background: ${props =>
-    props.state === 'active' ? 'rgba(217, 223, 247, 0.12)' : 'transparent'};
-  cursor: ${props => (props.state === 'hidden' ? 'default' : 'pointer')};
-  user-select: none;
-
-  @media (min-width: 553px) {
-    border-radius: 5px;
-  }
 `;
 
-const Left = styled.div`
+const WebContainer = Container.extend`
+  user-select: none;
+`;
+
+const AnimatedContainer = Animated.createAnimatedComponent(
+  Platform.OS === 'web' ? WebContainer : Container
+);
+
+const Left = styled.View`
   flex: 1;
   padding-right: 16px;
 `;
 
-const Name = styled.div`
+const Name = styled.Text`
   margin: 16px 0 4px 0;
+  color: rgba(217, 223, 247, 0.8);
   font-size: 18px;
   line-height: 24px;
 `;
 
-const Url = styled.div`
-  font-size: 16px;
-  line-height: 24px;
-
-  a {
-    display: inline-block;
-    color: rgba(217, 223, 247, 0.6);
-    cursor: ${props => (props.state === 'hidden' ? 'default' : 'pointer')};
-  }
+const Urls = styled.View`
+  display: flex;
+  flex-direction: column;
 `;
 
-const ButtonContainer = styled.div`
+const Url = styled.View`
+  margin: 0 auto 0 0;
+`;
+
+const ButtonContainer = styled.View`
   flex-shrink: 0;
   margin: 16px 0 0 0;
 `;
+
+function getBgOpacityForState(state) {
+  return state === 'active' ? 1 : 0;
+}
+
+function getBorderRadiusForViewport(viewport) {
+  return viewport.width > 552 ? 5 : 0;
+}
