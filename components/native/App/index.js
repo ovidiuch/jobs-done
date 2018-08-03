@@ -13,7 +13,8 @@ export class App extends Component {
     activeStepIndex: 0,
     parentSize: null,
     elHeights: {},
-    yOffset: new Animated.Value(0)
+    yOffset: new Animated.Value(0),
+    opacity: new Animated.Value(0)
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -25,6 +26,10 @@ export class App extends Component {
       Animated.timing(this.state.yOffset, {
         toValue: getYOffsetForState(this.state),
         duration: 1000
+      }).start();
+      Animated.timing(this.state.opacity, {
+        toValue: getOpacityForState(this.state),
+        duration: 2000
       }).start();
     }
   }
@@ -106,7 +111,7 @@ export class App extends Component {
   // };
 
   render() {
-    const { activeStepIndex, yOffset } = this.state;
+    const { activeStepIndex, yOffset, opacity } = this.state;
 
     const introStepIndex = 0;
     const outroStepIndex = getStepsNum() - 1;
@@ -114,7 +119,8 @@ export class App extends Component {
     const isOutroActive = activeStepIndex === outroStepIndex;
 
     const innerStyle = {
-      transform: [{ translateY: yOffset }]
+      transform: [{ translateY: yOffset }],
+      opacity
     };
 
     return (
@@ -171,14 +177,7 @@ function getStepsNum() {
 }
 
 function getYOffsetForState({ parentSize, elHeights, activeStepIndex }) {
-  // Wait until we now the parent's width/height
-  if (!parentSize) {
-    return 0;
-  }
-
-  // Wait until we now the layout of all steps
-  // NOTE: This means all steps are rendered from the start
-  if (Object.keys(elHeights).length < getStepsNum()) {
+  if (!isLayoutReady({ parentSize, elHeights })) {
     return 0;
   }
 
@@ -200,6 +199,25 @@ function getYOffsetForState({ parentSize, elHeights, activeStepIndex }) {
   );
 }
 
+function getOpacityForState({ parentSize, elHeights }) {
+  return isLayoutReady({ parentSize, elHeights }) ? 1 : 0;
+}
+
+function isLayoutReady({ parentSize, elHeights }) {
+  // Wait until we now the parent's width/height
+  if (!parentSize) {
+    return false;
+  }
+
+  // Wait until we now the layout of all steps
+  // NOTE: This means all steps are rendered from the start
+  if (Object.keys(elHeights).length < getStepsNum()) {
+    return false;
+  }
+
+  return true;
+}
+
 function getVisibleElements({ elHeights, activeStepIndex }) {
   // Already checked elements and active element
   return Object.keys(elHeights)
@@ -208,7 +226,6 @@ function getVisibleElements({ elHeights, activeStepIndex }) {
     .map(index => elHeights[index]);
 }
 
-// FIXME transition: opacity 2s;
 const Inner = styled.View`
   position: absolute;
   top: 100%;
