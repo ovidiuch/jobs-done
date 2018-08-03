@@ -1,3 +1,5 @@
+const alias = require('./alias');
+
 exports.addUrlLoader = function(config) {
   return addLoader(config, {
     test: /\.mp3$/,
@@ -14,10 +16,7 @@ exports.addNativeAlias = function(config) {
     ...config,
     resolve: {
       ...config.resolve,
-      alias: {
-        'react-native$': 'react-native-web',
-        'react-native-svg': 'svgs'
-      }
+      alias
     }
   };
 };

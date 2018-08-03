@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { Text } from '../../shared/text';
 
+// TODO Fix `last` prop warning
 export function ActivityOptions({ label }) {
   switch (label) {
     case 'Social':

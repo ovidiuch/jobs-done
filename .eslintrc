@@ -26,10 +26,12 @@
     },
     {
       "files": [
+        "alias.js",
+        ".babelrc.js",
         "cosmos.config.js",
-        "next.config.js",
         "webpack.extend.js",
         "rn-cli.config.js",
+        "build.js",
         "App.js"
       ],
       "env": {
