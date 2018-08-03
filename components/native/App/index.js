@@ -34,17 +34,21 @@ export class App extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   // window isn't available on the server side, but nor is componentDidMount
-  //   // called on the server
-  //   global.addEventListener('keydown', this.handleKeyDown);
-  // }
-  //
-  // componentWillUnmount() {
-  //   // window isn't available on the server side, but nor is componentWillUnmount
-  //   // called on the server
-  //   global.removeEventListener('keydown', this.handleKeyDown);
-  // }
+  componentDidMount() {
+    if (typeof global.addEventListener === 'function') {
+      // window isn't available on the server side, but nor is componentDidMount
+      // called on the server
+      global.addEventListener('keydown', this.handleKeyDown);
+    }
+  }
+
+  componentWillUnmount() {
+    if (typeof global.removeEventListener === 'function') {
+      // window isn't available on the server side, but nor is componentWillUnmount
+      // called on the server
+      global.removeEventListener('keydown', this.handleKeyDown);
+    }
+  }
 
   handleParentLayout = e => {
     const { width, height } = e.nativeEvent.layout;
@@ -82,33 +86,33 @@ export class App extends Component {
     }
   };
 
-  // handlePrev = () => {
-  //   const { activeStepIndex } = this.state;
-  //
-  //   if (activeStepIndex > -1) {
-  //     this.setState({
-  //       activeStepIndex: activeStepIndex - 1
-  //     });
-  //   }
-  // };
-  //
+  handlePrev = () => {
+    const { activeStepIndex } = this.state;
+
+    if (activeStepIndex > 0) {
+      this.setState({
+        activeStepIndex: activeStepIndex - 1
+      });
+    }
+  };
+
   handleNext = () => {
     const { activeStepIndex } = this.state;
 
-    if (activeStepIndex < getStepsNum()) {
+    if (activeStepIndex < getStepsNum() - 1) {
       this.setState({
         activeStepIndex: activeStepIndex + 1
       });
     }
   };
 
-  // handleKeyDown = e => {
-  //   if (e.keyCode === 13) {
-  //     this.handleNext();
-  //   } else if (e.keyCode === 8) {
-  //     this.handlePrev();
-  //   }
-  // };
+  handleKeyDown = e => {
+    if (e.keyCode === 13) {
+      this.handleNext();
+    } else if (e.keyCode === 8) {
+      this.handlePrev();
+    }
+  };
 
   render() {
     const { activeStepIndex, yOffset, opacity } = this.state;
