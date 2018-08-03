@@ -16,7 +16,7 @@ exports.addNativeAlias = function(config) {
       ...config.resolve,
       alias: {
         'react-native$': 'react-native-web',
-        'react-native-linear-gradient': 'react-native-web-linear-gradient'
+        'react-native-svg': 'svgs'
       }
     }
   };
