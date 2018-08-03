@@ -1,3 +1,10 @@
+Q: How to configured styled-components with react-native-web on the server?
+
+Problems:
+
+- `react-native` import in `node_modules/styled-components/dist/styled-components.native.cjs.js` doesn't point to `react-native-web`? Maybe `babel-plugin-module-resolver` doesn't work with `babel-node`?
+- ServerStyleSheet.collectStyles doesn't collect styles from native styled-components
+
 Q: How to resize SVG in RN automatically?
 
 FIXME
@@ -9,7 +16,7 @@ https://www.sarasoueidan.com/blog/svg-coordinate-systems/ (via viewBox?)
 
 Q: How to load custom fonts in RN?
 
-FIXME
+Relied on default fonts for now.
 
 ---
 
