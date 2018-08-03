@@ -1,11 +1,6 @@
-import { number, string, func, arrayOf } from 'prop-types';
+import { number, string, func, arrayOf, exact } from 'prop-types';
 import React, { Component } from 'react';
-import {
-  Platform,
-  Dimensions,
-  Animated,
-  TouchableWithoutFeedback
-} from 'react-native';
+import { Platform, Animated, TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 import { stepState } from '../shared/prop-types';
 import { Checkbox } from './Checkbox';
@@ -17,12 +12,22 @@ export class Step extends Component {
     name: string.isRequired,
     urls: arrayOf(string).isRequired,
     state: stepState.isRequired,
+    rootViewport: exact({
+      width: number.isRequired,
+      height: number.isRequired
+    }).isRequired,
     onSelect: func.isRequired
   };
 
+  static defaultProps = {
+    rootViewport: {
+      width: 320,
+      height: 568
+    }
+  };
+
   state = {
-    bgOpacity: new Animated.Value(getBgOpacityForState(this.props.state)),
-    borderRadius: getBorderRadiusForDeviceWidth()
+    bgOpacity: new Animated.Value(getBgOpacityForState(this.props.state))
   };
 
   componentDidUpdate(prevProps) {
@@ -33,16 +38,6 @@ export class Step extends Component {
       }).start();
     }
   }
-
-  handleLayout = () => {
-    const borderRadius = getBorderRadiusForDeviceWidth();
-
-    if (borderRadius !== this.state.borderRadius) {
-      this.setState({
-        borderRadius
-      });
-    }
-  };
 
   handleSelect = () => {
     const { stepIndex, state, onSelect } = this.props;
@@ -65,13 +60,14 @@ export class Step extends Component {
   }
 
   renderStep() {
-    const { name, urls, state } = this.props;
-    const { bgOpacity, borderRadius } = this.state;
+    const { name, urls, state, rootViewport } = this.props;
+    const { bgOpacity } = this.state;
 
     const backgroundColor = bgOpacity.interpolate({
       inputRange: [0, 1],
       outputRange: ['rgba(217, 223, 247, 0)', 'rgba(217, 223, 247, 0.12)']
     });
+    const borderRadius = getBorderRadiusForViewport(rootViewport);
 
     return (
       <AnimatedContainer
@@ -143,6 +139,6 @@ function getBgOpacityForState(state) {
   return state === 'active' ? 1 : 0;
 }
 
-function getBorderRadiusForDeviceWidth() {
-  return Dimensions.get('window').width > 552 ? 5 : 0;
+function getBorderRadiusForViewport(viewport) {
+  return viewport.width > 552 ? 5 : 0;
 }

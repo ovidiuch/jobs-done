@@ -11,7 +11,7 @@ import { steps } from './data';
 export class App extends Component {
   state = {
     activeStepIndex: 0,
-    parentSize: null,
+    rootViewport: undefined,
     elHeights: {},
     yOffset: new Animated.Value(0),
     opacity: new Animated.Value(0)
@@ -19,7 +19,7 @@ export class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (
-      this.state.parentSize !== prevState.parentSize ||
+      this.state.rootViewport !== prevState.rootViewport ||
       this.state.elHeights !== prevState.elHeights ||
       this.state.activeStepIndex !== prevState.activeStepIndex
     ) {
@@ -54,7 +54,7 @@ export class App extends Component {
     const { width, height } = e.nativeEvent.layout;
 
     this.setState({
-      parentSize: { width, height }
+      rootViewport: { width, height }
     });
   };
 
@@ -115,7 +115,7 @@ export class App extends Component {
   };
 
   render() {
-    const { activeStepIndex, yOffset, opacity } = this.state;
+    const { rootViewport, activeStepIndex, yOffset, opacity } = this.state;
 
     const introStepIndex = 0;
     const outroStepIndex = getStepsNum() - 1;
@@ -158,6 +158,7 @@ export class App extends Component {
                   {...step}
                   stepIndex={relIndex}
                   state={state}
+                  rootViewport={rootViewport}
                   onSelect={this.handleSelect}
                 />
               </ActiveElement>
@@ -180,13 +181,13 @@ function getStepsNum() {
   return steps.length + 2;
 }
 
-function getYOffsetForState({ parentSize, elHeights, activeStepIndex }) {
-  if (!isLayoutReady({ parentSize, elHeights })) {
+function getYOffsetForState({ rootViewport, elHeights, activeStepIndex }) {
+  if (!isLayoutReady({ rootViewport, elHeights })) {
     return 0;
   }
 
-  const isPortraitScreen = parentSize.height > parentSize.width;
-  const baseOffset = isPortraitScreen ? 0 : Math.round(parentSize.height / 2);
+  const isPortraitScreen = rootViewport.height > rootViewport.width;
+  const baseOffset = isPortraitScreen ? 0 : Math.round(rootViewport.height / 2);
   const visibleElements = getVisibleElements({ elHeights, activeStepIndex });
 
   // In portrait mode, elements are aligned to bottom
@@ -203,13 +204,13 @@ function getYOffsetForState({ parentSize, elHeights, activeStepIndex }) {
   );
 }
 
-function getOpacityForState({ parentSize, elHeights }) {
-  return isLayoutReady({ parentSize, elHeights }) ? 1 : 0;
+function getOpacityForState({ rootViewport, elHeights }) {
+  return isLayoutReady({ rootViewport, elHeights }) ? 1 : 0;
 }
 
-function isLayoutReady({ parentSize, elHeights }) {
+function isLayoutReady({ rootViewport, elHeights }) {
   // Wait until we now the parent's width/height
-  if (!parentSize) {
+  if (!rootViewport) {
     return false;
   }
 
