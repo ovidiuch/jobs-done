@@ -9,9 +9,7 @@ https://www.sarasoueidan.com/blog/svg-coordinate-systems/ (via viewBox?)
 
 Q: How to make styled-components to require `react-native-web` instead of `react-native` on the server? No webpack involved.
 
-FIXME
-
-Can `babel-plugin-module-resolver` alias a 2nd hand dependency via `babel/node`?
+Call `@babel/node` with `--ignore '**/node_modules/art/**'` so that `babel-plugin-module-resolver` transforms (most) node_modules files as well, especially `styled-components` package.
 
 ---
 
