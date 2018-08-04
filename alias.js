@@ -1,4 +1,4 @@
 module.exports = {
-  'react-native$': 'react-native-web',
-  'react-native-svg$': 'svgs'
+  'react-native': 'react-native-web',
+  'react-native-svg': 'svgs'
 };

@@ -5,7 +5,7 @@
   "scripts": {
     "lint": "eslint '{components/**/,}*.js'",
     "cosmos": "cosmos",
-    "build": "babel-node build.js",
+    "build": "babel-node ./build.js --config-file ./.babelrc.js --ignore '**/node_modules/art/**'",
     "native:cosmos": "cosmos-native",
     "native:start": "react-native-scripts start",
     "android": "react-native-scripts android",
