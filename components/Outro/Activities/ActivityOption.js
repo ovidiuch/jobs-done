@@ -1,6 +1,6 @@
 import { string, func } from 'prop-types';
 import React, { Component } from 'react';
-import { Animated, TouchableWithoutFeedback } from 'react-native';
+import { Platform, Animated, TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 import { Text } from '../../shared/text';
 import { Transition } from '../../shared/Transition';
@@ -77,6 +77,7 @@ const Label = Text.extend`
   margin: 0 16px 0 0;
   line-height: 40px;
   white-space: nowrap;
+  ${Platform.OS === 'web' && 'user-select: none;'};
 `;
 
 const CheerContainer = Animated.createAnimatedComponent(styled.View`
