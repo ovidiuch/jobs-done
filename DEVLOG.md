@@ -1,16 +1,27 @@
-Q: How to configured styled-components with react-native-web on the server?
-
-Problems:
-
-- `react-native` import in `node_modules/styled-components/dist/styled-components.native.cjs.js` doesn't point to `react-native-web`? Maybe `babel-plugin-module-resolver` doesn't work with `babel-node`?
-- ServerStyleSheet.collectStyles doesn't collect styles from native styled-components
-
 Q: How to resize SVG in RN automatically?
 
 FIXME
 
 https://github.com/react-native-community/react-native-svg/pull/596
 https://www.sarasoueidan.com/blog/svg-coordinate-systems/ (via viewBox?)
+
+---
+
+Q: How to make styled-components to require `react-native-web` instead of `react-native` on the server? No webpack involved.
+
+Call `@babel/node` with `--only 'components/**,tools/**,node_modules/styled-components/**'` (overriding the default Babel options which ignore node_modules). This way `babel-plugin-module-resolver` also transforms `styled-components` package.
+
+---
+
+Q: How to configure styled-components SSR with react-native-web?
+
+Problems:
+
+- ServerStyleSheet.collectStyles doesn't collect styles from native styled-components https://spectrum.chat/thread/2c63a455-9b05-40cd-9ff1-5388525f22b3
+
+styled-components sends the styles to react-native-web, which generates the output. So it's out of styled-component's scope.
+
+LUCKILY, react-native-web has an API for extracting the styles for SSR: https://github.com/necolas/react-native-web/blob/9c8407162e37835e35853605c363842d66ac27ac/packages/react-native-web/src/exports/AppRegistry/renderApplication.js#L38-L56
 
 ---
 

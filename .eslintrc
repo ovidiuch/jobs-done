@@ -6,12 +6,8 @@
     "plugin:import/warnings",
     "plugin:react/recommended"
   ],
-  "settings": {
-    "import/resolver": {
-      "babel-module": {}
-    }
-  },
   "env": {
+    "es6": true,
     "shared-node-browser": true
   },
   "globals": {
@@ -26,10 +22,12 @@
     },
     {
       "files": [
+        "alias.js",
+        ".babelrc.js",
         "cosmos.config.js",
-        "next.config.js",
         "webpack.extend.js",
         "rn-cli.config.js",
+        "tools/**",
         "App.js"
       ],
       "env": {
