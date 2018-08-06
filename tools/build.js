@@ -14,9 +14,10 @@ const BUILD_PATH = join(__dirname, '..', 'build');
 run();
 
 async function run() {
+  const buildId = Date.now();
   await clearPrevBuild();
-  await generateIndexFile();
-  await bundleModules();
+  await generateIndexFile(buildId);
+  await bundleModules(buildId);
   await copyNowConfig();
 }
 
@@ -25,7 +26,7 @@ async function clearPrevBuild() {
   await mkdir(getBuildPath());
 }
 
-async function generateIndexFile() {
+async function generateIndexFile(buildId) {
   console.log('Generating index file...');
 
   AppRegistry.registerComponent('Main', () => App);
@@ -51,7 +52,7 @@ async function generateIndexFile() {
   <body>
     ${content}
     <div id="root"></div>
-    <script src="main.js"></script>
+    <script src="main-${buildId}.js"></script>
   </body>
 </html>`;
 
@@ -62,11 +63,12 @@ function getBuildPath(path = '.') {
   return join(BUILD_PATH, path);
 }
 
-async function bundleModules() {
+async function bundleModules(buildId) {
   console.log('Bundling modules...');
 
   const webpackConfig = getAppWebpackConfig({
     path: getBuildPath(),
+    filename: `main-${buildId}.js`,
     mode: 'production'
   });
 
