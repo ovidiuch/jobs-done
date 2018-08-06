@@ -1,4 +1,4 @@
-const alias = require('./alias');
+const alias = require('./tools/alias');
 
 module.exports = {
   presets: ['@babel/preset-env', '@babel/preset-react'],

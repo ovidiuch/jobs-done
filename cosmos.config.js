@@ -1,4 +1,4 @@
-const { addUrlLoader, addNativeAlias } = require('./webpack.extend');
+const { addUrlLoader, addNativeAlias } = require('./tools/webpack.extend');
 
 module.exports = {
   globalImports: ['./global.js'],
