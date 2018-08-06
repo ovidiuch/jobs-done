@@ -68,7 +68,7 @@ https://github.com/necolas/react-native-web/issues/162#issuecomment-409619405
 
 This is better: https://codesandbox.io/s/53r88k5opx (Not really, though. Web links still open link via href attribute, as well as call the onPress handler).
 
-Ended up creating a custom component: https://github.com/skidding/jobs-done/blob/native/components/Step/Link/index.js
+Ended up creating a custom component: https://github.com/skidding/jobs-done/blob/485058e7838093b7b5efb298e5ba7b5d2e0e15b9/components/Step/Link/index.js
 
 ---
 
