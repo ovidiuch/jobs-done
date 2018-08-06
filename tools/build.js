@@ -1,5 +1,7 @@
+/* eslint-disable no-console */
+
 import { join } from 'path';
-import { remove, mkdir, writeFile } from 'fs-extra';
+import { remove, copy, mkdir, writeFile } from 'fs-extra';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { AppRegistry } from 'react-native-web';
@@ -15,6 +17,7 @@ async function run() {
   await clearPrevBuild();
   await generateIndexFile();
   await bundleModules();
+  await copyNowConfig();
 }
 
 async function clearPrevBuild() {
@@ -23,6 +26,8 @@ async function clearPrevBuild() {
 }
 
 async function generateIndexFile() {
+  console.log('Generating index file...');
+
   AppRegistry.registerComponent('Main', () => App);
   const { getStyleElement } = AppRegistry.getApplication('Main');
 
@@ -58,6 +63,8 @@ function getBuildPath(path = '.') {
 }
 
 async function bundleModules() {
+  console.log('Bundling modules...');
+
   const webpackConfig = getAppWebpackConfig({
     path: getBuildPath(),
     mode: 'production'
@@ -66,12 +73,27 @@ async function bundleModules() {
   await runWebpackCompiler(webpackConfig);
 }
 
+async function copyNowConfig() {
+  await copy('./now.json', getBuildPath('now.json'));
+}
+
 function runWebpackCompiler(webpackConfig) {
   return new Promise((resolve, reject) => {
     const compiler = webpack(webpackConfig);
+    compiler.hooks.failed.tap('lookingforerrors', err => {
+      console.log('webpack build failed');
+      console.log({ err });
+    });
+
+    // Webpack error handling: https://webpack.js.org/api/node/#error-handling
     compiler.run((err, stats) => {
       if (err) {
         reject(err);
+      } else if (stats.hasErrors()) {
+        stats.toJson().errors.map(error => {
+          console.log(error);
+        });
+        reject(new Error('webpack compilation failed'));
       } else {
         resolve(stats);
       }
