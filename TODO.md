@@ -5,7 +5,7 @@
   - [x] Configure ESLint with react-native-web
   - [x] Configure CRNA
   - [x] Convert existing UI to react-native components
-  - [ ] Fix background on Native
+  - [ ] Fix background in native environments
   - [ ] Learn how to publish to app stores
 - [ ] Fixed header
   - [ ] Logo (resets state on click)
