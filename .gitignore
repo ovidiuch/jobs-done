@@ -1,4 +1,8 @@
 node_modules
 yarn-error.log
+
 cosmos-export
-.next
+cosmos.modules.js
+
+.expo
+build

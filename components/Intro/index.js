@@ -1,7 +1,8 @@
 import { bool, func } from 'prop-types';
 import React, { Component } from 'react';
-import styled from 'styled-components';
-import { Button } from '../Button';
+import styled from 'styled-components/native';
+import { Header, Paragraph } from '../shared/text';
+import { Button } from '../shared/Button';
 
 export class Intro extends Component {
   static propTypes = {
@@ -14,29 +15,27 @@ export class Intro extends Component {
 
     return (
       <Container>
-        <h2>Here&apos;s to another productive day!</h2>
-        <p>
-          You gave it your best. Now it&apos;s time to call it a day and let
-          that big brain of yours relax.
-        </p>
-        <p>
+        <Header>Here&apos;s to another productive day!</Header>
+        <Paragraph>
+          You gave it your best. It&apos;s time to call it a day and let that
+          big brain of yours relax.
+        </Paragraph>
+        <Paragraph>
           Make sure everything&apos;s in check and lay down an outline for
           tomorrow.
-        </p>
+        </Paragraph>
         <ButtonContainer>
-          <Button onClick={onStart} disabled={!isActive}>
-            Start
-          </Button>
+          <Button label="Start" disabled={!isActive} onPress={onStart} />
         </ButtonContainer>
       </Container>
     );
   }
 }
 
-const Container = styled.div`
-  padding: 0 20px 48px 20px;
+const Container = styled.View`
+  padding: 0 20px 0 20px;
 `;
 
-const ButtonContainer = styled.div`
-  float: right;
+const ButtonContainer = styled.View`
+  margin: 0 0 0 auto;
 `;

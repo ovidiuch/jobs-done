@@ -1,6 +1,12 @@
 ## Milestone: Sharable viable product
 
 - [ ] React Native (start with this to figure out design constraints and avoid rewriting code)
+  - [x] Configure Cosmos with react-native-web
+  - [x] Configure ESLint with react-native-web
+  - [x] Configure CRNA
+  - [x] Convert existing UI to react-native components
+  - [ ] Fix background in native environments
+  - [ ] Learn how to publish to app stores
 - [ ] Fixed header
   - [ ] Logo (resets state on click)
   - [ ] Info button to access onboarding

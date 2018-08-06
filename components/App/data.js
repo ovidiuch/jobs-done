@@ -3,7 +3,7 @@ export const steps = [
     name: 'Reply to (or schedule) anything urgent',
     urls: [
       'https://mail.google.com/mail/',
-      'https://react-cosmos.slack.com/messages/C4E8D7K6J/'
+      'slack://react-cosmos.slack.com/messages/general/'
     ]
   },
   {

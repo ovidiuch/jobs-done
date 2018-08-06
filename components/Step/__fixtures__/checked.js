@@ -7,12 +7,12 @@ export default {
     name: 'Reply to (or schedule) anything urgent',
     urls: [
       'https://mail.google.com/mail/',
-      'https://react-cosmos.slack.com/messages/C4E8D7K6J/'
+      'slack://react-cosmos.slack.com/messages/general/'
     ],
-    state: 'past',
-    isChecked: false,
+    state: 'checked',
     onSelect: () => console.log('Select')
   },
+  bg: true,
   viewport: {
     width: 411,
     height: 731

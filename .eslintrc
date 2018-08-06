@@ -7,6 +7,7 @@
     "plugin:react/recommended"
   ],
   "env": {
+    "es6": true,
     "shared-node-browser": true
   },
   "globals": {
@@ -20,7 +21,13 @@
       }
     },
     {
-      "files": ["cosmos.config.js", "next.config.js", "webpack.extend.js"],
+      "files": [
+        ".babelrc.js",
+        "cosmos.config.js",
+        "rn-cli.config.js",
+        "tools/**",
+        "App.js"
+      ],
       "env": {
         "node": true
       }

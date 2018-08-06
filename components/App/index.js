@@ -1,67 +1,89 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
-import { ActiveElement } from '../ActiveElement';
-import { Step } from '../Step';
+import { Animated } from 'react-native';
+import styled from 'styled-components/native';
+import { Transition } from '../shared/Transition';
 import { Intro } from '../Intro';
 import { Outro } from '../Outro';
+import { Step } from '../Step';
+import { Layout } from './Layout';
+import { ActiveElement } from './ActiveElement';
 import { steps } from './data';
 
 export class App extends Component {
   state = {
-    activeStep: -1,
-    activeElOffset: null,
-    selectedActivityType: null
+    activeStepIndex: 0,
+    rootViewport: undefined,
+    elHeights: {}
   };
 
   componentDidMount() {
-    // window isn't available on the server side, but nor is componentDidMount
-    // called on the server
-    global.addEventListener('keydown', this.handleKeyDown);
+    if (typeof global.addEventListener === 'function') {
+      // window isn't available on the server side, but nor is componentDidMount
+      // called on the server
+      global.addEventListener('keydown', this.handleKeyDown);
+    }
   }
 
   componentWillUnmount() {
-    // window isn't available on the server side, but nor is componentWillUnmount
-    // called on the server
-    global.removeEventListener('keydown', this.handleKeyDown);
+    if (typeof global.removeEventListener === 'function') {
+      // window isn't available on the server side, but nor is componentWillUnmount
+      // called on the server
+      global.removeEventListener('keydown', this.handleKeyDown);
+    }
   }
 
-  handleActiveElRef = el => {
+  handleParentLayout = e => {
+    const { width, height } = e.nativeEvent.layout;
+
     this.setState({
-      activeElOffset: {
-        top: el.offsetTop,
-        height: el.offsetHeight
+      rootViewport: { width, height }
+    });
+  };
+
+  createElLayoutHandler = index => e => {
+    const { elHeights } = this.state;
+    const { height } = e.nativeEvent.layout;
+
+    if (elHeights[index] === height) {
+      return;
+    }
+
+    this.setState({
+      elHeights: {
+        ...elHeights,
+        [index]: height
       }
     });
   };
 
   handleSelect = stepIndex => {
-    const { activeStep } = this.state;
+    const { activeStepIndex } = this.state;
 
-    if (stepIndex === activeStep) {
+    if (stepIndex === activeStepIndex) {
       this.handleNext();
     } else {
       this.setState({
-        activeStep: stepIndex
+        activeStepIndex: stepIndex
       });
     }
   };
 
   handlePrev = () => {
-    const { activeStep } = this.state;
+    const { activeStepIndex } = this.state;
 
-    if (activeStep > -1) {
+    if (activeStepIndex > 0) {
       this.setState({
-        activeStep: activeStep - 1
+        activeStepIndex: activeStepIndex - 1
       });
     }
   };
 
   handleNext = () => {
-    const { activeStep } = this.state;
+    const { activeStepIndex } = this.state;
 
-    if (activeStep < steps.length) {
+    if (activeStepIndex < getStepsNum() - 1) {
       this.setState({
-        activeStep: activeStep + 1
+        activeStepIndex: activeStepIndex + 1
       });
     }
   };
@@ -74,144 +96,138 @@ export class App extends Component {
     }
   };
 
-  handleSelectActivityType = activityType => {
-    this.setState({
-      selectedActivityType: activityType
-    });
-  };
-
   render() {
-    const { activeStep, selectedActivityType } = this.state;
-
-    const isIntroActive = activeStep === -1;
-    const isOutroActive = activeStep === steps.length;
-
     return (
-      <>
-        <Container>
-          <Sunset />
-          <Center>
-            <Inner style={this.getInnerStyle()}>
-              <ActiveElement
-                key={-1}
-                state={isIntroActive ? 'active' : 'past'}
-                activeElRef={this.handleActiveElRef}
-              >
-                <Intro isActive={isIntroActive} onStart={this.handleNext} />
-              </ActiveElement>
-              {steps.map((step, index) => {
-                const isChecked = activeStep > index;
-                const state =
-                  activeStep === index
-                    ? 'active'
-                    : isChecked
-                      ? 'past'
-                      : 'hidden';
-
-                return (
-                  <ActiveElement
-                    key={index}
-                    state={state}
-                    activeElRef={this.handleActiveElRef}
-                  >
-                    <Step
-                      {...step}
-                      stepIndex={index}
-                      state={state}
-                      isChecked={isChecked}
-                      onSelect={this.handleSelect}
-                    />
-                  </ActiveElement>
-                );
-              })}
-              <ActiveElement
-                key={selectedActivityType}
-                state={isOutroActive ? 'active' : 'hidden'}
-                activeElRef={this.handleActiveElRef}
-              >
-                <Outro
-                  selectedActivityType={selectedActivityType}
-                  selectActivityType={this.handleSelectActivityType}
-                />
-              </ActiveElement>
-            </Inner>
-          </Center>
-        </Container>
-      </>
+      <Transition duration={1000} value={getYOffsetForState(this.state)}>
+        {yOffset => (
+          <Transition duration={2000} value={getOpacityForState(this.state)}>
+            {opacity => this.renderAnimated({ yOffset, opacity })}
+          </Transition>
+        )}
+      </Transition>
     );
   }
 
-  getInnerStyle() {
-    const { activeElOffset } = this.state;
+  renderAnimated({ yOffset, opacity }) {
+    const { rootViewport, activeStepIndex } = this.state;
 
-    if (!activeElOffset) {
-      // Don't show inner container until app is rendered on the client. But
-      // let DOM element render to properly calculate its bounds
-      return { opacity: 0 };
-    }
+    const introStepIndex = 0;
+    const outroStepIndex = getStepsNum() - 1;
+    const isIntroActive = activeStepIndex === 0;
+    const isOutroActive = activeStepIndex === outroStepIndex;
 
-    const { top, height } = activeElOffset;
-
-    if (isMobileDevice()) {
-      return {
-        opacity: 1,
-        top: '100%',
-        transform: `translate(0, -${top + height}px)`
-      };
-    }
-
-    return {
-      opacity: 1,
-      top: '50%',
-      transform: `translate(0, -${top + Math.round(height / 2)}px)`
+    const innerStyle = {
+      transform: [{ translateY: yOffset }],
+      opacity
     };
+
+    return (
+      <Layout onLayout={this.handleParentLayout}>
+        <AnimatedInner style={innerStyle}>
+          <ActiveElement
+            key={0}
+            state={isIntroActive ? 'active' : 'checked'}
+            onLayout={this.createElLayoutHandler(introStepIndex)}
+          >
+            <Intro isActive={isIntroActive} onStart={this.handleNext} />
+          </ActiveElement>
+          {steps.map((step, index) => {
+            // Account one index for Intro step
+            const relIndex = index + 1;
+            const isChecked = activeStepIndex > relIndex;
+            const state =
+              activeStepIndex === relIndex
+                ? 'active'
+                : isChecked
+                  ? 'checked'
+                  : 'disabled';
+
+            return (
+              <ActiveElement
+                key={relIndex}
+                state={state}
+                onLayout={this.createElLayoutHandler(relIndex)}
+              >
+                <Step
+                  {...step}
+                  stepIndex={relIndex}
+                  state={state}
+                  rootViewport={rootViewport}
+                  onSelect={this.handleSelect}
+                />
+              </ActiveElement>
+            );
+          })}
+          <ActiveElement
+            state={isOutroActive ? 'active' : 'disabled'}
+            onLayout={this.createElLayoutHandler(outroStepIndex)}
+          >
+            <Outro />
+          </ActiveElement>
+        </AnimatedInner>
+      </Layout>
+    );
   }
 }
 
-function isMobileDevice() {
-  return 'ontouchstart' in global;
+function getStepsNum() {
+  // Add two steps for Intro and Outro
+  return steps.length + 2;
 }
 
-const Container = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 9, 21, 1),
-    rgba(22, 35, 95, 1) 100%
+function getYOffsetForState({ rootViewport, elHeights, activeStepIndex }) {
+  if (!isLayoutReady({ rootViewport, elHeights })) {
+    return 0;
+  }
+
+  const isPortraitScreen = rootViewport.height > rootViewport.width;
+  const baseOffset = isPortraitScreen ? 0 : Math.round(rootViewport.height / 2);
+  const visibleElements = getVisibleElements({ elHeights, activeStepIndex });
+
+  // In portrait mode, elements are aligned to bottom
+  // In landscape mode, elements are aligned to center
+  return (
+    -baseOffset -
+    visibleElements.reduce((total, nextHeight, index) => {
+      const isLast = index === activeStepIndex;
+      const toAdd =
+        !isPortraitScreen && isLast ? Math.round(nextHeight / 2) : nextHeight;
+
+      return total + toAdd;
+    }, 0)
   );
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-`;
+}
 
-const Sunset = styled.div`
+function getOpacityForState({ rootViewport, elHeights }) {
+  return isLayoutReady({ rootViewport, elHeights }) ? 1 : 0;
+}
+
+function isLayoutReady({ rootViewport, elHeights }) {
+  // Wait until we now the parent's width/height
+  if (!rootViewport) {
+    return false;
+  }
+
+  // Wait until we now the layout of all steps
+  // NOTE: This means all steps are rendered from the start
+  if (Object.keys(elHeights).length < getStepsNum()) {
+    return false;
+  }
+
+  return true;
+}
+
+function getVisibleElements({ elHeights, activeStepIndex }) {
+  // Already checked elements and active element
+  return Object.keys(elHeights)
+    .sort()
+    .slice(0, activeStepIndex + 1)
+    .map(index => elHeights[index]);
+}
+
+const Inner = styled.View`
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 200%;
-  transform: translate(-25%, 5%);
-  background: radial-gradient(
-    ellipse closest-side,
-    rgba(107, 76, 122, 0.5),
-    rgba(107, 76, 122, 0) 100%
-  );
+  top: 100%;
 `;
 
-const Center = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: 552px;
-  height: 100%;
-`;
-
-const Inner = styled.div`
-  box-sizing: border-box;
-  position: absolute;
-  transition: transform 1s, opacity 2s;
-`;
+const AnimatedInner = Animated.createAnimatedComponent(Inner);
