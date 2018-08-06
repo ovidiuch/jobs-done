@@ -4,7 +4,9 @@
   - [x] Configure Cosmos with react-native-web
   - [x] Configure ESLint with react-native-web
   - [x] Configure CRNA
-  - [ ] Convert existing UI to react-native components
+  - [x] Convert existing UI to react-native components
+  - [ ] Fix background on Native
+  - [ ] Learn how to publish to app stores
 - [ ] Fixed header
   - [ ] Logo (resets state on click)
   - [ ] Info button to access onboarding
