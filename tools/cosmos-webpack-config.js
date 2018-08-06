@@ -10,7 +10,7 @@ export function getAppWebpackConfig({ path, mode }) {
     ...getDefaultWebpackConfig(rootPath),
     mode,
     devtool: false,
-    entry: [...globalImports, require.resolve('../App.main')],
+    entry: [...globalImports, require.resolve('../App.dom')],
     output: {
       path,
       filename: 'main.js',
