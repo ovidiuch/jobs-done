@@ -19,9 +19,9 @@ Problems:
 
 - ServerStyleSheet.collectStyles doesn't collect styles from native styled-components https://spectrum.chat/thread/2c63a455-9b05-40cd-9ff1-5388525f22b3
 
-styled-components sends the styles to react-native-web, which generates the output. So it's out of styled-component's scope.
+Conclusion: styled-components sends the styles to react-native-web, which generates the output. So it's out of styled-component's scope.
 
-LUCKILY, react-native-web has an API for extracting the styles for SSR: https://github.com/necolas/react-native-web/blob/9c8407162e37835e35853605c363842d66ac27ac/packages/react-native-web/src/exports/AppRegistry/renderApplication.js#L38-L56
+Solution: react-native-web has an API for extracting the styles for SSR: https://github.com/necolas/react-native-web/blob/9c8407162e37835e35853605c363842d66ac27ac/packages/react-native-web/src/exports/AppRegistry/renderApplication.js#L38-L56
 
 ---
 
@@ -37,21 +37,21 @@ https://github.com/necolas/react-native-web/blob/master/packages/website/guides/
 
 ---
 
-Q: How to apply web-only style to RNW components? (eg. `user-select`)
+Q: How to apply web-only styles to RNW components? (eg. `user-select`)
 
 https://github.com/necolas/react-native-web/blob/master/packages/website/guides/getting-started.md#web-specific-code
 
-Conditional styles that match `Platform.OS === 'web'`
+Conditional styles that match `Platform.OS === 'web'`.
 
 ---
 
-Q: How to make something `inline-block` in RN? (ie. only take as much width as it needs)
+Q: How to make an element to only take up as much width as it needs in RN? (Eg. as `inline-block` would)
 
 `margin-left: auto` or `margin-right: auto` https://stackoverflow.com/a/36606694/128816
 
 ---
 
-Q: Where does Text transform into <a> tag based on `accessibilityRole`?
+Q: Where does Text component decide to use `<a>` tag based on `accessibilityRole`?
 
 - react-native-web/src/exports/createElement/index.js
 - react-native-web/src/modules/AccessibilityUtil/propsToAccessibilityComponent.js
@@ -66,7 +66,9 @@ Q: But a Text component with `href` doesn't seem to open link on Native, how can
 
 https://github.com/necolas/react-native-web/issues/162#issuecomment-409619405
 
-This is better: https://codesandbox.io/s/53r88k5opx (Not really, though. Web links still open link via href attribute, as well as call the onPress handler)
+This is better: https://codesandbox.io/s/53r88k5opx (Not really, though. Web links still open link via href attribute, as well as call the onPress handler).
+
+Ended up creating a custom component: https://github.com/skidding/jobs-done/blob/native/components/Step/Link/index.js
 
 ---
 
