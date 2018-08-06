@@ -8,7 +8,7 @@ import { getRandomCheerLabel } from './cheers';
 
 export class ActivityOption extends Component {
   state = {
-    cheerLabel: null
+    cheerLabel: getRandomCheerLabel()
   };
 
   handleSelect = () => {
@@ -55,7 +55,6 @@ export class ActivityOption extends Component {
         <TouchableWithoutFeedback onPress={this.handleSelect}>
           <Label>{label}</Label>
         </TouchableWithoutFeedback>
-
         <CheerContainer style={{ height, opacity: cheerOpacity }}>
           <CheerLabel>{cheerLabel}</CheerLabel>
         </CheerContainer>
@@ -76,23 +75,19 @@ const Label = Text.extend`
   line-height: 24px;
   margin: 0 16px 0 0;
   line-height: 40px;
-  white-space: nowrap;
   ${Platform.OS === 'web' && 'user-select: none;'};
 `;
 
 const CheerContainer = Animated.createAnimatedComponent(styled.View`
   overflow: hidden;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   height: 0px;
-  margin-right: auto;
+  margin: 0 auto 0 0;
+  background: rgba(217, 223, 247, 0.12);
+  border-radius: 5px;
   opacity: 0;
 `);
 
 const CheerLabel = Label.extend`
-  flex: 1;
-  background: rgba(217, 223, 247, 0.12);
-  border-radius: 5px;
+  margin: 0;
   padding: 0 16px;
 `;
