@@ -5,8 +5,8 @@ exports.addNativeAlias = function(config) {
     ...config,
     resolve: {
       ...config.resolve,
-      // These aliases are already applied via Babel, except Babel only compiles
-      // source code (excluding node_modules)
+      // These aliases are already applied via Babel, except that the Babel
+      // webpack loader only transforms source code (excluding node_modules)
       alias
     }
   };
