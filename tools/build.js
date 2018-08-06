@@ -80,10 +80,6 @@ async function copyNowConfig() {
 function runWebpackCompiler(webpackConfig) {
   return new Promise((resolve, reject) => {
     const compiler = webpack(webpackConfig);
-    compiler.hooks.failed.tap('lookingforerrors', err => {
-      console.log('webpack build failed');
-      console.log({ err });
-    });
 
     // Webpack error handling: https://webpack.js.org/api/node/#error-handling
     compiler.run((err, stats) => {
