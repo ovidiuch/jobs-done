@@ -22,10 +22,8 @@
     },
     {
       "files": [
-        "alias.js",
         ".babelrc.js",
         "cosmos.config.js",
-        "webpack.extend.js",
         "rn-cli.config.js",
         "tools/**",
         "App.js"
