@@ -1,53 +1,51 @@
-import { string } from 'prop-types';
+import { string, func } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/native';
-import { Text } from '../../shared/text';
+import { ActivityOption } from './ActivityOption';
 
-// TODO Fix `last` prop warning
-export function ActivityOptions({ label }) {
-  switch (label) {
-    case 'Social':
-      return (
-        <List>
-          <ListItem>Attend an event</ListItem>
-          <ListItem>Take someone to dinner</ListItem>
-          <ListItem>Hang out with a friend</ListItem>
-          <ListItem last>Call someone dear</ListItem>
-        </List>
-      );
-    case 'Physical':
-      return (
-        <List>
-          <ListItem>Go for a run</ListItem>
-          <ListItem>Go for a swim</ListItem>
-          <ListItem>Take a long walk</ListItem>
-          <ListItem last>Work out</ListItem>
-        </List>
-      );
-    case 'Leisure':
-      return (
-        <List>
-          <ListItem>Read a book</ListItem>
-          <ListItem>Play a game</ListItem>
-          <ListItem>Go see a play</ListItem>
-          <ListItem last>Watch a movie</ListItem>
-        </List>
-      );
-    default:
-      return null;
+const ACTIVITY_OPTIONS = {
+  Social: [
+    'Attend an event',
+    'Take someone to dinner',
+    'Hang out with a friend',
+    'Call someone dear'
+  ],
+  Physical: ['Go for a run', 'Go for a swim', 'Take a long walk', 'Work out'],
+  Leisure: ['Read a book', 'Play a game', 'Go see a play', 'Watch a movie']
+};
+
+export function ActivityOptions({
+  selectedActivityType,
+  selectedActivity,
+
+  onSelectActivity
+}) {
+  if (!selectedActivityType) {
+    return null;
   }
+
+  const activities = ACTIVITY_OPTIONS[selectedActivityType];
+
+  return (
+    <List>
+      {activities.map(activity => (
+        <ActivityOption
+          key={activity}
+          label={activity}
+          selectedActivity={selectedActivity}
+          onSelect={onSelectActivity}
+        />
+      ))}
+    </List>
+  );
 }
 
 ActivityOptions.propTypes = {
-  label: string
+  selectedActivityType: string,
+  selectedActivity: string,
+  onSelectActivity: func
 };
 
 const List = styled.View`
   width: 100%;
-`;
-
-const ListItem = Text.extend`
-  line-height: 24px;
-  margin: 0 0 ${props => (props.last ? 0 : 4)}px 0;
-  padding: 0 0 0 40px;
 `;

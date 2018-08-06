@@ -7,15 +7,23 @@ export class Activities extends Component {
   static propTypes = {};
 
   state = {
-    selectedActivityType: null
+    selectedActivityType: null,
+    selectedActivity: null
   };
 
   handleSelectActivityType = activityType => {
-    this.setState({ selectedActivityType: activityType });
+    this.setState({
+      selectedActivityType: activityType,
+      selectedActivity: null
+    });
+  };
+
+  handleSelectActivity = activity => {
+    this.setState({ selectedActivity: activity });
   };
 
   render() {
-    const { selectedActivityType } = this.state;
+    const { selectedActivityType, selectedActivity } = this.state;
 
     return (
       <React.Fragment>
@@ -36,7 +44,11 @@ export class Activities extends Component {
             selectActivityType={this.handleSelectActivityType}
           />
         </ActivityTypeButtons>
-        <ActivityOptions label={selectedActivityType} />
+        <ActivityOptions
+          selectedActivityType={selectedActivityType}
+          selectedActivity={selectedActivity}
+          onSelectActivity={this.handleSelectActivity}
+        />
       </React.Fragment>
     );
   }

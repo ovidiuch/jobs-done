@@ -7,6 +7,7 @@
   - [x] Convert existing UI to react-native components
   - [ ] Fix background in native environments
   - [ ] Learn how to publish to app stores
+- [x] Design activities
 - [ ] Fixed header
   - [ ] Logo (resets state on click)
   - [ ] Info button to access onboarding
