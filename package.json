@@ -5,6 +5,7 @@
   "scripts": {
     "lint": "eslint '{{components,tools}/**/,}*.js'",
     "cosmos": "cosmos",
+    "start": "babel-node ./tools/start.js --config-file ./.babelrc.js --only 'components/**,tools/**,node_modules/styled-components/**'",
     "build": "babel-node ./tools/build.js --config-file ./.babelrc.js --only 'components/**,tools/**,node_modules/styled-components/**'",
     "native:cosmos": "cosmos-native",
     "native:start": "react-native-scripts start",
@@ -44,6 +45,7 @@
     "react-cosmos": "^4.6.4",
     "react-native-scripts": "1.14.0",
     "url-loader": "^1.0.1",
-    "webpack": "^4.16.0"
+    "webpack": "^4.16.0",
+    "webpack-serve": "^2.0.2"
   }
 }

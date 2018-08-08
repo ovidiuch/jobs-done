@@ -6,10 +6,12 @@ export function getAppWebpackConfig({ path, filename, mode }) {
   // NOTE: This is an experiment to see what would a Cosmos API for building
   // an app bundle would look like
   const { rootPath, globalImports } = getCosmosConfig();
+  const defaultWebpackConfig = getDefaultWebpackConfig(rootPath);
+
   let webpackConfig = {
-    ...getDefaultWebpackConfig(rootPath),
+    ...defaultWebpackConfig,
     mode,
-    devtool: false,
+    devtool: mode === 'production' ? false : defaultWebpackConfig.devtool,
     entry: [...globalImports, require.resolve('../App.dom')],
     output: {
       path,
@@ -26,11 +28,13 @@ export function getAppWebpackConfig({ path, filename, mode }) {
     )
   };
 
-  // TODO: Minimization is disabled in renderer build
-  webpackConfig = {
-    ...webpackConfig,
-    optimization: { minimize: true }
-  };
+  if (mode === 'production') {
+    // Enable minimization
+    webpackConfig = {
+      ...webpackConfig,
+      optimization: { minimize: true }
+    };
+  }
 
   return addNativeAlias(webpackConfig);
 }

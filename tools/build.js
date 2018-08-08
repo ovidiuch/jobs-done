@@ -2,12 +2,9 @@
 
 import { join } from 'path';
 import { remove, copy, mkdir, writeFile } from 'fs-extra';
-import React from 'react';
-import { renderToStaticMarkup } from 'react-dom/server';
-import { AppRegistry } from 'react-native-web';
 import webpack from 'webpack';
 import { getAppWebpackConfig } from './cosmos-webpack-config';
-import { App } from '../components/App';
+import { getIndexFile } from './index-file';
 
 const BUILD_PATH = join(__dirname, '..', 'build');
 
@@ -29,34 +26,10 @@ async function clearPrevBuild() {
 async function generateIndexFile(buildId) {
   console.log('Generating index file...');
 
-  AppRegistry.registerComponent('Main', () => App);
-  const { getStyleElement } = AppRegistry.getApplication('Main');
-
-  const content = renderToStaticMarkup(<App />);
-  const style = renderToStaticMarkup(getStyleElement());
-
-  const page = `<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Jobs Done!</title>
-    <meta
-      name="description"
-      content="A shutdown ritual app inspired by Deep Work"
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="theme-color" content="#000915" />
-    ${style}
-  </head>
-  <body>
-    ${content}
-    <div id="root"></div>
-    <script src="main-${buildId}.js"></script>
-  </body>
-</html>`;
-
-  await writeFile(getBuildPath('index.html'), page, 'utf8');
+  const indexFile = getIndexFile({
+    scriptFilename: `main-${buildId}.js`
+  });
+  await writeFile(getBuildPath('index.html'), indexFile, 'utf8');
 }
 
 function getBuildPath(path = '.') {
