@@ -2,6 +2,7 @@ import { number, string, func, arrayOf, exact } from 'prop-types';
 import React, { Component } from 'react';
 import { Platform, Animated, TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
+import { debounce } from 'lodash';
 import { stepState } from '../shared/prop-types';
 import { Transition } from '../shared/Transition';
 import { Checkbox } from './Checkbox';
@@ -27,13 +28,42 @@ export class Step extends Component {
     }
   };
 
-  handleSelect = () => {
-    const { stepIndex, state, onSelect } = this.props;
-
-    if (state !== 'disabled') {
-      onSelect(stepIndex);
-    }
+  state = {
+    linksEnabled: this.props.state === 'active'
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    const linksEnabled = this.props.state === 'active';
+
+    // Why is linksEnabled not derived from this.props.state in the render
+    // method? Good question!
+    // Because users shouldn't be able to press links from checked steps. And
+    // the following used to happen:
+    //   1. A disabled link from a checked step was pressed
+    //   2. The checked step was activated
+    //   3. The press event would only now reach the link (which was now enabled)
+    //   4. The link was opened as the checked step was activating
+    if (linksEnabled !== prevState.linksEnabled) {
+      setTimeout(() => {
+        this.setState({ linksEnabled });
+      }, 500);
+    }
+  }
+
+  // Prevent step from toggling itself on and off on press, because sometimes
+  // two press events fire rapidly one after another (for unknown reasons).
+  handleSelect = debounce(
+    () => {
+      const { stepIndex, state, onSelect } = this.props;
+
+      if (state !== 'disabled') {
+        onSelect(stepIndex);
+      }
+    },
+    500,
+    // Fire synchronously on the first call
+    { leading: true, trailing: false }
+  );
 
   render() {
     const { state } = this.props;
@@ -55,6 +85,7 @@ export class Step extends Component {
 
   renderStep(bgOpacity) {
     const { name, urls, state, rootViewport } = this.props;
+    const { linksEnabled } = this.state;
 
     const backgroundColor = bgOpacity.interpolate({
       inputRange: [0, 1],
@@ -72,7 +103,7 @@ export class Step extends Component {
           <Urls>
             {urls.map(url => (
               <Url key={url}>
-                <Link href={url} disabled={state !== 'active'} />
+                <Link href={url} disabled={!linksEnabled} />
               </Url>
             ))}
           </Urls>
