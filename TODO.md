@@ -15,6 +15,7 @@
 - [ ] Register page (opened on Edit as guest)
   - [ ] Server, db and session
 - [ ] Edit steps and activities page
+  - [ ] "+ Add links or instructions" under steps without links
 - [ ] Onboarding: What and why
 - [x] Proper font, colors and spacing
 - [ ] Medium article or Twitter thread

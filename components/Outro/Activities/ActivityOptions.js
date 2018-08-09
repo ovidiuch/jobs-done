@@ -17,7 +17,6 @@ const ACTIVITY_OPTIONS = {
 export function ActivityOptions({
   selectedActivityType,
   selectedActivity,
-
   onSelectActivity
 }) {
   if (!selectedActivityType) {
@@ -28,9 +27,9 @@ export function ActivityOptions({
 
   return (
     <List>
-      {activities.map(activity => (
+      {activities.map((activity, index) => (
         <ActivityOption
-          key={activity}
+          key={index}
           label={activity}
           selectedActivity={selectedActivity}
           onSelect={onSelectActivity}

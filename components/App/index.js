@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Animated } from 'react-native';
 import styled from 'styled-components/native';
+import { debounce } from 'lodash';
 import { Transition } from '../shared/Transition';
 import { Intro } from '../Intro';
 import { Outro } from '../Outro';
@@ -40,21 +41,25 @@ export class App extends Component {
     });
   };
 
-  createElLayoutHandler = index => e => {
-    const { elHeights } = this.state;
-    const { height } = e.nativeEvent.layout;
+  createElLayoutHandler = index =>
+    // The handler is debounced to avoid repositioning root too often when a
+    // child is resized continuously due to an ongoing transition. Instead,
+    // the root begins repositioning when the child transition ends.
+    debounce(e => {
+      const { elHeights } = this.state;
+      const { height } = e.nativeEvent.layout;
 
-    if (elHeights[index] === height) {
-      return;
-    }
-
-    this.setState({
-      elHeights: {
-        ...elHeights,
-        [index]: height
+      if (elHeights[index] === height) {
+        return;
       }
-    });
-  };
+
+      this.setState({
+        elHeights: {
+          ...elHeights,
+          [index]: height
+        }
+      });
+    }, 50);
 
   handleSelect = stepIndex => {
     const { activeStepIndex } = this.state;
