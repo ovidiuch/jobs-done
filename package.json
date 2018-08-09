@@ -22,6 +22,7 @@
     "react-native": "^0.55.4",
     "react-native-svg": "^6.5.1",
     "react-native-web": "^0.8.9",
+    "react-router-native": "^4.3.0",
     "styled-components": "^3.3.3",
     "svgs": "^3.2.1",
     "url-parse": "^1.4.1"

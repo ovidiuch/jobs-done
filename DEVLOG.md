@@ -1,3 +1,25 @@
+Q: Is there a router abstraction for react-native-web? If yes, which is the simplest to use?
+
+Options:
+
+- https://reactnavigation.org/
+- https://reacttraining.com/react-router/
+
+What is the difference between the two?
+
+A navigation seems to be more than a router. Navigators include navigation UI and can render elements such as headers or tab bars.
+
+Resources:
+
+- https://medium.com/@Or_yoffe/building-a-platform-agnostic-app-react-native-and-web-c0e82cbdda8
+- https://medium.com/@kevinle/comprehensive-routing-and-navigation-in-react-native-made-easy-6383e6cdc293
+
+Q: What am I looking for in a router?
+
+To be able to render the same component instance between two routes with different props. To trigger componentDidUpdate on route change.
+
+---
+
 Q: How to resize SVG in RN automatically?
 
 FIXME
