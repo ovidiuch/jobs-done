@@ -46,6 +46,8 @@ export class App extends Component {
     // child is resized continuously due to an ongoing transition. Instead,
     // the root begins repositioning when the child transition ends.
     debounce(e => {
+      // TODO: Abort if component unmounted
+
       const { elHeights } = this.state;
       const { height } = e.nativeEvent.layout;
 
