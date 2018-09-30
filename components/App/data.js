@@ -10,18 +10,15 @@ export const steps = [
     name: 'Transfer mental tasks and notes to official task list',
     urls: [
       'https://keep.google.com/u/0/',
-      'https://workflowy.com/#/b63a7ca3e2c3'
+      'https://workflowy.com/#/5cc92adf106d'
     ]
   },
   {
     name: 'Skim over all tasks and check next calendar days',
-    urls: [
-      'https://workflowy.com/#/b63a7ca3e2c3',
-      'https://calendar.google.com/calendar/r'
-    ]
+    urls: ['https://calendar.google.com/calendar/r']
   },
   {
     name: 'Create a rough plan for tomorrow',
-    urls: ['https://workflowy.com/#/4af9601ba880']
+    urls: ['https://workflowy.com/#/2d8a33346768']
   }
 ];
