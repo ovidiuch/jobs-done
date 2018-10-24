@@ -23,7 +23,7 @@
 Nice to have:
 
 - [x] Animated checkbox
-- [ ] Router (so native back button goes back in steps)
+- [x] Router (so native back button goes back in steps)
 - [x] Fade in next steps (by rendering them all the time)
 - [ ] Try different transition functions
 - [ ] Fade in intro & outro text gradually to avoid mental skipping
