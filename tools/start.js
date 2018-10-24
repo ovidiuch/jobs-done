@@ -1,7 +1,7 @@
 import serve from 'webpack-serve';
 import { argv } from 'yargs';
-import { getAppWebpackConfig } from './cosmos-webpack-config';
-import { getIndexFile } from './index-file';
+import { getAppWebpackConfig } from './cosmosWebpackConfig';
+import { getIndexFile } from './indexFile';
 
 start();
 

@@ -4,7 +4,7 @@ import { Platform, Animated, TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 import { debounce } from 'lodash';
 import { UnmountAwareComponent } from '../shared/UnmountAwareComponent';
-import { stepState } from '../shared/prop-types';
+import { stepState } from '../shared/propTypes';
 import { Transition } from '../shared/Transition';
 import { Checkbox } from './Checkbox';
 import { Link } from './Link';

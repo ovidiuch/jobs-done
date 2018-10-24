@@ -9,7 +9,7 @@ export class Outro extends Component {
       <Container>
         <Header>Shutdown complete.</Header>
         <Paragraph>
-          Time to unwind.<br />Let work sink in your subconscious until
+          Time to unwind.{`\n`}Let work sink in your subconscious until
           tomorrow.
         </Paragraph>
         <Paragraph>What do you feel like doing this evening?</Paragraph>

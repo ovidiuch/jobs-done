@@ -1,13 +1,20 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { AppRegistry } from 'react-native-web';
-import { App } from '../components/App';
+import { StaticRouter } from 'react-router';
+import { Routes } from '../components/App/Routes';
+
+const Root = () => (
+  <StaticRouter location="/" context={{}}>
+    <Routes />
+  </StaticRouter>
+);
 
 export function getIndexFile({ scriptFilename }) {
-  AppRegistry.registerComponent('Main', () => App);
+  AppRegistry.registerComponent('Main', () => Root);
   const { getStyleElement } = AppRegistry.getApplication('Main');
 
-  const content = renderToStaticMarkup(<App />);
+  const content = renderToStaticMarkup(<Root />);
   const style = renderToStaticMarkup(getStyleElement());
 
   return `<!DOCTYPE html>

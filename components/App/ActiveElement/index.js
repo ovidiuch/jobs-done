@@ -2,7 +2,7 @@ import { func, node } from 'prop-types';
 import React, { Component } from 'react';
 import { Animated } from 'react-native';
 import styled from 'styled-components/native';
-import { stepState } from '../../shared/prop-types';
+import { stepState } from '../../shared/propTypes';
 import { Transition } from '../../shared/Transition';
 
 export class ActiveElement extends Component {

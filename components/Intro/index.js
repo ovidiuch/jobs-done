@@ -17,11 +17,11 @@ export class Intro extends Component {
       <Container>
         <Header>Here&apos;s to a great day!</Header>
         <Paragraph>
-          You gave it your best.<br />Call it a day and let your big brain
+          You gave it your best.{`\n`}Call it a day and let your big brain
           relax.
         </Paragraph>
         <Paragraph>
-          Make sure everything&apos;s in check<br />and plot an outline for
+          Make sure everything&apos;s in check{`\n`}and plot an outline for
           tomorrow.
         </Paragraph>
         <ButtonContainer>
