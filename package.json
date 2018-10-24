@@ -6,8 +6,8 @@
     "lint": "eslint '{{components,tools}/**/,}*.js'",
     "cosmos": "cosmos",
     "cosmos:native": "cosmos-native",
-    "start": "babel-node ./tools/start.js --config-file ./.babelrc.js --only 'components/**,tools/**,node_modules/styled-components/**'",
-    "build": "babel-node ./tools/build.js --config-file ./.babelrc.js --only 'components/**,tools/**,node_modules/styled-components/**'",
+    "start": "NODE_ENV=development babel-node ./tools/start.js --config-file ./.babelrc.js --only 'components/**,tools/**,node_modules/styled-components/**'",
+    "build": "NODE_ENV=production babel-node ./tools/build.js --config-file ./.babelrc.js --only 'components/**,tools/**,node_modules/styled-components/**'",
     "start:native": "react-native-scripts start",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios"
