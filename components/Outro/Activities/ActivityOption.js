@@ -71,7 +71,7 @@ ActivityOption.propTypes = {
 
 const Container = Animated.createAnimatedComponent(styled.View``);
 
-const Label = Text.extend`
+const Label = styled(Text)`
   line-height: 24px;
   margin: 0 16px 0 0;
   line-height: 40px;
@@ -87,7 +87,7 @@ const CheerContainer = Animated.createAnimatedComponent(styled.View`
   opacity: 0;
 `);
 
-const CheerLabel = Label.extend`
+const CheerLabel = styled(Label)`
   margin: 0;
   padding: 0 16px;
 `;

@@ -125,7 +125,7 @@ const Container = styled.View`
   padding: 0 20px 16px 20px;
 `;
 
-const WebContainer = Container.extend`
+const WebContainer = styled(Container)`
   user-select: none;
 `;
 

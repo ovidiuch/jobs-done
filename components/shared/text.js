@@ -6,7 +6,7 @@ export const Text = styled.Text`
   line-height: 30px;
 `;
 
-export const Paragraph = Text.extend`
+export const Paragraph = styled(Text)`
   margin: 0 0 20px 0;
 `;
 
