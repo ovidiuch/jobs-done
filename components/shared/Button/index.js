@@ -77,7 +77,7 @@ const Label = styled.Text`
   letter-spacing: 1px;
 `;
 
-const WebLabel = Label.extend`
+const WebLabel = styled(Label)`
   user-select: none;
 `;
 

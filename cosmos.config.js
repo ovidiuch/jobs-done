@@ -1,7 +1,7 @@
 const { addNativeAlias } = require('./tools/webpack.extend');
 
 module.exports = {
-  globalImports: ['./global.js'],
+  globalImports: ['./global.js', 'babel-polyfill'],
   webpack: config => addNativeAlias(config),
   plugin: {
     responsivePreview: {

@@ -1,14 +1,15 @@
 import { number, string, func, arrayOf, exact } from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import { Platform, Animated, TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 import { debounce } from 'lodash';
+import { UnmountAwareComponent } from '../shared/UnmountAwareComponent';
 import { stepState } from '../shared/prop-types';
 import { Transition } from '../shared/Transition';
 import { Checkbox } from './Checkbox';
 import { Link } from './Link';
 
-export class Step extends Component {
+export class Step extends UnmountAwareComponent {
   static propTypes = {
     stepIndex: number.isRequired,
     name: string.isRequired,
@@ -45,7 +46,9 @@ export class Step extends Component {
     //   4. The link was opened as the checked step was activating
     if (linksEnabled !== prevState.linksEnabled) {
       setTimeout(() => {
-        this.setState({ linksEnabled });
+        if (!this.unmounted) {
+          this.setState({ linksEnabled });
+        }
       }, 500);
     }
   }
@@ -125,7 +128,7 @@ const Container = styled.View`
   padding: 0 20px 16px 20px;
 `;
 
-const WebContainer = Container.extend`
+const WebContainer = styled(Container)`
   user-select: none;
 `;
 
