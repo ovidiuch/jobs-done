@@ -5,10 +5,10 @@
   "scripts": {
     "lint": "eslint '{{components,tools}/**/,}*.js'",
     "cosmos": "cosmos",
+    "cosmos:native": "cosmos-native",
     "start": "babel-node ./tools/start.js --config-file ./.babelrc.js --only 'components/**,tools/**,node_modules/styled-components/**'",
     "build": "babel-node ./tools/build.js --config-file ./.babelrc.js --only 'components/**,tools/**,node_modules/styled-components/**'",
-    "native:cosmos": "cosmos-native",
-    "native:start": "react-native-scripts start",
+    "start:native": "react-native-scripts start",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios"
   },
@@ -20,7 +20,7 @@
     "react-art": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-native": "^0.55.4",
-    "react-native-svg": "^8.0.5",
+    "react-native-svg": "^6.5.1",
     "react-native-web": "^0.9.4",
     "react-router-native": "^4.3.0",
     "styled-components": "^3.4.10",
