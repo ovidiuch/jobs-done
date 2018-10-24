@@ -1,11 +1,8 @@
-const {
-  addNativeAlias,
-  compileReactRouter
-} = require('./tools/webpack.extend');
+const { addNativeAlias } = require('./tools/webpack.extend');
 
 module.exports = {
   globalImports: ['./global.js', 'babel-polyfill'],
-  webpack: config => compileReactRouter(addNativeAlias(config)),
+  webpack: config => addNativeAlias(config),
   plugin: {
     responsivePreview: {
       devices: [
