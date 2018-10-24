@@ -3,8 +3,8 @@
 import { join } from 'path';
 import { remove, copy, mkdir, writeFile } from 'fs-extra';
 import webpack from 'webpack';
-import { getAppWebpackConfig } from './cosmos-webpack-config';
-import { getIndexFile } from './index-file';
+import { getAppWebpackConfig } from './cosmosWebpackConfig';
+import { getIndexFile } from './indexFile';
 
 const BUILD_PATH = join(__dirname, '..', 'build');
 
