@@ -18,6 +18,10 @@ Q: What am I looking for in a router?
 
 To be able to render the same component instance between two routes with different props. To trigger componentDidUpdate on route change.
 
+Q: How to combine react-router-native with react-router-dom into a _universal_ interface for RNW?
+
+https://github.com/edupooch/simple-crna-routing
+
 ---
 
 Q: How to resize SVG in RN automatically?
