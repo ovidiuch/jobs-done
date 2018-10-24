@@ -15,13 +15,13 @@ export class Intro extends Component {
 
     return (
       <Container>
-        <Header>Here&apos;s to another productive day!</Header>
+        <Header>Here&apos;s to a great day!</Header>
         <Paragraph>
-          You gave it your best. It&apos;s time to call it a day and let that
-          big brain of yours relax.
+          You gave it your best.<br />Call it a day and let your big brain
+          relax.
         </Paragraph>
         <Paragraph>
-          Make sure everything&apos;s in check and lay down an outline for
+          Make sure everything&apos;s in check<br />and plot an outline for
           tomorrow.
         </Paragraph>
         <ButtonContainer>
