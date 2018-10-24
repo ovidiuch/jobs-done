@@ -11,6 +11,8 @@ import { ActiveElement } from './ActiveElement';
 import { steps } from './data';
 
 export class App extends Component {
+  unmounted = false;
+
   state = {
     activeStepIndex: 0,
     rootViewport: undefined,
@@ -26,6 +28,8 @@ export class App extends Component {
   }
 
   componentWillUnmount() {
+    this.unmounted = true;
+
     if (typeof global.removeEventListener === 'function') {
       // window isn't available on the server side, but nor is componentWillUnmount
       // called on the server
@@ -41,27 +45,33 @@ export class App extends Component {
     });
   };
 
-  createElLayoutHandler = index =>
+  delayedElLayoutHandlers = {};
+
+  createElLayoutHandler = index => {
     // The handler is debounced to avoid repositioning root too often when a
     // child is resized continuously due to an ongoing transition. Instead,
     // the root begins repositioning when the child transition ends.
-    debounce(e => {
-      // TODO: Abort if component unmounted
-
+    this.delayedElLayoutHandlers[index] = debounce(height => {
       const { elHeights } = this.state;
+
+      if (!this.unmounted && elHeights[index] !== height) {
+        this.setState({
+          elHeights: {
+            ...elHeights,
+            [index]: height
+          }
+        });
+      }
+    }, 50);
+
+    // Event has to be read synchronously
+    // See https://reactjs.org/docs/events.html#event-pooling
+    return e => {
       const { height } = e.nativeEvent.layout;
 
-      if (elHeights[index] === height) {
-        return;
-      }
-
-      this.setState({
-        elHeights: {
-          ...elHeights,
-          [index]: height
-        }
-      });
-    }, 50);
+      this.delayedElLayoutHandlers[index](height);
+    };
+  };
 
   handleSelect = stepIndex => {
     const { activeStepIndex } = this.state;
