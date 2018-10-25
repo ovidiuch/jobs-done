@@ -3,9 +3,9 @@
   "license": "MIT",
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
-    "lint": "eslint '{{components,tools}/**/,}*.js'",
-    "cosmos": "cosmos",
-    "cosmos:native": "cosmos-native",
+    "lint": "eslint '{{components,tools,cosmos}/**/,}*.js'",
+    "cosmos": "cosmos --config cosmos/cosmos.config.js",
+    "cosmos:native": "cosmos-native --config cosmos/cosmos.config.js",
     "start": "NODE_ENV=development babel-node ./tools/start.js --config-file ./.babelrc.js --only 'components/**,tools/**,node_modules/styled-components/**'",
     "build": "NODE_ENV=production babel-node ./tools/build.js --config-file ./.babelrc.js --only 'components/**,tools/**,node_modules/styled-components/**'",
     "start:native": "react-native-scripts start",

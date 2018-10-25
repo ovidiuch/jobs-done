@@ -1,12 +1,10 @@
-/* eslint-disable no-console */
-
 import { join } from 'path';
 import { remove, copy, mkdir, writeFile } from 'fs-extra';
 import webpack from 'webpack';
-import { getAppWebpackConfig } from './cosmosWebpackConfig';
-import { getIndexFile } from './indexFile';
+import { getAppWebpackConfig } from './shared/webpack/webpackConfig';
+import { renderIndex } from './shared/renderIndex';
 
-const BUILD_PATH = join(__dirname, '..', 'build');
+const BUILD_PATH = join(__dirname, '../../build');
 
 run();
 
@@ -26,7 +24,7 @@ async function clearPrevBuild() {
 async function generateIndexFile(buildId) {
   console.log('Generating index file...');
 
-  const indexFile = getIndexFile({
+  const indexFile = renderIndex({
     scriptFilename: `main-${buildId}.js`
   });
   await writeFile(getBuildPath('index.html'), indexFile, 'utf8');

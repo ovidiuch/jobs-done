@@ -1,7 +1,7 @@
 import serve from 'webpack-serve';
 import { argv } from 'yargs';
-import { getAppWebpackConfig } from './cosmosWebpackConfig';
-import { getIndexFile } from './indexFile';
+import { getAppWebpackConfig } from './shared/webpack/webpackConfig';
+import { renderIndex } from './shared/renderIndex';
 
 start();
 
@@ -18,7 +18,7 @@ async function start() {
     const { app } = result;
 
     app.use(async ctx => {
-      ctx.body = getIndexFile({ scriptFilename });
+      ctx.body = renderIndex({ scriptFilename });
     });
   });
 }

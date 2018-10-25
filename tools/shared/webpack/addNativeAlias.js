@@ -1,4 +1,4 @@
-const alias = require('./alias');
+const alias = require('../alias');
 
 exports.addNativeAlias = function(config) {
   return {

@@ -69,7 +69,6 @@ const Label = styled(Text)`
   line-height: 24px;
   margin: 0;
   line-height: 40px;
-  white-space: nowrap;
   ${Platform.OS === 'web' && 'user-select: none;'};
 `;
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { AppRegistry } from 'react-native-web';
 import { StaticRouter } from 'react-router';
-import { Routes } from '../components/App/Routes';
+import { Routes } from '../../components/App/Routes';
 
 const Root = () => (
   <StaticRouter location="/" context={{}}>
@@ -10,7 +10,7 @@ const Root = () => (
   </StaticRouter>
 );
 
-export function getIndexFile({ scriptFilename }) {
+export function renderIndex({ scriptFilename }) {
   AppRegistry.registerComponent('Main', () => Root);
   const { getStyleElement } = AppRegistry.getApplication('Main');
 
