@@ -4,7 +4,7 @@ import webpack from 'webpack';
 import { getAppWebpackConfig } from './shared/webpack/webpackConfig';
 import { renderIndex } from './shared/renderIndex';
 
-const BUILD_PATH = join(__dirname, '../../build');
+const BUILD_PATH = join(__dirname, '../build');
 
 run();
 
