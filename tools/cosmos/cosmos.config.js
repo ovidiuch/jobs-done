@@ -1,10 +1,10 @@
-const { addNativeAlias } = require('../tools/shared/webpack/addNativeAlias');
+const { addNativeAlias } = require('../shared/webpack/addNativeAlias');
 
 module.exports = {
-  rootPath: '..',
+  rootPath: '../..',
   // The rest of the paths are relative to `rootPath`, so this project's root
-  proxiesPath: 'cosmos/cosmos.proxies.js',
-  modulesPath: 'cosmos/cosmos.modules.js',
+  proxiesPath: 'tools/cosmos/cosmos.proxies.js',
+  modulesPath: 'tools/cosmos/cosmos.modules.js',
   globalImports: ['./global.js', 'babel-polyfill'],
   webpack: config => addNativeAlias(config),
   plugin: {
