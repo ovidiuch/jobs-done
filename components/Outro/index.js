@@ -15,9 +15,9 @@ export class Outro extends Component {
     return (
       <Container>
         <Header>Shutdown complete.</Header>
-        <Paragraph>Time to unwind.</Paragraph>
         <Paragraph>
-          Let work sink in your subconscious until tomorrow.
+          Time to unwind.{`\n`}Let work sink in your subconscious until
+          tomorrow.
         </Paragraph>
         <Paragraph>What do you feel up for this evening?</Paragraph>
         <Activities activities={activities} />
