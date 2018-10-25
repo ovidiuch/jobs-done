@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Animated } from 'react-native';
 import styled from 'styled-components/native';
 import { stepState } from '../../shared/propTypes';
-import { Transition } from '../../shared/Transition';
+import { Transition, QUICK_TRANS_TIME } from '../../shared/Transition';
 
 export class ActiveElement extends Component {
   static propTypes = {
@@ -16,7 +16,10 @@ export class ActiveElement extends Component {
     const { children, state, onLayout } = this.props;
 
     return (
-      <Transition duration={600} value={getBgOpacityForState(state)}>
+      <Transition
+        duration={QUICK_TRANS_TIME}
+        value={getBgOpacityForState(state)}
+      >
         {opacity => (
           <Container state={state} onLayout={onLayout} style={{ opacity }}>
             {children}

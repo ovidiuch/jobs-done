@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Platform, Animated, TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 import { Text } from '../../shared/text';
-import { Transition } from '../../shared/Transition';
+import { Transition, QUICK_TRANS_TIME } from '../../shared/Transition';
 import { getRandomCheerLabel } from './cheers';
 
 export class ActivityOption extends Component {
@@ -28,10 +28,10 @@ export class ActivityOption extends Component {
     const isSelected = selectedActivity === label;
 
     return (
-      <Transition duration={600} value={isSelected ? 1 : 0}>
+      <Transition duration={QUICK_TRANS_TIME} value={isSelected ? 1 : 0}>
         {cheerOpacity => (
           <Transition
-            duration={600}
+            duration={QUICK_TRANS_TIME}
             value={isSelected || !selectedActivity ? 1 : 0.5}
           >
             {rootOpacity => this.renderAnimated({ rootOpacity, cheerOpacity })}

@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 import styled from 'styled-components/native';
-import { Transition } from '../../shared/Transition';
+import { Transition, QUICK_TRANS_TIME } from '../../shared/Transition';
 
 export class Button extends Component {
   static propTypes = {
@@ -24,7 +24,10 @@ export class Button extends Component {
     const { disabled, onPress } = this.props;
 
     return (
-      <Transition duration={600} value={getOpacityForState(disabled)}>
+      <Transition
+        duration={QUICK_TRANS_TIME}
+        value={getOpacityForState(disabled)}
+      >
         {opacity => {
           const color = opacity.interpolate({
             inputRange: [0, 1],

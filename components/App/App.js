@@ -4,7 +4,7 @@ import { Animated } from 'react-native';
 import styled from 'styled-components/native';
 import { debounce } from 'lodash';
 import { UnmountAwareComponent } from '../shared/UnmountAwareComponent';
-import { Transition } from '../shared/Transition';
+import { Transition, QUICK_TRANS_TIME } from '../shared/Transition';
 import { Intro } from '../Intro';
 import { Outro } from '../Outro';
 import { Step } from '../Step';
@@ -119,15 +119,19 @@ export class App extends UnmountAwareComponent {
 
     return (
       <Transition
-        duration={1000}
-        value={getYOffsetForState({ rootViewport, elHeights, activeStepIndex })}
+        duration={2000}
+        value={getOpacityForState({ rootViewport, elHeights })}
       >
-        {yOffset => (
+        {opacity => (
           <Transition
-            duration={2000}
-            value={getOpacityForState({ rootViewport, elHeights })}
+            duration={QUICK_TRANS_TIME}
+            value={getYOffsetForState({
+              rootViewport,
+              elHeights,
+              activeStepIndex
+            })}
           >
-            {opacity => this.renderAnimated({ yOffset, opacity })}
+            {yOffset => this.renderAnimated({ yOffset, opacity })}
           </Transition>
         )}
       </Transition>

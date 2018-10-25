@@ -2,7 +2,7 @@ import { bool } from 'prop-types';
 import React, { Component } from 'react';
 import { Animated } from 'react-native';
 import styled from 'styled-components/native';
-import { Transition } from '../../shared/Transition';
+import { Transition, QUICK_TRANS_TIME } from '../../shared/Transition';
 
 export class Checkbox extends Component {
   static propTypes = {
@@ -14,7 +14,10 @@ export class Checkbox extends Component {
 
     return (
       <Bg>
-        <Transition duration={600} value={getAnimValueForState(checked)}>
+        <Transition
+          duration={QUICK_TRANS_TIME}
+          value={getAnimValueForState(checked)}
+        >
           {anim => {
             const top = anim.interpolate({
               inputRange: [0, 1],

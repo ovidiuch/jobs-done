@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { Animated } from 'react-native';
 import { Button } from '../../shared/Button';
-import { Transition } from '../../shared/Transition';
+import { Transition, QUICK_TRANS_TIME } from '../../shared/Transition';
 
 export function ActivityTypeButton({
   label,
@@ -14,7 +14,7 @@ export function ActivityTypeButton({
 
   return (
     <Transition
-      duration={600}
+      duration={QUICK_TRANS_TIME}
       value={!selectedActivityType || selectedActivityType === label ? 1 : 0.3}
     >
       {opacity => (

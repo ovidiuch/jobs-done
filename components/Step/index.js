@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 import { debounce } from 'lodash';
 import { UnmountAwareComponent } from '../shared/UnmountAwareComponent';
 import { stepState } from '../shared/propTypes';
-import { Transition } from '../shared/Transition';
+import { Transition, QUICK_TRANS_TIME } from '../shared/Transition';
 import { Checkbox } from './Checkbox';
 import { Link } from './Link';
 
@@ -72,7 +72,10 @@ export class Step extends UnmountAwareComponent {
     const { state } = this.props;
 
     return (
-      <Transition duration={600} value={getBgOpacityForState(state)}>
+      <Transition
+        duration={QUICK_TRANS_TIME}
+        value={getBgOpacityForState(state)}
+      >
         {bgOpacity => {
           return state === 'disabled' ? (
             this.renderStep(bgOpacity)

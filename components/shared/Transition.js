@@ -2,6 +2,8 @@ import { number, func } from 'prop-types';
 import { Component } from 'react';
 import { Animated } from 'react-native';
 
+export const QUICK_TRANS_TIME = 600;
+
 export class Transition extends Component {
   static propTypes = {
     children: func.isRequired,
