@@ -13,7 +13,7 @@ async function start() {
     mode: 'development'
   });
 
-  const { host = 'localhost' } = argv;
+  const { host = '0.0.0.0' } = argv;
   serve({ host }, { config }).then(result => {
     const { app } = result;
 
