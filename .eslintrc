@@ -13,9 +13,14 @@
   "globals": {
     "global": true
   },
+  "settings": {
+    "react": {
+      "version": "15.0"
+    }
+  },
   "overrides": [
     {
-      "files": ["**/*.fixture.js", "**/__fixtures__/**/*.js"],
+      "files": ["**/*.fixture.js", "**/__fixtures__/**", "tools/**"],
       "rules": {
         "no-console": "off"
       }
