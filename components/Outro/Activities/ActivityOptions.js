@@ -42,4 +42,5 @@ ActivityOptions.propTypes = {
 
 const List = styled.View`
   width: 100%;
+  padding: 12px 0 0 0;
 `;

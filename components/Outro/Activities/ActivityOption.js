@@ -30,7 +30,7 @@ export class ActivityOption extends Component {
     return (
       <Transition
         duration={QUICK_TRANS_TIME}
-        value={isSelected || !selectedActivity ? 1 : 0.5}
+        value={isSelected || !selectedActivity ? 1 : 0.4}
       >
         {opacity => this.renderAnimated({ isSelected, opacity })}
       </Transition>
@@ -42,14 +42,14 @@ export class ActivityOption extends Component {
     const { cheerLabel } = this.state;
 
     return (
-      <Container style={{ opacity }}>
-        <TouchableWithoutFeedback onPress={this.handleSelect}>
-          <Label>
-            <Arrow>❯</Arrow> {label}
-          </Label>
-        </TouchableWithoutFeedback>
-        {isSelected && <CheerLabel>{cheerLabel}</CheerLabel>}
-      </Container>
+      <TouchableWithoutFeedback onPress={this.handleSelect}>
+        <Container style={{ opacity }}>
+          <ActivityLabel>
+            <Arrow>→</Arrow> {label}
+          </ActivityLabel>
+          {isSelected && <CheerLabel>{cheerLabel}</CheerLabel>}
+        </Container>
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -68,7 +68,6 @@ const Container = Animated.createAnimatedComponent(styled.View`
 const Label = styled(Text)`
   line-height: 24px;
   margin: 0;
-  padding: 0 16px;
   line-height: 40px;
   white-space: nowrap;
   ${Platform.OS === 'web' && 'user-select: none;'};
@@ -79,8 +78,14 @@ const Arrow = styled(Text)`
   opacity: 0.5;
 `;
 
+const ActivityLabel = styled(Label)`
+  flex: 1;
+  padding: 0 16px 0 0;
+`;
+
 const CheerLabel = styled(Label)`
   margin: 0;
+  padding: 0 16px;
   background: rgba(217, 223, 247, 0.12);
   border-radius: 5px;
 `;
