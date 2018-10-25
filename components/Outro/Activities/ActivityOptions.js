@@ -4,14 +4,9 @@ import styled from 'styled-components/native';
 import { ActivityOption } from './ActivityOption';
 
 const ACTIVITY_OPTIONS = {
-  Social: [
-    'Attend an event',
-    'Take someone to dinner',
-    'Hang out with a friend',
-    'Call someone dear'
-  ],
-  Physical: ['Go for a run', 'Go for a swim', 'Take a long walk', 'Work out'],
-  Leisure: ['Read a book', 'Play a game', 'Go see a play', 'Watch a movie']
+  Social: ['Attend an event', 'Dine out', 'Hang out', 'Call someone dear'],
+  Health: ['Go for a run', 'Go for a swim', 'Take a long walk', 'Work out'],
+  Relax: ['Read a book', 'Play a game', 'Go see a play', 'Watch a movie']
 };
 
 export function ActivityOptions({

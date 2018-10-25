@@ -34,12 +34,12 @@ export class Activities extends Component {
             selectActivityType={this.handleSelectActivityType}
           />
           <ActivityTypeButton
-            label="Physical"
+            label="Health"
             selectedActivityType={selectedActivityType}
             selectActivityType={this.handleSelectActivityType}
           />
           <ActivityTypeButton
-            label="Leisure"
+            label="Relax"
             selectedActivityType={selectedActivityType}
             selectActivityType={this.handleSelectActivityType}
           />

@@ -8,7 +8,7 @@ import { getRandomCheerLabel } from './cheers';
 
 export class ActivityOption extends Component {
   state = {
-    cheerLabel: getRandomCheerLabel()
+    cheerLabel: null
   };
 
   handleSelect = () => {
@@ -28,36 +28,27 @@ export class ActivityOption extends Component {
     const isSelected = selectedActivity === label;
 
     return (
-      <Transition duration={QUICK_TRANS_TIME} value={isSelected ? 1 : 0}>
-        {cheerOpacity => (
-          <Transition
-            duration={QUICK_TRANS_TIME}
-            value={isSelected || !selectedActivity ? 1 : 0.5}
-          >
-            {rootOpacity => this.renderAnimated({ rootOpacity, cheerOpacity })}
-          </Transition>
-        )}
+      <Transition
+        duration={QUICK_TRANS_TIME}
+        value={isSelected || !selectedActivity ? 1 : 0.5}
+      >
+        {opacity => this.renderAnimated({ isSelected, opacity })}
       </Transition>
     );
   }
 
-  renderAnimated({ rootOpacity, cheerOpacity }) {
+  renderAnimated({ isSelected, opacity }) {
     const { label } = this.props;
     const { cheerLabel } = this.state;
 
-    const height = cheerOpacity.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, 40]
-    });
-
     return (
-      <Container style={{ opacity: rootOpacity }}>
+      <Container style={{ opacity }}>
         <TouchableWithoutFeedback onPress={this.handleSelect}>
-          <Label>{label}</Label>
+          <Label>
+            <Arrow>❯</Arrow> {label}
+          </Label>
         </TouchableWithoutFeedback>
-        <CheerContainer style={{ height, opacity: cheerOpacity }}>
-          <CheerLabel>{cheerLabel}</CheerLabel>
-        </CheerContainer>
+        {isSelected && <CheerLabel>{cheerLabel}</CheerLabel>}
       </Container>
     );
   }
@@ -69,25 +60,27 @@ ActivityOption.propTypes = {
   onSelect: func.isRequired
 };
 
-const Container = Animated.createAnimatedComponent(styled.View``);
+const Container = Animated.createAnimatedComponent(styled.View`
+  display: flex;
+  flex-direction: row;
+`);
 
 const Label = styled(Text)`
   line-height: 24px;
-  margin: 0 16px 0 0;
+  margin: 0;
+  padding: 0 16px;
   line-height: 40px;
+  white-space: nowrap;
   ${Platform.OS === 'web' && 'user-select: none;'};
 `;
 
-const CheerContainer = Animated.createAnimatedComponent(styled.View`
-  overflow: hidden;
-  height: 0px;
-  margin: 0 auto 0 0;
-  background: rgba(217, 223, 247, 0.12);
-  border-radius: 5px;
-  opacity: 0;
-`);
+const Arrow = styled(Text)`
+  padding-right: 4px;
+  opacity: 0.5;
+`;
 
 const CheerLabel = styled(Label)`
   margin: 0;
-  padding: 0 16px;
+  background: rgba(217, 223, 247, 0.12);
+  border-radius: 5px;
 `;

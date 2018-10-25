@@ -2,7 +2,6 @@ import React from 'react';
 import { number, func } from 'prop-types';
 import { Animated } from 'react-native';
 import styled from 'styled-components/native';
-import { debounce } from 'lodash';
 import { UnmountAwareComponent } from '../shared/UnmountAwareComponent';
 import { Transition, QUICK_TRANS_TIME } from '../shared/Transition';
 import { Intro } from '../Intro';
@@ -49,32 +48,18 @@ export class App extends UnmountAwareComponent {
     });
   };
 
-  delayedElLayoutHandlers = {};
+  createElLayoutHandler = index => e => {
+    const { height } = e.nativeEvent.layout;
+    const { elHeights } = this.state;
 
-  createElLayoutHandler = index => {
-    // The handler is debounced to avoid repositioning root too often when a
-    // child is resized continuously due to an ongoing transition. Instead,
-    // the root begins repositioning when the child transition ends.
-    this.delayedElLayoutHandlers[index] = debounce(height => {
-      const { elHeights } = this.state;
-
-      if (!this.unmounted && elHeights[index] !== height) {
-        this.setState({
-          elHeights: {
-            ...elHeights,
-            [index]: height
-          }
-        });
-      }
-    }, 50);
-
-    // Event has to be read synchronously
-    // See https://reactjs.org/docs/events.html#event-pooling
-    return e => {
-      const { height } = e.nativeEvent.layout;
-
-      this.delayedElLayoutHandlers[index](height);
-    };
+    if (!this.unmounted && elHeights[index] !== height) {
+      this.setState({
+        elHeights: {
+          ...elHeights,
+          [index]: height
+        }
+      });
+    }
   };
 
   handleSelect = stepIndex => {

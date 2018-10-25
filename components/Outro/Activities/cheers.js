@@ -1,17 +1,28 @@
+import { shuffle } from 'lodash';
+
 const CHEERS = [
-  'Nice one!',
-  'Go at it!',
   'Do it!',
   'Nice!',
-  'Sounds great!',
+  'Great!',
   'Good idea!',
   'Right on!',
   'Enjoy!',
   'Sweet!',
-  'Exciting!'
+  'Exciting!',
+  'Excellent!',
+  'Boom!'
 ];
 
-// TODO: Shuffle to get even distribution
+let nextCheers = [];
+
 export function getRandomCheerLabel() {
-  return CHEERS[Math.round(Math.random() * (CHEERS.length - 1))];
+  if (nextCheers.length === 0) {
+    genNextCheers();
+  }
+
+  return nextCheers.pop();
+}
+
+function genNextCheers() {
+  nextCheers = shuffle(CHEERS);
 }
