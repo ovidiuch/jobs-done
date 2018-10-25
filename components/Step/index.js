@@ -4,7 +4,7 @@ import { Platform, Animated, TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 import { debounce } from 'lodash';
 import { UnmountAwareComponent } from '../shared/UnmountAwareComponent';
-import { stepState } from '../shared/propTypes';
+import { stepStateType } from '../shared/propTypes';
 import { Transition, QUICK_TRANS_TIME } from '../shared/Transition';
 import { Checkbox } from './Checkbox';
 import { Link } from './Link';
@@ -14,7 +14,7 @@ export class Step extends UnmountAwareComponent {
     stepIndex: number.isRequired,
     name: string.isRequired,
     urls: arrayOf(string).isRequired,
-    state: stepState.isRequired,
+    state: stepStateType.isRequired,
     rootViewport: exact({
       width: number.isRequired,
       height: number.isRequired

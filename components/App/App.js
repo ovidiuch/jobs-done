@@ -3,16 +3,17 @@ import { number, func } from 'prop-types';
 import { Animated } from 'react-native';
 import styled from 'styled-components/native';
 import { UnmountAwareComponent } from '../shared/UnmountAwareComponent';
+import { appDataType } from '../shared/propTypes';
 import { Transition, QUICK_TRANS_TIME } from '../shared/Transition';
 import { Intro } from '../Intro';
 import { Outro } from '../Outro';
 import { Step } from '../Step';
 import { Layout } from './Layout';
 import { ActiveElement } from './ActiveElement';
-import { steps } from './data';
 
 export class App extends UnmountAwareComponent {
   static propTypes = {
+    appData: appDataType,
     activeStepIndex: number.isRequired,
     setActiveStepIndex: func.isRequired
   };
@@ -81,9 +82,13 @@ export class App extends UnmountAwareComponent {
   };
 
   handleNext = () => {
-    const { activeStepIndex, setActiveStepIndex } = this.props;
+    const {
+      appData: { steps },
+      activeStepIndex,
+      setActiveStepIndex
+    } = this.props;
 
-    if (activeStepIndex < getStepsNum() - 1) {
+    if (activeStepIndex < getStepsNum(steps) - 1) {
       setActiveStepIndex(activeStepIndex + 1);
     }
   };
@@ -99,18 +104,22 @@ export class App extends UnmountAwareComponent {
   };
 
   render() {
-    const { activeStepIndex } = this.props;
+    const {
+      appData: { steps },
+      activeStepIndex
+    } = this.props;
     const { rootViewport, elHeights } = this.state;
 
     return (
       <Transition
         duration={2000}
-        value={getOpacityForState({ rootViewport, elHeights })}
+        value={getOpacityForState({ steps, rootViewport, elHeights })}
       >
         {opacity => (
           <Transition
             duration={QUICK_TRANS_TIME}
             value={getYOffsetForState({
+              steps,
               rootViewport,
               elHeights,
               activeStepIndex
@@ -124,11 +133,14 @@ export class App extends UnmountAwareComponent {
   }
 
   renderAnimated({ yOffset, opacity }) {
-    const { activeStepIndex } = this.props;
+    const {
+      appData: { steps, activities },
+      activeStepIndex
+    } = this.props;
     const { rootViewport } = this.state;
 
     const introStepIndex = 0;
-    const outroStepIndex = getStepsNum() - 1;
+    const outroStepIndex = getStepsNum(steps) - 1;
     const isIntroActive = activeStepIndex === 0;
     const isOutroActive = activeStepIndex === outroStepIndex;
 
@@ -178,7 +190,7 @@ export class App extends UnmountAwareComponent {
             state={isOutroActive ? 'active' : 'disabled'}
             onLayout={this.createElLayoutHandler(outroStepIndex)}
           >
-            <Outro />
+            <Outro activities={activities} />
           </ActiveElement>
         </AnimatedInner>
       </Layout>
@@ -186,13 +198,18 @@ export class App extends UnmountAwareComponent {
   }
 }
 
-function getStepsNum() {
+function getStepsNum(steps) {
   // Add two steps for Intro and Outro
   return steps.length + 2;
 }
 
-function getYOffsetForState({ rootViewport, elHeights, activeStepIndex }) {
-  if (!isLayoutReady({ rootViewport, elHeights })) {
+function getYOffsetForState({
+  steps,
+  rootViewport,
+  elHeights,
+  activeStepIndex
+}) {
+  if (!isLayoutReady({ steps, rootViewport, elHeights })) {
     return 0;
   }
 
@@ -214,11 +231,11 @@ function getYOffsetForState({ rootViewport, elHeights, activeStepIndex }) {
   );
 }
 
-function getOpacityForState({ rootViewport, elHeights }) {
-  return isLayoutReady({ rootViewport, elHeights }) ? 1 : 0;
+function getOpacityForState({ steps, rootViewport, elHeights }) {
+  return isLayoutReady({ steps, rootViewport, elHeights }) ? 1 : 0;
 }
 
-function isLayoutReady({ rootViewport, elHeights }) {
+function isLayoutReady({ steps, rootViewport, elHeights }) {
   // Wait until we now the parent's width/height
   if (!rootViewport) {
     return false;
@@ -226,7 +243,7 @@ function isLayoutReady({ rootViewport, elHeights }) {
 
   // Wait until we now the layout of all steps
   // NOTE: This means all steps are rendered from the start
-  if (Object.keys(elHeights).length < getStepsNum()) {
+  if (Object.keys(elHeights).length < getStepsNum(steps)) {
     return false;
   }
 
