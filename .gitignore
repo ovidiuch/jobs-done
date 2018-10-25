@@ -6,3 +6,5 @@ tools/cosmos/cosmos.modules.js
 
 .expo
 build
+
+data.js

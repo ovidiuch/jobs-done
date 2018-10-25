@@ -1,8 +1,8 @@
 ## Milestone: Self-hosted product
 
+- [x] Load data from git-ignored file db (with example provided)
 - [ ] Logo / favicon
 - [ ] Tweak activity button style
-- [ ] Load data from git-ignored .json (with example provided)
 - [ ] Document steps to publish
 
 ## Milestone: Sharable viable product
