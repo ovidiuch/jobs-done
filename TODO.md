@@ -1,4 +1,14 @@
+## Milestone: Self-hosted product
+
+- [ ] Logo / favicon
+- [ ] Tweak activity button style
+- [ ] Load data from git-ignored .json (with example provided)
+- [ ] Document steps to publish
+
 ## Milestone: Sharable viable product
+
+> TODO: Explain why I dropped server
+> TODO: Explain why I dropped native publish
 
 - [ ] React Native (start with this to figure out design constraints and avoid rewriting code)
   - [x] Configure Cosmos with react-native-web
