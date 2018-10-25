@@ -2,13 +2,13 @@ import { func, node } from 'prop-types';
 import React, { Component } from 'react';
 import { Animated } from 'react-native';
 import styled from 'styled-components/native';
-import { stepState } from '../../shared/propTypes';
+import { stepStateType } from '../../shared/propTypes';
 import { Transition, QUICK_TRANS_TIME } from '../../shared/Transition';
 
 export class ActiveElement extends Component {
   static propTypes = {
     children: node.isRequired,
-    state: stepState.isRequired,
+    state: stepStateType.isRequired,
     onLayout: func.isRequired
   };
 

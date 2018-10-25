@@ -1,15 +1,11 @@
 import { string, func } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/native';
+import { activitiesType } from '../../shared/propTypes';
 import { ActivityOption } from './ActivityOption';
 
-const ACTIVITY_OPTIONS = {
-  Social: ['Attend an event', 'Dine out', 'Hang out', 'Call someone dear'],
-  Health: ['Go for a run', 'Go for a swim', 'Take a long walk', 'Work out'],
-  Relax: ['Read a book', 'Play a game', 'Go see a play', 'Watch a movie']
-};
-
 export function ActivityOptions({
+  activities,
   selectedActivityType,
   selectedActivity,
   onSelectActivity
@@ -18,11 +14,11 @@ export function ActivityOptions({
     return null;
   }
 
-  const activities = ACTIVITY_OPTIONS[selectedActivityType];
+  const activityOptions = activities[selectedActivityType];
 
   return (
     <List>
-      {activities.map((activity, index) => (
+      {activityOptions.map((activity, index) => (
         <ActivityOption
           key={index}
           label={activity}
@@ -35,6 +31,7 @@ export function ActivityOptions({
 }
 
 ActivityOptions.propTypes = {
+  activities: activitiesType.isRequired,
   selectedActivityType: string,
   selectedActivity: string,
   onSelectActivity: func

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
+import { activitiesType } from '../../shared/propTypes';
 import { ActivityOptions } from './ActivityOptions';
 import { ActivityTypeButton } from './ActivityTypeButton';
 
 export class Activities extends Component {
-  static propTypes = {};
+  static propTypes = {
+    activities: activitiesType.isRequired
+  };
 
   state = {
     selectedActivityType: null,
@@ -23,28 +26,23 @@ export class Activities extends Component {
   };
 
   render() {
+    const { activities } = this.props;
     const { selectedActivityType, selectedActivity } = this.state;
 
     return (
       <React.Fragment>
         <ActivityTypeButtons>
-          <ActivityTypeButton
-            label="Social"
-            selectedActivityType={selectedActivityType}
-            selectActivityType={this.handleSelectActivityType}
-          />
-          <ActivityTypeButton
-            label="Health"
-            selectedActivityType={selectedActivityType}
-            selectActivityType={this.handleSelectActivityType}
-          />
-          <ActivityTypeButton
-            label="Relax"
-            selectedActivityType={selectedActivityType}
-            selectActivityType={this.handleSelectActivityType}
-          />
+          {Object.keys(activities).map((activity, idx) => (
+            <ActivityTypeButton
+              key={idx}
+              label={activity}
+              selectedActivityType={selectedActivityType}
+              selectActivityType={this.handleSelectActivityType}
+            />
+          ))}
         </ActivityTypeButtons>
         <ActivityOptions
+          activities={activities}
           selectedActivityType={selectedActivityType}
           selectedActivity={selectedActivity}
           onSelectActivity={this.handleSelectActivity}

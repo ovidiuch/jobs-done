@@ -1,3 +1,15 @@
-import { oneOf } from 'prop-types';
+import { string, shape, oneOf, arrayOf, objectOf } from 'prop-types';
 
-export const stepState = oneOf(['disabled', 'active', 'checked']);
+export const stepStateType = oneOf(['disabled', 'active', 'checked']);
+
+export const stepType = shape({
+  name: string.isRequired,
+  urls: arrayOf(string).isRequired
+});
+
+export const activitiesType = objectOf(arrayOf(string));
+
+export const appDataType = shape({
+  steps: arrayOf(stepType).isRequired,
+  activities: activitiesType.isRequired
+});
