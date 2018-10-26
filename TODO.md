@@ -1,14 +1,16 @@
-## Milestone: Self-hosted product
+## Milestone: Self-hosted static app
 
 - [x] Load data from git-ignored file db (with example provided)
+- [ ] Document steps to publish
+- [ ] Make set phrase customizable
 - [ ] Logo / favicon
 - [ ] Tweak activity button style
-- [ ] Document steps to publish
 
-## Milestone: Sharable viable product
+## ~~Milestone: Sharable viable product~~
 
-> TODO: Explain why I dropped server
-> TODO: Explain why I dropped native publish
+> 1.  I abandoned this milestone to avoid spending time on server stuff for this app and move on to other more interesting work. All user data comes from a single JS object (exported by data.js) so it's fairly simple for anyone to clone this repo and publish their own static instance of this app without requiring authentication, admin, etc.
+
+> 2.  While this is a React Native project I didn't bother publishing on app stores. The react-native-web version works just fine with a browser bookmark on both my laptop and phone.
 
 - [ ] React Native (start with this to figure out design constraints and avoid rewriting code)
   - [x] Configure Cosmos with react-native-web
