@@ -18,7 +18,7 @@ Clone this repo and run `yarn install`.
 
 ### Run
 
-Run `yarn start` to run the _web_ app locally in dev mode.
+Run `yarn start` to start the _web_ app locally in dev mode.
 
 Run `yarn cosmos` to browse components independently.
 
@@ -35,3 +35,5 @@ Go to `build` dir and publish it using something like [Now](https://zeit.co/now)
 ### Native
 
 The aforementioned instructions are for running and publishing the web app. But this is a React _Native_ project. While I tested it on Android and iOS simulator, I didn't bother publishing _Jobs Done!_ on app stores. The web version already works just fine on both desktop and mobile ¯\\\_(ツ)\_/¯.
+
+Open two terminals to load the app on native devices or simulators. In the first run `yarn cosmos:native`. In the second run `yarn start:native` for [Expo](https://expo.io/) or `yarn ios` or `yarn android` for a specific platform.
