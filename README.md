@@ -34,4 +34,4 @@ Go to `build` dir and publish it using something like [Now](https://zeit.co/now)
 
 ### Native
 
-The following instructions are for running and publishing the web app. But this is a React _Native_ project. While I tested it on Android and iOS simulator, I didn't bother publishing _Jobs Done!_ on app stores. The web version already works just fine on both desktop and mobile ¯\\\_(ツ)\_/¯.
+The aforementioned instructions are for running and publishing the web app. But this is a React _Native_ project. While I tested it on Android and iOS simulator, I didn't bother publishing _Jobs Done!_ on app stores. The web version already works just fine on both desktop and mobile ¯\\\_(ツ)\_/¯.
