@@ -19,7 +19,7 @@ The need for a shutdown ritual comes from the following (oversimplified) reasoni
 2.  We can only sustain deep focus for a limited amount of hours per day
 3.  To be able to focus deeply consistently our mind requires rest (ie. complete disconnect from work) between working sessions
 
-> TODO: App name reference
+> The app name is inspired by the loyal [Peasant](https://www.youtube.com/watch?v=5r06heQ5HsI)
 
 ## How it works
 
