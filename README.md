@@ -19,13 +19,19 @@ The need for a shutdown ritual comes from the following (oversimplified) reasoni
 2.  We can only sustain deep focus for a limited amount of hours per day
 3.  To be able to focus deeply consistently our mind requires rest (ie. complete disconnect from work) between working sessions
 
+> TODO: App name reference
+
 ## How it works
 
-> TODO
+You decide it's take to call it a day.
 
-- Steps
-- Set phrase
-- Activities
+You are guided through a set of (customizable) steps meant to relieve your mind from work-related thoughts. This often involves formalizing thoughts into tasks and creating a plan for tomorrow.
+
+Then you **say a "set phrase" out loud.** This step is personal so choose a set phrase you resonate with. Verbalizing your set phrase "provides a simple cue to your mind that it’s safe to release work-related thoughts for the rest of the day."
+
+Finally, you're presented an array of (customizable) pastime activities you could do to disconnect.
+
+> I extended the original shutdown ritual with the last step because I've often found myself clueless about how to spend my evening after a day fully immersed in work.
 
 ## Tech stack
 
