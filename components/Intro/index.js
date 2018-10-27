@@ -1,5 +1,6 @@
 import { bool, func } from 'prop-types';
 import React, { Component } from 'react';
+import { TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 import { Header, Paragraph } from '../shared/text';
 import { Button } from '../shared/Button';
@@ -7,13 +8,14 @@ import { Button } from '../shared/Button';
 export class Intro extends Component {
   static propTypes = {
     isActive: bool.isRequired,
+    onSelect: func.isRequired,
     onStart: func.isRequired
   };
 
   render() {
-    const { isActive, onStart } = this.props;
+    const { isActive, onSelect, onStart } = this.props;
 
-    return (
+    const content = (
       <Container>
         <Header>Here&apos;s to a great day!</Header>
         <Paragraph>
@@ -25,9 +27,21 @@ export class Intro extends Component {
           tomorrow.
         </Paragraph>
         <ButtonContainer>
-          <Button label="Start" disabled={!isActive} onPress={onStart} />
+          {isActive ? (
+            <Button label="Start" onPress={onStart} />
+          ) : (
+            <Button label="Start" disabled />
+          )}
         </ButtonContainer>
       </Container>
+    );
+
+    return isActive ? (
+      content
+    ) : (
+      <TouchableWithoutFeedback onPress={onSelect}>
+        {content}
+      </TouchableWithoutFeedback>
     );
   }
 }

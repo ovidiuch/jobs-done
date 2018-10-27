@@ -73,6 +73,10 @@ export class App extends UnmountAwareComponent {
     }
   };
 
+  handleSelectIntro = () => {
+    this.props.setActiveStepIndex(0);
+  };
+
   handlePrev = () => {
     const { activeStepIndex, setActiveStepIndex } = this.props;
 
@@ -155,7 +159,11 @@ export class App extends UnmountAwareComponent {
             state={isIntroActive ? 'active' : 'checked'}
             onLayout={this.createElLayoutHandler(introStepIndex)}
           >
-            <Intro isActive={isIntroActive} onStart={this.handleNext} />
+            <Intro
+              isActive={isIntroActive}
+              onStart={this.handleNext}
+              onSelect={this.handleSelectIntro}
+            />
           </ActiveElement>
           {steps.map((step, idx) => {
             // Account one index for Intro step
