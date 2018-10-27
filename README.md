@@ -1,8 +1,26 @@
 # Jobs Done!
 
-An ritual app for ending the work day inspired by [Deep Work](https://www.goodreads.com/book/show/25744928-deep-work)
+A ritual app for ending the work day inspired by [Deep Work](https://www.goodreads.com/book/show/25744928-deep-work)
 
-## Stack
+## Motivation
+
+This app is built on Cal Newport's **showdown ritual** concept from his book _Deep Work_.
+
+The need for a shutdown ritual comes from the following (oversimplified) reasoning:
+
+1.  Deep focus is invaluable for producing great work
+2.  We can only sustain deep focus for a limited amount of hours per day
+3.  To be able to focus deeply consistently our mind requires rest (ie. complete disconnect from work) between working sessions
+
+## How it works
+
+> TODO
+
+- Steps
+- Set phrase
+- Activities
+
+## Tech stack
 
 This is a [React Native](https://facebook.github.io/react-native/) app built with [React Native for Web](https://github.com/necolas/react-native-web/). For web publishing, it compiles into a static app with the app data embedded in the frontend build.
 
