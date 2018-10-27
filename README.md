@@ -4,7 +4,7 @@ An ritual app for ending the work day inspired by [Deep Work](https://www.goodre
 
 ## Stack
 
-This is a [React Native](https://facebook.github.io/react-native/) app built with [React Native for Web](https://github.com/necolas/react-native-web/). For web publishing, it compiles into a static app, with the app data embedded in the frontend build.
+This is a [React Native](https://facebook.github.io/react-native/) app built with [React Native for Web](https://github.com/necolas/react-native-web/). For web publishing, it compiles into a static app with the app data embedded in the frontend build.
 
 The project features a [custom server-side rendering implementation](https://github.com/skidding/jobs-done/blob/d3d85ce6c5b156249702d90190397bd67fdc31ed/tools/shared/renderIndex.js#L13-L39), which might be interesting for someone trying to understand how SSR works.
 
