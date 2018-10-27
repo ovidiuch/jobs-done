@@ -27,7 +27,7 @@ You decide it's take to call it a day.
 
 You are guided through a set of (customizable) steps meant to relieve your mind from work-related thoughts. This often involves formalizing thoughts into tasks and creating a plan for tomorrow.
 
-Then you **say a "set phrase" out loud.** This step is personal so choose a set phrase you resonate with. Verbalizing your set phrase "provides a simple cue to your mind that it’s safe to release work-related thoughts for the rest of the day."
+Then you **say a "set phrase" out loud.** This step is personal so choose a set phrase you resonate with. Verbalizing your set phrase "provides a simple cue to your mind that it's safe to release work-related thoughts for the rest of the day."
 
 Finally, you're presented an array of (customizable) pastime activities you could do to disconnect.
 
