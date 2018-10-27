@@ -18,13 +18,10 @@ export class Intro extends Component {
     const content = (
       <Container>
         <Header>Here&apos;s to a great day!</Header>
+        <Paragraph>You gave it your best.</Paragraph>
         <Paragraph>
-          You gave it your best.{`\n`}Call it a day and let your big brain
-          relax.
-        </Paragraph>
-        <Paragraph>
-          Make sure everything&apos;s in check{`\n`}and plot an outline for
-          tomorrow.
+          Call it a day. Make sure everything&apos;s in check and plot an
+          outline for tomorrow.
         </Paragraph>
         <ButtonContainer>
           {isActive ? (

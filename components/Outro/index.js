@@ -17,11 +17,10 @@ export class Outro extends Component {
     return (
       <Container>
         <Header>{setPhrase}</Header>
+        <Paragraph>Let work marinate in your subconscious overnight.</Paragraph>
         <Paragraph>
-          Time to unwind.{`\n`}Let work sink in your subconscious until
-          tomorrow.
+          Time to unwind. What do you feel up for this evening?
         </Paragraph>
-        <Paragraph>What do you feel up for this evening?</Paragraph>
         <Activities activities={activities} />
       </Container>
     );
