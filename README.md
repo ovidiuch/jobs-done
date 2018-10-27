@@ -1,10 +1,17 @@
-# Jobs Done!
+# [Jobs Done!](https://jobs-done.now.sh/#/)
 
 A ritual app for ending the work day inspired by [Deep Work](https://www.goodreads.com/book/show/25744928-deep-work)
 
+Jump to:
+
+- [Motivation](#motivation)
+- [How it works](#how-it-works)
+- [Tech stack](#tech-stack)
+- [How to use](#how-to-use)
+
 ## Motivation
 
-This app is built on Cal Newport's **showdown ritual** concept from his book _Deep Work_.
+This app is built on Cal Newport's **showdown ritual** concept from his book Deep Work.
 
 The need for a shutdown ritual comes from the following (oversimplified) reasoning:
 
@@ -55,3 +62,7 @@ Go to `build` dir and publish it using something like [Now](https://zeit.co/now)
 The aforementioned instructions are for running and publishing the web app. But this is a React _Native_ project. While I tested it on Android and iOS simulator, I didn't bother publishing _Jobs Done!_ on app stores. The web version already works just fine on both desktop and mobile ¯\\\_(ツ)\_/¯.
 
 Open two terminals to load the app on native devices or simulators. In the first run `yarn cosmos:native`. In the second run `yarn start:native` for [Expo](https://expo.io/) or `yarn ios` or `yarn android` for a specific platform.
+
+## License
+
+MIT © [Ovidiu Cherecheș](https://ovidiu.ch)
