@@ -21,6 +21,7 @@ export const appData = {
       urls: ['https://workflowy.com/#/2d8a33346768']
     }
   ],
+  setPhrase: 'Shutdown complete.',
   activities: {
     Social: ['Attend an event', 'Dine out', 'Hang out', 'Call someone dear'],
     Physical: ['Go for a run', 'Go for a swim', 'Take a long walk', 'Work out'],

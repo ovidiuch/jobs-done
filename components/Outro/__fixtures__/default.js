@@ -4,7 +4,7 @@ import { Outro } from '..';
 export default {
   component: Outro,
   props: {
-    activities: appData.activities
+    appData
   },
   bg: true
 };

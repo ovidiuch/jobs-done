@@ -11,5 +11,6 @@ export const activitiesType = objectOf(arrayOf(string));
 
 export const appDataType = shape({
   steps: arrayOf(stepType).isRequired,
+  setPhrase: string.isRequired,
   activities: activitiesType.isRequired
 });

@@ -133,10 +133,8 @@ export class App extends UnmountAwareComponent {
   }
 
   renderAnimated({ yOffset, opacity }) {
-    const {
-      appData: { steps, activities },
-      activeStepIndex
-    } = this.props;
+    const { appData, activeStepIndex } = this.props;
+    const { steps } = appData;
     const { rootViewport } = this.state;
 
     const introStepIndex = 0;
@@ -190,7 +188,7 @@ export class App extends UnmountAwareComponent {
             state={isOutroActive ? 'active' : 'disabled'}
             onLayout={this.createElLayoutHandler(outroStepIndex)}
           >
-            <Outro activities={activities} />
+            <Outro appData={appData} />
           </ActiveElement>
         </AnimatedInner>
       </Layout>

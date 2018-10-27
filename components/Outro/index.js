@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
-import { activitiesType } from '../shared/propTypes';
+import { appDataType } from '../shared/propTypes';
 import { Header, Paragraph } from '../shared/text';
 import { Activities } from './Activities';
 
 export class Outro extends Component {
   static propTypes = {
-    activities: activitiesType.isRequired
+    appData: appDataType.isRequired
   };
 
   render() {
-    const { activities } = this.props;
+    const {
+      appData: { setPhrase, activities }
+    } = this.props;
 
     return (
       <Container>
-        <Header>Shutdown complete.</Header>
+        <Header>{setPhrase}</Header>
         <Paragraph>
           Time to unwind.{`\n`}Let work sink in your subconscious until
           tomorrow.

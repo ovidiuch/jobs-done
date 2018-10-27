@@ -1,8 +1,8 @@
 ## Milestone: Self-hosted static app
 
 - [x] Load data from git-ignored file db (with example provided)
-- [ ] Document steps to publish
-- [ ] Make set phrase customizable
+- [x] Document steps to publish
+- [x] Make set phrase customizable
 - [ ] Logo / favicon
 - [ ] Tweak activity button style
 
