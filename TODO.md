@@ -4,7 +4,7 @@
 - [x] Document steps to publish
 - [x] Make set phrase customizable
 - [x] Redesign activity section
-- [ ] Logo / favicon
+- [x] Add favicon and web manifest
 
 ## ~~Milestone: Sharable viable product~~
 
