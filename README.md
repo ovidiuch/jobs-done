@@ -39,7 +39,7 @@ This is a [React Native](https://facebook.github.io/react-native/) app built wit
 
 The project features a [custom server-side rendering implementation](https://github.com/skidding/jobs-done/blob/d3d85ce6c5b156249702d90190397bd67fdc31ed/tools/shared/renderIndex.js#L13-L39), which might be interesting for someone trying to understand how SSR works.
 
-Styles are generated _universally_ using [styled-components](https://www.styled-components.com/). On native platforms, browsers and on the server. Pretty cool!
+Styles are defined _universally_ using [styled-components](https://www.styled-components.com/). Same styles compile to native platforms as well as browsers (on both client and server side). Pretty cool!
 
 ## How to use
 
