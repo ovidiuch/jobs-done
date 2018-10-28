@@ -2,7 +2,15 @@
 
 A ritual app for ending the work day inspired by [Deep Work](https://www.goodreads.com/book/show/25744928-deep-work)
 
-[![App screenshot](screenshot.png)](https://jobs-done.now.sh/)
+<a href="https://jobs-done.now.sh/">
+  <img width="30%" alt="Screenshot" src="screen1.png">
+</a>
+<a href="https://jobs-done.now.sh/">
+  <img width="30%" alt="Screenshot" src="screen2.png">
+</a>
+<a href="https://jobs-done.now.sh/">
+  <img width="30%" alt="Screenshot" src="screen3.png">
+</a>
 
 Jump to:
 
