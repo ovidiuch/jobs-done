@@ -25,9 +25,9 @@ export class Intro extends Component {
         </Paragraph>
         <ButtonContainer>
           {isActive ? (
-            <Button label="Start" onPress={onStart} />
+            <Button label="START" onPress={onStart} />
           ) : (
-            <Button label="Start" disabled />
+            <Button label="START" disabled />
           )}
         </ButtonContainer>
       </Container>

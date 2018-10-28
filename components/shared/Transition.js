@@ -8,7 +8,8 @@ export class Transition extends Component {
   static propTypes = {
     children: func.isRequired,
     value: number.isRequired,
-    duration: number.isRequired
+    duration: number.isRequired,
+    onDone: func
   };
 
   state = {
@@ -16,13 +17,13 @@ export class Transition extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const { value, duration } = this.props;
+    const { value, duration, onDone } = this.props;
 
     if (value !== prevProps.value || duration !== prevProps.duration) {
       Animated.timing(this.state.valueAnim, {
         toValue: value,
         duration
-      }).start();
+      }).start(onDone);
     }
   }
 

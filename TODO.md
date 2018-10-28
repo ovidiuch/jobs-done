@@ -3,7 +3,7 @@
 - [x] Load data from git-ignored file db (with example provided)
 - [x] Document steps to publish
 - [x] Make set phrase customizable
-- [ ] Tweak activity button style
+- [x] Redesign activity section
 - [ ] Logo / favicon
 
 ## ~~Milestone: Sharable viable product~~

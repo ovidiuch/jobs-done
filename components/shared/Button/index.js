@@ -56,7 +56,7 @@ export class Button extends Component {
 
     return (
       <Container>
-        <AnimatedLabel style={{ color }}>{label.toUpperCase()}</AnimatedLabel>
+        <AnimatedLabel style={{ color }}>{label}</AnimatedLabel>
       </Container>
     );
   }

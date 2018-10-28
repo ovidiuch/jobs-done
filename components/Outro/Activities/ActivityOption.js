@@ -1,8 +1,9 @@
 import { string, func } from 'prop-types';
 import React, { Component } from 'react';
-import { Platform, Animated, TouchableWithoutFeedback } from 'react-native';
+import { Platform, Animated } from 'react-native';
 import styled from 'styled-components/native';
 import { Text } from '../../shared/text';
+import { Button } from '../../shared/Button';
 import { Transition, QUICK_TRANS_TIME } from '../../shared/Transition';
 import { getRandomCheerLabel } from './cheers';
 
@@ -23,34 +24,64 @@ export class ActivityOption extends Component {
     }
   };
 
+  handleAnimationDone = () => {
+    if (!this.isSelected()) {
+      this.setState({
+        cheerLabel: null
+      });
+    }
+  };
+
   render() {
-    const { label, selectedActivity } = this.props;
-    const isSelected = selectedActivity === label;
+    const { selectedActivity } = this.props;
+    const isSelected = this.isSelected();
 
     return (
       <Transition
         duration={QUICK_TRANS_TIME}
         value={isSelected || !selectedActivity ? 1 : 0.4}
       >
-        {opacity => this.renderAnimated({ isSelected, opacity })}
+        {opacity => (
+          <Transition
+            duration={QUICK_TRANS_TIME}
+            value={isSelected ? 1 : 0}
+            onDone={this.handleAnimationDone}
+          >
+            {cheerOpacity => this.renderAnimated({ opacity, cheerOpacity })}
+          </Transition>
+        )}
       </Transition>
     );
   }
 
-  renderAnimated({ isSelected, opacity }) {
+  renderAnimated({ opacity, cheerOpacity }) {
     const { label } = this.props;
     const { cheerLabel } = this.state;
 
+    const cheerMarginBottom = cheerOpacity.interpolate({
+      inputRange: [0, 1],
+      outputRange: [-16, 0]
+    });
+
     return (
-      <TouchableWithoutFeedback onPress={this.handleSelect}>
-        <Container style={{ opacity }}>
-          <ActivityLabel>
-            <Arrow>→</Arrow> {label}
-          </ActivityLabel>
-          {isSelected && <CheerLabel>{cheerLabel}</CheerLabel>}
-        </Container>
-      </TouchableWithoutFeedback>
+      <Container style={{ opacity }}>
+        {cheerLabel && (
+          <CheerLabel
+            numberOfLines={1}
+            style={{ opacity: cheerOpacity, marginBottom: cheerMarginBottom }}
+          >
+            {cheerLabel}
+          </CheerLabel>
+        )}
+        <Button label={label} onPress={this.handleSelect} />
+      </Container>
     );
+  }
+
+  isSelected() {
+    const { label, selectedActivity } = this.props;
+
+    return selectedActivity === label;
   }
 }
 
@@ -61,30 +92,19 @@ ActivityOption.propTypes = {
 };
 
 const Container = Animated.createAnimatedComponent(styled.View`
-  display: flex;
-  flex-direction: row;
+  position: relative;
+  margin: 16px 16px 0 0;
 `);
 
-const Label = styled(Text)`
-  line-height: 24px;
-  margin: 0;
-  line-height: 40px;
-  ${Platform.OS === 'web' && 'user-select: none;'};
-`;
-
-const Arrow = styled(Text)`
-  padding-right: 4px;
-  opacity: 0.5;
-`;
-
-const ActivityLabel = styled(Label)`
-  flex: 1;
-  padding: 0 16px 0 0;
-`;
-
-const CheerLabel = styled(Label)`
+const CheerLabel = Animated.createAnimatedComponent(styled(Text)`
+  position: absolute;
+  right: 8px;
+  bottom: 60px;
   margin: 0;
   padding: 0 16px;
-  background: rgba(217, 223, 247, 0.12);
+  background: rgba(217, 223, 247, 0.7);
+  color: rgba(0, 9, 21, 0.8);
   border-radius: 5px;
-`;
+  line-height: 40px;
+  ${Platform.OS === 'web' && 'user-select: none;'};
+`);

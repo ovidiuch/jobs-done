@@ -25,6 +25,6 @@ export const appData = {
   activities: {
     Social: ['Attend an event', 'Dine out', 'Hang out', 'Call someone dear'],
     Physical: ['Go for a run', 'Go for a swim', 'Take a long walk', 'Work out'],
-    Leisure: ['Read a book', 'Play a game', 'Go see a play', 'Watch a movie']
+    Leisure: ['Read a book', 'Play a game', 'See a play', 'Watch a movie']
   }
 };

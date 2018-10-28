@@ -17,16 +17,18 @@ export function ActivityOptions({
   const activityOptions = activities[selectedActivityType];
 
   return (
-    <List>
-      {activityOptions.map((activity, index) => (
-        <ActivityOption
-          key={index}
-          label={activity}
-          selectedActivity={selectedActivity}
-          onSelect={onSelectActivity}
-        />
-      ))}
-    </List>
+    <Container>
+      <Options>
+        {activityOptions.map((activity, index) => (
+          <ActivityOption
+            key={index}
+            label={activity}
+            selectedActivity={selectedActivity}
+            onSelect={onSelectActivity}
+          />
+        ))}
+      </Options>
+    </Container>
   );
 }
 
@@ -37,7 +39,16 @@ ActivityOptions.propTypes = {
   onSelectActivity: func
 };
 
-const List = styled.View`
-  width: 100%;
-  padding: 12px 0 0 0;
+const Container = styled.View`
+  margin: 16px 0 0 0;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: rgba(217, 223, 247, 0.1);
+`;
+
+const Options = styled.View`
+  margin: 0 -16px 0 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 `;

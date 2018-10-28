@@ -30,7 +30,7 @@ export class Activities extends Component {
     const { selectedActivityType, selectedActivity } = this.state;
 
     return (
-      <React.Fragment>
+      <Container>
         <ActivityTypeButtons>
           {Object.keys(activities).map((activity, idx) => (
             <ActivityTypeButton
@@ -42,19 +42,22 @@ export class Activities extends Component {
           ))}
         </ActivityTypeButtons>
         <ActivityOptions
+          key={selectedActivityType}
           activities={activities}
           selectedActivityType={selectedActivityType}
           selectedActivity={selectedActivity}
           onSelectActivity={this.handleSelectActivity}
         />
-      </React.Fragment>
+      </Container>
     );
   }
 }
 
+const Container = styled.View``;
+
 const ActivityTypeButtons = styled.View`
-  margin: 0 -16px 0 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin: 0 -16px -16px 0;
 `;
