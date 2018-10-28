@@ -18,7 +18,7 @@ export const appData = {
     },
     {
       name: 'Create a rough plan for tomorrow',
-      urls: ['https://workflowy.com/#/2d8a33346768']
+      urls: ['https://workflowy.com/']
     }
   ],
   setPhrase: 'Shutdown complete.',
