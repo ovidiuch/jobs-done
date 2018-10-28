@@ -1,6 +1,8 @@
-# [Jobs Done!](https://jobs-done.now.sh/#/)
+# [Jobs Done!](https://jobs-done.now.sh/)
 
 A ritual app for ending the work day inspired by [Deep Work](https://www.goodreads.com/book/show/25744928-deep-work)
+
+[![App screenshot](screenshot.png)](https://jobs-done.now.sh/)
 
 Jump to:
 
