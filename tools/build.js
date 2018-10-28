@@ -1,10 +1,12 @@
 import { join } from 'path';
 import { remove, copy, mkdir, writeFile } from 'fs-extra';
 import webpack from 'webpack';
+import cpy from 'cpy';
 import { getAppWebpackConfig } from './shared/webpack/webpackConfig';
 import { renderIndex } from './shared/renderIndex';
 
 const BUILD_PATH = join(__dirname, '../build');
+const STATIC_PATH = join(__dirname, '../static');
 
 run();
 
@@ -14,6 +16,7 @@ async function run() {
   await generateIndexFile(buildId);
   await bundleModules(buildId);
   await copyNowConfig();
+  await copyStatics();
 }
 
 async function clearPrevBuild() {
@@ -48,6 +51,13 @@ async function bundleModules(buildId) {
 
 async function copyNowConfig() {
   await copy('./now.json', getBuildPath('now.json'));
+}
+
+async function copyStatics() {
+  return cpy('**/*', '../build', {
+    cwd: STATIC_PATH,
+    parents: true
+  });
 }
 
 function runWebpackCompiler(webpackConfig) {
