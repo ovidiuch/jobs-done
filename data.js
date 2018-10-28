@@ -11,7 +11,7 @@ export const appData = {
       name: 'Transfer mental tasks and notes to official task list',
       urls: [
         'https://keep.google.com/u/0/',
-        'https://workflowy.com/#/5cc92adf106d'
+        'https://workflowy.com/#/86667fad65a1'
       ]
     },
     {
@@ -20,7 +20,7 @@ export const appData = {
     },
     {
       name: 'Create a rough plan for tomorrow',
-      urls: ['https://workflowy.com/#/2d8a33346768']
+      urls: ['https://workflowy.com/#/86667fad65a1']
     }
   ],
   setPhrase: 'Shutdown complete.',
