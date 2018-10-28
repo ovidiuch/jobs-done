@@ -12,6 +12,8 @@ A ritual app for ending the work day inspired by [Deep Work](https://www.goodrea
   <img width="30%" alt="Screenshot" src="screen3.png">
 </a>
 
+---
+
 Jump to:
 
 - [Motivation](#motivation)
