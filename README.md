@@ -77,7 +77,7 @@ Go to `build` dir and publish it using something like [Now](https://zeit.co/now)
 
 ### Native
 
-The aforementioned instructions are for running and publishing the web app. But this is a React _Native_ project. While I tested it on Android and iOS simulator, I didn't bother publishing _Jobs Done!_ on app stores. The web version already works just fine on both desktop and mobile ¯\\\_(ツ)\_/¯.
+The aforementioned instructions are for running and publishing the web app. But this is a React _Native_ project. I did test _Jobs Done!_ on Android and iOS simulator, but I didn't bother publishing it on app stores. The web version already works just fine on both desktop and mobile ¯\\\_(ツ)\_/¯.
 
 Open two terminals to load the app on native devices or simulators. In the first run `yarn cosmos:native`. In the second run `yarn start:native` for [Expo](https://expo.io/) or `yarn ios` or `yarn android` for a specific platform.
 
