@@ -23,7 +23,7 @@ Jump to:
 
 ## Motivation
 
-This app is built on Cal Newport's **showdown ritual** concept from his book Deep Work.
+This app is built on Cal Newport's **shutdown ritual** concept from his book Deep Work.
 
 The need for a shutdown ritual comes from the following (oversimplified) reasoning:
 
