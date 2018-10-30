@@ -35,7 +35,7 @@ The need for a shutdown ritual comes from the following (oversimplified) reasoni
 
 ## How it works
 
-You decide it's take to call it a day.
+You decide it's time to call it a day.
 
 You are guided through a set of (customizable) steps meant to relieve your mind from work-related thoughts. This often involves formalizing thoughts into tasks and creating a plan for tomorrow.
 
