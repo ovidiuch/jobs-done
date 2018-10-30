@@ -59,15 +59,13 @@ Styles are defined _universally_ using [styled-components](https://www.styled-co
 
 Clone this repo and run `yarn install`.
 
+Copy [data.example.js](data.example.js) as `data.js` in project root. Customize it with your info later.
+
 ### Run
 
 Run `yarn start` to start the _web_ app locally in dev mode.
 
 Run `yarn cosmos` to browse components independently.
-
-### Customize
-
-Copy [data.example.js](data.example.js) as `data.js` in project root. Customize it with your info.
 
 ### Publish
 
