@@ -5,7 +5,7 @@ module.exports = {
   // The rest of the paths are relative to `rootPath`, so this project's root
   proxiesPath: 'tools/cosmos/cosmos.proxies.js',
   modulesPath: 'tools/cosmos/cosmos.modules.js',
-  globalImports: ['./global.js', 'babel-polyfill'],
+  globalImports: ['./global.js'],
   webpack: config => addNativeAlias(config),
   plugin: {
     responsivePreview: {
