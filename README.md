@@ -1,6 +1,6 @@
 # [Jobs Done!](https://jobs-done.now.sh/)
 
-A ritual app for ending the work day inspired by [Deep Work](https://www.goodreads.com/book/show/25744928-deep-work)
+A ritual app for ending the work day inspired by [Deep Work](http://calnewport.com/books/deep-work/)
 
 <a href="https://jobs-done.now.sh/">
   <img width="30%" alt="Screenshot" src="screen1.png">
