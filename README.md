@@ -2,7 +2,7 @@
 
 A ritual app for ending the work day inspired by [Deep Work](http://calnewport.com/books/deep-work/)
 
-> Are you on Product Hunt? **[Share your feedback!](https://www.producthunt.com/posts/jobs-done)** 💬
+> **Are you on Product Hunt? [Upvote & share your feedback!](https://www.producthunt.com/posts/jobs-done)** 💬
 
 <a href="https://jobs-done.now.sh/">
   <img width="30%" alt="Screenshot" src="screen1.png">
