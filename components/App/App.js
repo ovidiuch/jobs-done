@@ -157,15 +157,11 @@ export class App extends UnmountAwareComponent {
       <Layout onLayout={this.handleParentLayout}>
         <AnimatedInner style={innerStyle}>
           <ActiveElement
-            key={0}
+            key="intro"
             state={isIntroActive ? 'active' : 'checked'}
             onLayout={this.createElLayoutHandler(introStepIndex)}
           >
-            <Intro
-              isActive={isIntroActive}
-              onStart={this.handleNext}
-              onSelect={this.handleSelectIntro}
-            />
+            {getIntroEl(isIntroActive, this.handleNext, this.handleSelectIntro)}
           </ActiveElement>
           {steps.map((step, idx) => {
             // Account one index for Intro step
@@ -195,16 +191,29 @@ export class App extends UnmountAwareComponent {
             );
           })}
           <ActiveElement
+            key="outro"
             state={isOutroActive ? 'active' : 'disabled'}
             onLayout={this.createElLayoutHandler(outroStepIndex)}
           >
-            <Outro appData={appData} />
+            {getOutroEl(appData)}
           </ActiveElement>
         </AnimatedInner>
       </Layout>
     );
   }
 }
+
+const getIntroEl = memoize(
+  // Memoization is done by shallow comparing every argument
+  (isActive, onStart, onSelect) => (
+    <Intro isActive={isActive} onStart={onStart} onSelect={onSelect} />
+  )
+);
+
+const getOutroEl = memoize(
+  // Memoization is done by shallow comparing every argument
+  appData => <Outro appData={appData} />
+);
 
 const getStepEl = memoize(
   // Memoization is done by shallow comparing every argument
