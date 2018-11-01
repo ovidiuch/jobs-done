@@ -1,4 +1,5 @@
 import React from 'react';
+import memoize from 'fast-memoize';
 import { number, func } from 'prop-types';
 import { Animated } from 'react-native';
 import styled from 'styled-components/native';
@@ -49,7 +50,7 @@ export class App extends UnmountAwareComponent {
     });
   };
 
-  createElLayoutHandler = index => e => {
+  createElLayoutHandler = memoize(index => e => {
     const { height } = e.nativeEvent.layout;
     const { elHeights } = this.state;
 
@@ -61,7 +62,7 @@ export class App extends UnmountAwareComponent {
         }
       });
     }
-  };
+  });
 
   handleSelect = stepIndex => {
     const { activeStepIndex, setActiveStepIndex } = this.props;
