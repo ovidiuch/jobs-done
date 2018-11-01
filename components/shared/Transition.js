@@ -1,10 +1,10 @@
 import { number, func } from 'prop-types';
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import { Animated } from 'react-native';
 
 export const QUICK_TRANS_TIME = 600;
 
-export class Transition extends Component {
+export class Transition extends PureComponent {
   static propTypes = {
     children: func.isRequired,
     value: number.isRequired,

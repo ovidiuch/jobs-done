@@ -1,4 +1,5 @@
 import { func, node } from 'prop-types';
+import { isEqual } from 'lodash';
 import React, { Component } from 'react';
 import { Animated } from 'react-native';
 import styled from 'styled-components/native';
@@ -11,6 +12,11 @@ export class ActiveElement extends Component {
     state: stepStateType.isRequired,
     onLayout: func.isRequired
   };
+
+  shouldComponentUpdate(prevProps) {
+    // Deep compare props (including children)
+    return !isEqual(this.props, prevProps);
+  }
 
   render() {
     const { children, state, onLayout } = this.props;

@@ -4,13 +4,16 @@ export default {
   component: Step,
   props: {
     stepIndex: 0,
-    name: 'Reply to (or schedule) anything urgent',
-    urls: [
-      'https://mail.google.com/mail/',
-      'slack://react-cosmos.slack.com/messages/general/'
-    ],
+    step: {
+      name: 'Reply to (or schedule) anything urgent',
+      urls: [
+        'https://mail.google.com/mail/',
+        'slack://react-cosmos.slack.com/messages/general/'
+      ]
+    },
     state: 'checked',
-    onSelect: () => console.log('Select')
+    onSelect: () => console.log('Select'),
+    mobileViewport: false
   },
   bg: true,
   viewport: {

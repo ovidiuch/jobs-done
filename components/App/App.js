@@ -1,4 +1,5 @@
 import React from 'react';
+import memoize from 'fast-memoize';
 import { number, func } from 'prop-types';
 import { Animated } from 'react-native';
 import styled from 'styled-components/native';
@@ -49,7 +50,7 @@ export class App extends UnmountAwareComponent {
     });
   };
 
-  createElLayoutHandler = index => e => {
+  createElLayoutHandler = memoize(index => e => {
     const { height } = e.nativeEvent.layout;
     const { elHeights } = this.state;
 
@@ -61,7 +62,7 @@ export class App extends UnmountAwareComponent {
         }
       });
     }
-  };
+  });
 
   handleSelect = stepIndex => {
     const { activeStepIndex, setActiveStepIndex } = this.props;
@@ -145,6 +146,7 @@ export class App extends UnmountAwareComponent {
     const outroStepIndex = getStepsNum(steps) - 1;
     const isIntroActive = activeStepIndex === 0;
     const isOutroActive = activeStepIndex === outroStepIndex;
+    const mobileViewport = isMobileViewport(rootViewport);
 
     const innerStyle = {
       transform: [{ translateY: yOffset }],
@@ -155,15 +157,11 @@ export class App extends UnmountAwareComponent {
       <Layout onLayout={this.handleParentLayout}>
         <AnimatedInner style={innerStyle}>
           <ActiveElement
-            key={0}
+            key="intro"
             state={isIntroActive ? 'active' : 'checked'}
             onLayout={this.createElLayoutHandler(introStepIndex)}
           >
-            <Intro
-              isActive={isIntroActive}
-              onStart={this.handleNext}
-              onSelect={this.handleSelectIntro}
-            />
+            {getIntroEl(isIntroActive, this.handleNext, this.handleSelectIntro)}
           </ActiveElement>
           {steps.map((step, idx) => {
             // Account one index for Intro step
@@ -182,27 +180,53 @@ export class App extends UnmountAwareComponent {
                 state={state}
                 onLayout={this.createElLayoutHandler(stepIndex)}
               >
-                <Step
-                  {...step}
-                  stepIndex={stepIndex}
-                  state={state}
-                  rootViewport={rootViewport}
-                  onSelect={this.handleSelect}
-                />
+                {getStepEl(
+                  step,
+                  stepIndex,
+                  state,
+                  mobileViewport,
+                  this.handleSelect
+                )}
               </ActiveElement>
             );
           })}
           <ActiveElement
+            key="outro"
             state={isOutroActive ? 'active' : 'disabled'}
             onLayout={this.createElLayoutHandler(outroStepIndex)}
           >
-            <Outro appData={appData} />
+            {getOutroEl(appData)}
           </ActiveElement>
         </AnimatedInner>
       </Layout>
     );
   }
 }
+
+const getIntroEl = memoize(
+  // Memoization is done by shallow comparing every argument
+  (isActive, onStart, onSelect) => (
+    <Intro isActive={isActive} onStart={onStart} onSelect={onSelect} />
+  )
+);
+
+const getOutroEl = memoize(
+  // Memoization is done by shallow comparing every argument
+  appData => <Outro appData={appData} />
+);
+
+const getStepEl = memoize(
+  // Memoization is done by shallow comparing every argument
+  (step, stepIndex, state, mobileViewport, onSelect) => (
+    <Step
+      step={step}
+      stepIndex={stepIndex}
+      state={state}
+      mobileViewport={mobileViewport}
+      onSelect={onSelect}
+    />
+  )
+);
 
 function getStepsNum(steps) {
   // Add two steps for Intro and Outro
@@ -262,6 +286,10 @@ function getVisibleElements({ elHeights, activeStepIndex }) {
     .sort()
     .slice(0, activeStepIndex + 1)
     .map(index => elHeights[index]);
+}
+
+function isMobileViewport(viewport) {
+  return viewport ? viewport.width > 552 : false;
 }
 
 const Inner = styled.View`

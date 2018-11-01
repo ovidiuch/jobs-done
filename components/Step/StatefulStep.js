@@ -16,13 +16,16 @@ export class StatefulStep extends Component {
     return (
       <Step
         stepIndex={0}
-        name="Reply to (or schedule) anything urgent"
-        urls={[
-          'https://mail.google.com/mail/',
-          'slack://react-cosmos.slack.com/messages/general/'
-        ]}
+        step={{
+          name: 'Reply to (or schedule) anything urgent',
+          urls: [
+            'https://mail.google.com/mail/',
+            'slack://react-cosmos.slack.com/messages/general/'
+          ]
+        }}
         state={this.state.state}
         onSelect={this.handleSelect}
+        mobileViewport={true}
       />
     );
   }

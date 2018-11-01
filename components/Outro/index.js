@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components/native';
 import { appDataType } from '../shared/propTypes';
 import { Header, Paragraph } from '../shared/text';
 import { Activities } from './Activities';
 
-export class Outro extends Component {
+export class Outro extends PureComponent {
   static propTypes = {
     appData: appDataType.isRequired
   };
