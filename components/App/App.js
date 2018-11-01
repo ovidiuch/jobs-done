@@ -146,6 +146,7 @@ export class App extends UnmountAwareComponent {
     const outroStepIndex = getStepsNum(steps) - 1;
     const isIntroActive = activeStepIndex === 0;
     const isOutroActive = activeStepIndex === outroStepIndex;
+    const mobileViewport = isMobileViewport(rootViewport);
 
     const innerStyle = {
       transform: [{ translateY: yOffset }],
@@ -183,13 +184,13 @@ export class App extends UnmountAwareComponent {
                 state={state}
                 onLayout={this.createElLayoutHandler(stepIndex)}
               >
-                <Step
-                  {...step}
-                  stepIndex={stepIndex}
-                  state={state}
-                  rootViewport={rootViewport}
-                  onSelect={this.handleSelect}
-                />
+                {getStepEl(
+                  step,
+                  stepIndex,
+                  state,
+                  mobileViewport,
+                  this.handleSelect
+                )}
               </ActiveElement>
             );
           })}
@@ -204,6 +205,19 @@ export class App extends UnmountAwareComponent {
     );
   }
 }
+
+const getStepEl = memoize(
+  // Memoization is done by shallow comparing every argument
+  (step, stepIndex, state, mobileViewport, onSelect) => (
+    <Step
+      step={step}
+      stepIndex={stepIndex}
+      state={state}
+      mobileViewport={mobileViewport}
+      onSelect={onSelect}
+    />
+  )
+);
 
 function getStepsNum(steps) {
   // Add two steps for Intro and Outro
@@ -263,6 +277,10 @@ function getVisibleElements({ elHeights, activeStepIndex }) {
     .sort()
     .slice(0, activeStepIndex + 1)
     .map(index => elHeights[index]);
+}
+
+function isMobileViewport(viewport) {
+  return viewport ? viewport.width > 552 : false;
 }
 
 const Inner = styled.View`

@@ -1,32 +1,21 @@
-import { number, string, func, arrayOf, exact } from 'prop-types';
+import { bool, number, func } from 'prop-types';
 import React from 'react';
 import { Platform, Animated, TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 import { debounce } from 'lodash';
 import { UnmountAwareComponent } from '../shared/UnmountAwareComponent';
-import { stepStateType } from '../shared/propTypes';
+import { stepType, stepStateType } from '../shared/propTypes';
 import { Transition, QUICK_TRANS_TIME } from '../shared/Transition';
 import { Checkbox } from './Checkbox';
 import { Link } from './Link';
 
 export class Step extends UnmountAwareComponent {
   static propTypes = {
+    step: stepType.isRequired,
     stepIndex: number.isRequired,
-    name: string.isRequired,
-    urls: arrayOf(string).isRequired,
     state: stepStateType.isRequired,
-    rootViewport: exact({
-      width: number.isRequired,
-      height: number.isRequired
-    }).isRequired,
+    mobileViewport: bool.isRequired,
     onSelect: func.isRequired
-  };
-
-  static defaultProps = {
-    rootViewport: {
-      width: 320,
-      height: 568
-    }
   };
 
   state = {
@@ -90,14 +79,18 @@ export class Step extends UnmountAwareComponent {
   }
 
   renderStep(bgOpacity) {
-    const { name, urls, state, rootViewport } = this.props;
+    const {
+      step: { name, urls },
+      state,
+      mobileViewport
+    } = this.props;
     const { linksEnabled } = this.state;
 
     const backgroundColor = bgOpacity.interpolate({
       inputRange: [0, 1],
       outputRange: ['rgba(217, 223, 247, 0)', 'rgba(217, 223, 247, 0.12)']
     });
-    const borderRadius = getBorderRadiusForViewport(rootViewport);
+    const borderRadius = getBorderRadiusForViewport(mobileViewport);
 
     return (
       <AnimatedContainer
@@ -169,6 +162,6 @@ function getBgOpacityForState(state) {
   return state === 'active' ? 1 : 0;
 }
 
-function getBorderRadiusForViewport(viewport) {
-  return viewport.width > 552 ? 5 : 0;
+function getBorderRadiusForViewport(mobileViewport) {
+  return mobileViewport ? 5 : 0;
 }
