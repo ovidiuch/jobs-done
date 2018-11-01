@@ -38,6 +38,10 @@ export class Step extends UnmountAwareComponent {
   );
 
   handleAnimationDone = () => {
+    if (this.unmounted) {
+      return;
+    }
+
     // Why is linksEnabled not derived from this.props.state in the render
     // method? Good question!
     // Because users shouldn't be able to press links from checked steps. And
@@ -48,7 +52,7 @@ export class Step extends UnmountAwareComponent {
     //   4. The link was opened as the checked step was activating
     const linksEnabled = this.props.state === 'active';
 
-    if (!this.unmounted) {
+    if (linksEnabled !== this.state.linksEnabled) {
       this.setState({ linksEnabled });
     }
   };
