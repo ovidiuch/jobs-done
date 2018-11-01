@@ -1,5 +1,5 @@
 import { string, bool, func } from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   Platform,
   Animated,
@@ -9,7 +9,7 @@ import {
 import styled from 'styled-components/native';
 import { Transition, QUICK_TRANS_TIME } from '../../shared/Transition';
 
-export class Button extends Component {
+export class Button extends PureComponent {
   static propTypes = {
     label: string.isRequired,
     disabled: bool,

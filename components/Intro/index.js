@@ -1,11 +1,11 @@
 import { bool, func } from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 import { Header, Paragraph } from '../shared/text';
 import { Button } from '../shared/Button';
 
-export class Intro extends Component {
+export class Intro extends PureComponent {
   static propTypes = {
     isActive: bool.isRequired,
     onSelect: func.isRequired,

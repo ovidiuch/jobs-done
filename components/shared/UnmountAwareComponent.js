@@ -1,6 +1,6 @@
-import { Component } from 'react';
+import { PureComponent } from 'react';
 
-export class UnmountAwareComponent extends Component {
+export class UnmountAwareComponent extends PureComponent {
   unmounted = false;
 
   componentWillUnmount() {
