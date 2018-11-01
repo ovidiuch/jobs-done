@@ -22,26 +22,6 @@ export class Step extends UnmountAwareComponent {
     linksEnabled: this.props.state === 'active'
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    const linksEnabled = this.props.state === 'active';
-
-    // Why is linksEnabled not derived from this.props.state in the render
-    // method? Good question!
-    // Because users shouldn't be able to press links from checked steps. And
-    // the following used to happen:
-    //   1. A disabled link from a checked step was pressed
-    //   2. The checked step was activated
-    //   3. The press event would only now reach the link (which was now enabled)
-    //   4. The link was opened as the checked step was activating
-    if (linksEnabled !== prevState.linksEnabled) {
-      setTimeout(() => {
-        if (!this.unmounted) {
-          this.setState({ linksEnabled });
-        }
-      }, 500);
-    }
-  }
-
   // Prevent step from toggling itself on and off on press, because sometimes
   // two press events fire rapidly one after another (for unknown reasons).
   handleSelect = debounce(
@@ -57,6 +37,22 @@ export class Step extends UnmountAwareComponent {
     { leading: true, trailing: false }
   );
 
+  handleAnimationDone = () => {
+    // Why is linksEnabled not derived from this.props.state in the render
+    // method? Good question!
+    // Because users shouldn't be able to press links from checked steps. And
+    // the following used to happen:
+    //   1. A disabled link from a checked step was pressed
+    //   2. The checked step was activated
+    //   3. The press event would only now reach the link (which was now enabled)
+    //   4. The link was opened as the checked step was activating
+    const linksEnabled = this.props.state === 'active';
+
+    if (!this.unmounted) {
+      this.setState({ linksEnabled });
+    }
+  };
+
   render() {
     const { state } = this.props;
 
@@ -64,6 +60,7 @@ export class Step extends UnmountAwareComponent {
       <Transition
         duration={QUICK_TRANS_TIME}
         value={getBgOpacityForState(state)}
+        onDone={this.handleAnimationDone}
       >
         {bgOpacity => {
           return state === 'disabled' ? (
