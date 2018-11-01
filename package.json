@@ -6,8 +6,8 @@
     "lint": "eslint \"{{components,tools}/**/,}*.js\"",
     "cosmos": "cosmos --config tools/cosmos/cosmos.config.js",
     "cosmos:native": "cosmos-native --config tools/cosmos/cosmos.config.js",
-    "start": "NODE_ENV=development babel-node tools/start.js --config-file ./.babelrc.js --only \"*.js,components/**,tools/**,node_modules/styled-components/**\"",
-    "build": "NODE_ENV=production babel-node tools/build.js --config-file ./.babelrc.js --only \"*.js,components/**,tools/**,node_modules/styled-components/**\"",
+    "start": "cross-env NODE_ENV=development babel-node tools/start.js --config-file ./.babelrc.js --only \"*.js,components/**,tools/**,node_modules/styled-components/**\"",
+    "build": "cross-env NODE_ENV=production babel-node tools/build.js --config-file ./.babelrc.js --only \"*.js,components/**,tools/**,node_modules/styled-components/**\"",
     "start:native": "react-native-scripts start",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios"
@@ -42,6 +42,7 @@
     "babel-plugin-react-native-web": "^0.9.4",
     "babel-plugin-styled-components": "^1.8.0",
     "cpy": "^7.0.1",
+    "cross-env": "^5.2.0",
     "eslint": "^5.7.0",
     "eslint-plugin-babel": "^5.2.1",
     "eslint-plugin-import": "^2.14.0",
