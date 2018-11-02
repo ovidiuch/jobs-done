@@ -4,7 +4,7 @@ export const stepStateType = oneOf(['disabled', 'active', 'checked']);
 
 export const stepType = shape({
   name: string.isRequired,
-  urls: arrayOf(string).isRequired
+  urls: arrayOf(string)
 });
 
 export const activitiesType = objectOf(arrayOf(string));

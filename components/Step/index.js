@@ -93,26 +93,46 @@ export class Step extends UnmountAwareComponent {
     });
     const borderRadius = getBorderRadiusForViewport(mobileViewport);
 
-    return (
-      <AnimatedContainer
-        onLayout={this.handleLayout}
-        style={{ backgroundColor, borderRadius }}
-      >
-        <Left>
-          <Name>{name}</Name>
-          <Urls>
-            {urls.map(url => (
-              <Url key={url}>
-                <Link href={url} disabled={!linksEnabled} />
-              </Url>
-            ))}
-          </Urls>
-        </Left>
-        <ButtonContainer>
-          <Checkbox checked={state === 'checked'} />
-        </ButtonContainer>
-      </AnimatedContainer>
-    );
+    if (typeof urls !== 'undefined' && urls.length > 0) {
+      return (
+        <AnimatedContainer
+          onLayout={this.handleLayout}
+          style={{ backgroundColor, borderRadius }}
+        >
+          <Left>
+            <Name>{name}</Name>
+            <Urls>
+              {urls.map(url => (
+                <Url key={url}>
+                  <Link href={url} disabled={!linksEnabled} />
+                </Url>
+              ))}
+            </Urls>
+          </Left>
+          <ButtonContainer>
+            <Checkbox checked={state === 'checked'} />
+          </ButtonContainer>
+        </AnimatedContainer>
+      );
+    }
+    else {
+      return (
+        <AnimatedContainer
+          onLayout={this.handleLayout}
+          style={{ backgroundColor, borderRadius }}
+        >
+          <Left>
+            <Name>{name}</Name>
+            <Urls>
+            </Urls>
+          </Left>
+          <ButtonContainer>
+            <Checkbox checked={state === 'checked'} />
+          </ButtonContainer>
+        </AnimatedContainer>
+      );
+    }
+    
   }
 }
 
