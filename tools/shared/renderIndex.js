@@ -24,7 +24,7 @@ export function renderIndex({ scriptFilename }) {
     <title>Jobs Done!</title>
     <meta
       name="description"
-      content="A ritual app for ending the work day"
+      content="Ritual app for ending the work day"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="apple-mobile-web-app-capable" content="yes" />

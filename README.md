@@ -2,7 +2,7 @@
 
 **[Live demo](https://jobs-done.now.sh)** ◌ [Hacker News](https://news.ycombinator.com/item?id=18339215) ◌ [Reddit](https://www.reddit.com/r/productivity/comments/9t8clr/jobs_done_a_ritual_app_for_ending_the_work_day/) ◌ [Product Hunt](https://www.producthunt.com/posts/jobs-done)
 
-A ritual app for ending the work day inspired by [Deep Work](http://calnewport.com/books/deep-work/)
+Ritual app for ending the work day inspired by [Deep Work](http://calnewport.com/books/deep-work/)
 
 <a href="https://jobs-done.now.sh/">
   <img width="30%" alt="Screenshot" src="screen1.png">

@@ -1,7 +1,7 @@
 {
   "name": "Jobs Done!",
   "short_name": "Jobs Done!",
-  "description": "A ritual app for ending the work day",
+  "description": "Ritual app for ending the work day",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
