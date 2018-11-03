@@ -66,12 +66,11 @@ export class ActivityOption extends Component {
     return (
       <Container style={{ opacity }}>
         {cheerLabel && (
-          <CheerLabel
-            numberOfLines={1}
+          <CheerTooltip
             style={{ opacity: cheerOpacity, marginBottom: cheerMarginBottom }}
           >
-            {cheerLabel}
-          </CheerLabel>
+            <CheerLabel numberOfLines={1}>{cheerLabel}</CheerLabel>
+          </CheerTooltip>
         )}
         <Button label={label} onPress={this.handleSelect} />
       </Container>
@@ -96,15 +95,18 @@ const Container = Animated.createAnimatedComponent(styled.View`
   margin: 16px 16px 0 0;
 `);
 
-const CheerLabel = Animated.createAnimatedComponent(styled(Text)`
+const CheerTooltip = Animated.createAnimatedComponent(styled.View`
   position: absolute;
   right: 8px;
   bottom: 60px;
   margin: 0;
   padding: 0 16px;
   background: rgba(217, 223, 247, 0.7);
-  color: rgba(0, 9, 21, 0.8);
   border-radius: 5px;
-  line-height: 40px;
   ${Platform.OS === 'web' && 'user-select: none;'};
 `);
+
+const CheerLabel = styled(Text)`
+  color: rgba(0, 9, 21, 0.8);
+  line-height: 40px;
+`;

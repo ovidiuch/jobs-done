@@ -41,7 +41,7 @@ ActivityOptions.propTypes = {
 
 const Container = styled.View`
   margin: 16px 0 0 0;
-  border-top-style: solid;
+  border-style: solid;
   border-top-width: 1px;
   border-top-color: rgba(217, 223, 247, 0.1);
 `;

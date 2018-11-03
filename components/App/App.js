@@ -295,6 +295,7 @@ function isMobileViewport(viewport) {
 const Inner = styled.View`
   position: absolute;
   top: 100%;
+  width: 100%;
 `;
 
 const AnimatedInner = Animated.createAnimatedComponent(Inner);
