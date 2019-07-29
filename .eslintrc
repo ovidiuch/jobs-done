@@ -20,19 +20,20 @@
   },
   "overrides": [
     {
-      "files": ["**/*.fixture.js", "**/__fixtures__/**", "tools/**"],
+      "files": [
+        "**/*.fixture.js",
+        "**/__fixtures__/**",
+        "**/cosmos.decorator.js",
+        "tools/**"
+      ],
       "rules": {
-        "no-console": "off"
+        "no-console": "off",
+        "react/display-name": "off",
+        "react/prop-types": "off"
       }
     },
     {
-      "files": [
-        ".babelrc.js",
-        "cosmos.config.js",
-        "rn-cli.config.js",
-        "tools/**",
-        "App.js"
-      ],
+      "files": ["babel.config.js", "rn-cli.config.js", "tools/**", "App.js"],
       "env": {
         "node": true
       }

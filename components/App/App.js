@@ -161,7 +161,11 @@ export class App extends UnmountAwareComponent {
             state={isIntroActive ? 'active' : 'checked'}
             onLayout={this.createElLayoutHandler(introStepIndex)}
           >
-            {getIntroEl(isIntroActive, this.handleNext, this.handleSelectIntro)}
+            <Intro
+              isActive={isIntroActive}
+              onStart={this.handleNext}
+              onSelect={this.handleSelectIntro}
+            />
           </ActiveElement>
           {steps.map((step, idx) => {
             // Account one index for Intro step
@@ -171,8 +175,8 @@ export class App extends UnmountAwareComponent {
               activeStepIndex === stepIndex
                 ? 'active'
                 : isChecked
-                  ? 'checked'
-                  : 'disabled';
+                ? 'checked'
+                : 'disabled';
 
             return (
               <ActiveElement
@@ -180,13 +184,13 @@ export class App extends UnmountAwareComponent {
                 state={state}
                 onLayout={this.createElLayoutHandler(stepIndex)}
               >
-                {getStepEl(
-                  step,
-                  stepIndex,
-                  state,
-                  mobileViewport,
-                  this.handleSelect
-                )}
+                <Step
+                  step={step}
+                  stepIndex={stepIndex}
+                  state={state}
+                  mobileViewport={mobileViewport}
+                  onSelect={this.handleSelect}
+                />
               </ActiveElement>
             );
           })}
@@ -195,38 +199,13 @@ export class App extends UnmountAwareComponent {
             state={isOutroActive ? 'active' : 'disabled'}
             onLayout={this.createElLayoutHandler(outroStepIndex)}
           >
-            {getOutroEl(appData)}
+            <Outro appData={appData} />
           </ActiveElement>
         </AnimatedInner>
       </Layout>
     );
   }
 }
-
-const getIntroEl = memoize(
-  // Memoization is done by shallow comparing every argument
-  (isActive, onStart, onSelect) => (
-    <Intro isActive={isActive} onStart={onStart} onSelect={onSelect} />
-  )
-);
-
-const getOutroEl = memoize(
-  // Memoization is done by shallow comparing every argument
-  appData => <Outro appData={appData} />
-);
-
-const getStepEl = memoize(
-  // Memoization is done by shallow comparing every argument
-  (step, stepIndex, state, mobileViewport, onSelect) => (
-    <Step
-      step={step}
-      stepIndex={stepIndex}
-      state={state}
-      mobileViewport={mobileViewport}
-      onSelect={onSelect}
-    />
-  )
-);
 
 function getStepsNum(steps) {
   // Add two steps for Intro and Outro

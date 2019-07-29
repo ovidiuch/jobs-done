@@ -1,8 +1,4 @@
+import React from 'react';
 import { StatefulButton } from '../StatefulButton';
-import { Button } from '..';
 
-export default {
-  component: Button,
-  decorator: StatefulButton,
-  bg: true
-};
+export default <StatefulButton />;

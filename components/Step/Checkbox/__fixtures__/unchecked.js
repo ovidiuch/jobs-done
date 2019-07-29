@@ -1,9 +1,4 @@
+import React from 'react';
 import { Checkbox } from '..';
 
-export default {
-  component: Checkbox,
-  props: {
-    checked: false
-  },
-  bg: true
-};
+export default <Checkbox checked={false} />;

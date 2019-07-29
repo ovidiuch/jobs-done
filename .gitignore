@@ -2,7 +2,7 @@ node_modules
 yarn-error.log
 
 tools/cosmos/cosmos-export
-tools/cosmos/cosmos.modules.js
+tools/cosmos/cosmos.userdeps.js
 
 .expo
 build

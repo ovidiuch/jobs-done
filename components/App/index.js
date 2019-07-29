@@ -4,10 +4,8 @@ import { Routes } from './Routes';
 
 export const App = () => (
   <Router>
-    <Router>
-      <BackButton>
-        <Routes />
-      </BackButton>
-    </Router>
+    <BackButton>
+      <Routes />
+    </BackButton>
   </Router>
 );

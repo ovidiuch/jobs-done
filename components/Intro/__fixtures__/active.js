@@ -1,11 +1,10 @@
+import React from 'react';
 import { Intro } from '..';
 
-export default {
-  component: Intro,
-  props: {
-    isActive: true,
-    onStart: () => console.log('Intro start'),
-    onSelect: () => console.log('Intro select')
-  },
-  bg: true
-};
+export default (
+  <Intro
+    isActive
+    onStart={() => console.log('Intro start')}
+    onSelect={() => console.log('Intro select')}
+  />
+);
