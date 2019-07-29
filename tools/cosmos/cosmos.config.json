@@ -3,6 +3,7 @@
   "globalImports": ["./global.js"],
   "userDepsFilePath": "tools/cosmos/cosmos.userdeps.js",
   "webpack": { "overridePath": "tools/cosmos/webpack.override.js" },
+  "watchDirs": ["components"],
   "ui": {
     "responsivePreview": {
       "devices": [
