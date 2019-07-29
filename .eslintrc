@@ -33,7 +33,13 @@
       }
     },
     {
-      "files": ["babel.config.js", "rn-cli.config.js", "tools/**", "App.js"],
+      "files": [
+        "babel.config.js",
+        "babel.config.web.js",
+        "rn-cli.config.js",
+        "tools/**",
+        "App.js"
+      ],
       "env": {
         "node": true
       }

@@ -4,10 +4,9 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "lint": "eslint \"{{components,tools}/**/,}*.js\"",
-    "cosmos": "cosmos --config tools/cosmos/cosmos.config.json",
-    "cosmos:native": "cosmos-native --config tools/cosmos/cosmos.config.json",
-    "start": "cross-env NODE_ENV=development babel-node tools/start.js --config-file ./babel.config.js --only \"*.js,components/**,tools/**,node_modules/styled-components/**\"",
-    "build": "cross-env NODE_ENV=production babel-node tools/build.js --config-file ./babel.config.js --only \"*.js,components/**,tools/**,node_modules/styled-components/**\""
+    "cosmos": "cosmos --config tools/cosmos/cosmos.config.json --external-userdeps",
+    "start": "cross-env NODE_ENV=development babel-node tools/start.js --config-file ./babel.config.web.js --only \"*.js,components/**,tools/**,node_modules/styled-components/**\"",
+    "build": "cross-env NODE_ENV=production babel-node tools/build.js --config-file ./babel.config.web.js --only \"*.js,components/**,tools/**,node_modules/styled-components/**\""
   },
   "dependencies": {
     "expo": "^33.0.0",
