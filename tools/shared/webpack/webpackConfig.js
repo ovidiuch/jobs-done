@@ -1,12 +1,12 @@
 import webpack from 'webpack';
-import { getCosmosConfig } from 'react-cosmos/dist/config';
+import { detectCosmosConfig } from 'react-cosmos/dist/config';
 import { getDefaultWebpackConfig } from 'react-cosmos/dist/plugins/webpack/webpackConfig/default';
 import { addNativeAlias } from './addNativeAlias';
 
 export function getAppWebpackConfig({ path, filename, mode }) {
   // XXX: This is an experiment to see what would a Cosmos API for building
   // an app bundle would look like
-  const { rootDir, globalImports } = getCosmosConfig();
+  const { rootDir, globalImports } = detectCosmosConfig();
   const defaultWebpackConfig = getDefaultWebpackConfig(webpack, rootDir);
 
   let webpackConfig = {
