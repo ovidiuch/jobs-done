@@ -1,7 +1,9 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0",
-    "ignoreNodeModulesValidation": true,
+    "sdkVersion": "33.0.0",
+    "name": "jobs-done",
+    "slug": "jobs-done",
+    "platforms": ["android", "ios", "web"],
     "packagerOpts": {
       "config": "rn-cli.config.js"
     }

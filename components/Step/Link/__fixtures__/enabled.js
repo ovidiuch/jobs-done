@@ -1,9 +1,4 @@
+import React from 'react';
 import { Link } from '..';
 
-export default {
-  component: Link,
-  props: {
-    href: 'https://mail.google.com/mail/'
-  },
-  bg: true
-};
+export default <Link href="https://mail.google.com/mail/" />;

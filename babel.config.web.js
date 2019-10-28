@@ -1,9 +1,8 @@
 const alias = require('./tools/shared/alias');
 
 module.exports = {
-  presets: ['@babel/preset-env', '@babel/preset-react'],
+  presets: ['babel-preset-expo'],
   plugins: [
-    '@babel/plugin-proposal-class-properties',
     ['styled-components', { ssr: true, displayName: true, preprocess: false }],
     // NOTE: This works for imports/requires in repo source, but doesn't alias
     // require calls from node_modules. Eg. require('react-native') in
