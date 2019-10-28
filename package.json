@@ -5,6 +5,7 @@
   "scripts": {
     "lint": "eslint \"{{components,tools}/**/,}*.js\"",
     "cosmos": "cosmos --config tools/cosmos/cosmos.config.json --external-userdeps",
+    "cosmos-native": "cosmos-native --config tools/cosmos/cosmos.config.json",
     "start": "cross-env NODE_ENV=development babel-node tools/start.js --config-file ./babel.config.web.js --only \"*.js,components/**,tools/**,node_modules/styled-components/**\"",
     "build": "cross-env NODE_ENV=production babel-node tools/build.js --config-file ./babel.config.web.js --only \"*.js,components/**,tools/**,node_modules/styled-components/**\""
   },
@@ -43,7 +44,7 @@
     "eslint-plugin-react": "^7.11.1",
     "fs-extra": "^7.0.0",
     "html-webpack-plugin": "^3.2.0",
-    "react-cosmos": "^5.0.0-beta.10",
+    "react-cosmos": "^5.0.0-rc.0",
     "url-loader": "^1.1.2",
     "webpack": "^4.22.0",
     "webpack-serve": "^2.0.2",
